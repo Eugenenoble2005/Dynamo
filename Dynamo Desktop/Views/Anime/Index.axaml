@@ -1,0 +1,53 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:vm="using:Dynamo_Desktop.ViewModels.Anime"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 	xmlns:fluent="using:FluentAvalonia.UI.Controls"
+             mc:Ignorable="d" 
+			 d:DesignWidth="800" 
+			 xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+			 xmlns:loaders="using:AsyncImageLoader.Loaders"
+			 x:DataType="vm:IndexViewModel"
+			 d:DesignHeight="450"
+			 xmlns:anime="using:Dynamo_Desktop.Models.Anime"
+             x:Class="Dynamo_Desktop.Views.Anime.Index">
+		<Grid>
+			<TabControl>
+				<TabItem Header="GogoAnime">
+					<ScrollViewer>
+						<UniformGrid Columns="3">
+					
+								<ItemsRepeater Items="{Binding
+										   GogoAnimeRecentEpisodes.results}">
+									<ItemsRepeater.ItemTemplate>
+						
+										<DataTemplate
+											x:DataType="anime:GogoResult"
+										>
+	
+											<Grid>
+												<asyncImageLoader:AdvancedImage Source="{Binding
+																		image}" Height="150"/>
+												<TextBlock Text="{Binding
+													   title}"/>
+
+											</Grid>
+									
+										</DataTemplate>
+										
+									</ItemsRepeater.ItemTemplate>
+								</ItemsRepeater>
+						</UniformGrid>
+					</ScrollViewer>
+				</TabItem>
+				<TabItem Header="AnimePahe">
+
+					
+				</TabItem>
+				<TabItem Header="KayoAnime">
+					<TextBlock Text="kayoanime"/>
+				</TabItem>
+			</TabControl>
+		</Grid>
+</UserControl>

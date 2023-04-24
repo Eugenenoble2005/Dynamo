@@ -1,0 +1,82 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Dynamo_Desktop.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Dynamo_Desktop.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+		xmlns:fluent="using:FluentAvalonia.UI.Controls"
+		TransparencyLevelHint="{DynamicResource
+		 TransparencyEffect}"
+        Background="Transparent"
+		ExtendClientAreaToDecorationsHint="True"
+        Title="Dynamo_Desktop">
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+     <Panel>
+           <ExperimentalAcrylicBorder IsHitTestVisible="False"
+									  >
+               <ExperimentalAcrylicBorder.Material>
+                   <ExperimentalAcrylicMaterial
+                       BackgroundSource="Digger"
+                       TintColor="{DynamicResource
+					    ResourceKey=MicaBackground}"
+                       TintOpacity="1"
+                       MaterialOpacity="0.7" />
+               </ExperimentalAcrylicBorder.Material>
+           </ExperimentalAcrylicBorder>
+		 <!--Search Bar-->
+		 <Grid>
+			 <TextBlock 
+				 VerticalAlignment="Top" 
+				 HorizontalAlignment="Left" 
+				 Margin="10" 
+				 Text="Dynamo Resource"/>
+		 </Grid>
+		 <!---App title-->
+		 <Grid Width="500" Height="30" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,8">
+			 <TextBox Watermark="Search Everywhere..." />
+		 </Grid>
+		 <!--Main Content-->
+		 <Grid Margin="5,40,0,0">
+			 	        <fluent:NavigationView 
+							x:Name="nvSample" 
+							IsSettingsVisible="True" 
+							PaneDisplayMode="{DynamicResource
+							PaneLocation}"
+                            IsBackButtonVisible="True"
+							Header=""
+                            IsBackEnabled="True"
+							
+>			<fluent:NavigationView.MenuItems>
+	                <fluent:NavigationViewItem Content="Anime" Tag="Anime">
+						<fluent:NavigationViewItem.Icon>
+							 <fluent:ImageIcon Source="/Assets/Images/anime-logo.png"/>
+						</fluent:NavigationViewItem.Icon>
+					</fluent:NavigationViewItem>
+					 <fluent:NavigationViewItem Content="Manga" Tag="SamplePage1" >
+						<fluent:NavigationViewItem.Icon>
+							 <fluent:ImageIcon Source="/Assets/Images/manga-logo.png"/>
+						</fluent:NavigationViewItem.Icon>
+					</fluent:NavigationViewItem>
+						 <fluent:NavigationViewItem Content="Movies/TV" Tag="SamplePage1" >
+						<fluent:NavigationViewItem.Icon>
+							 <fluent:ImageIcon Source="/Assets/Images/tv-logo.png"/>
+						</fluent:NavigationViewItem.Icon>
+					</fluent:NavigationViewItem>
+                   	 <fluent:NavigationViewItem Content="Books" Tag="SamplePage1" >
+						<fluent:NavigationViewItem.Icon>
+							 <fluent:ImageIcon Source="/Assets/Images/book-logo.png"/>
+						</fluent:NavigationViewItem.Icon>
+					</fluent:NavigationViewItem>
+			</fluent:NavigationView.MenuItems>
+            <fluent:Frame x:Name="ContentFrame" Margin="0,-80"/>
+        </fluent:NavigationView>
+		 </Grid>
+       </Panel>
+</Window>
