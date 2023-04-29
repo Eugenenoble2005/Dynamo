@@ -27,7 +27,7 @@ namespace Dynamo_Desktop.ViewModels.Anime
 
         //internal properties
         private GogoAnimeRecentEpisodes gogoAnimeRecentEpisodes = new GogoAnimeRecentEpisodes();
-
+        private ICommand RetryCommand { get; }
 
         //external properties
         public GogoAnimeRecentEpisodes GogoAnimeRecentEpisodes { get => gogoAnimeRecentEpisodes; set => this.RaiseAndSetIfChanged(ref gogoAnimeRecentEpisodes, value); }
@@ -37,6 +37,7 @@ namespace Dynamo_Desktop.ViewModels.Anime
         public IndexViewModel()
         {
             GetRecentEpisodes();
+           
         }   
         public async void GetRecentEpisodes()
         {
@@ -50,11 +51,17 @@ namespace Dynamo_Desktop.ViewModels.Anime
                     Content="Could not fetch data. Please check your internet connection",
                     CloseButtonText="Close",
                     PrimaryButtonText="Retry",
+                    DefaultButton=ContentDialogButton.Primary
+                    
                 };
-                await cd.ShowAsync();
+                ContentDialogResult result = await cd.ShowAsync();
+                if(result == ContentDialogResult.Primary)
+                {
+                    GetRecentEpisodes();
+                }
             }
 
         }
-      
+
     }
 }

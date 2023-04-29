@@ -19,7 +19,7 @@
     <Application.Styles>
         <FluentTheme Mode="Dark"/>
 		<sty:FluentAvaloniaTheme RequestedTheme="Dark" PreferSystemTheme="False"/>
-		<!--<StyleInclude Source="avares://AsyncImageLoader.Avalonia/AdvancedImage.axaml"/>-->
+		<StyleInclude Source="avares://AsyncImageLoader.Avalonia/AdvancedImage.axaml"/>
     </Application.Styles>
 	
 	

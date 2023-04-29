@@ -13,32 +13,36 @@
 			 xmlns:anime="using:Dynamo_Desktop.Models.Anime"
              x:Class="Dynamo_Desktop.Views.Anime.Index">
 		<Grid>
+			
 			<TabControl>
 				<TabItem Header="GogoAnime">
 					<ScrollViewer>
-						<UniformGrid Columns="3">
 					
 								<ItemsRepeater Items="{Binding
 										   GogoAnimeRecentEpisodes.results}">
-									<ItemsRepeater.ItemTemplate>
-						
-										<DataTemplate
-											x:DataType="anime:GogoResult"
-										>
-	
-											<Grid>
-												<asyncImageLoader:AdvancedImage Source="{Binding
-																		image}" Height="150"/>
-												<TextBlock Text="{Binding
-													   title}"/>
+									<ItemsRepeater.Layout>
+										<UniformGridLayout
+											  ItemsStretch="Fill"
+											 MaximumRowsOrColumns="3"
+											 
+											 ></UniformGridLayout>
+									</ItemsRepeater.Layout>
+										<ItemsRepeater.ItemTemplate>
 
-											</Grid>
-									
-										</DataTemplate>
-										
-									</ItemsRepeater.ItemTemplate>
+											<DataTemplate
+												x:DataType="anime:GogoResult"
+										>
+												<Grid Margin="10">
+													<asyncImageLoader:AdvancedImage Source="{Binding
+																		image}" Height="250"/>
+					
+
+												</Grid>
+						
+											</DataTemplate>
+
+										</ItemsRepeater.ItemTemplate>
 								</ItemsRepeater>
-						</UniformGrid>
 					</ScrollViewer>
 				</TabItem>
 				<TabItem Header="AnimePahe">
