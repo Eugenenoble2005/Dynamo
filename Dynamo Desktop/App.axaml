@@ -10,15 +10,16 @@
     </Application.DataTemplates>
 	
 	<Application.Resources>
-		<Color x:Key="MicaBackground">black</Color>
+		<Color x:Key="MicaBackground">White</Color>
 		<FluentControls:NavigationViewPaneDisplayMode x:Key="PaneLocation">Left</FluentControls:NavigationViewPaneDisplayMode>
 		<WindowTransparencyLevel x:Key="TransparencyEffect">Mica</WindowTransparencyLevel>
 	</Application.Resources>
 	
 	
     <Application.Styles>
-        <FluentTheme Mode="Dark"/>
-		<sty:FluentAvaloniaTheme RequestedTheme="Dark" PreferSystemTheme="False"/>
+
+		<FluentTheme Mode="Light"/>
+		<sty:FluentAvaloniaTheme  PreferSystemTheme="True"/>
 		<StyleInclude Source="avares://AsyncImageLoader.Avalonia/AdvancedImage.axaml"/>
     </Application.Styles>
 	

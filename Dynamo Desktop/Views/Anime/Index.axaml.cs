@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Dynamo_Desktop.ViewModels.Anime;
 using FluentAvalonia.UI.Controls;
@@ -15,6 +16,5 @@ public partial class Index : UserControl
         DataContext = new IndexViewModel();
      
     }
-   
 }
 

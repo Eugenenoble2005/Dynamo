@@ -17,7 +17,7 @@ namespace Dynamo_Desktop.Views
             InitializeComponent();
             ContentFrame.Navigate(typeof(Anime.Index));
             DataContext = new MainWindowViewModel();
-            AppTheme.SetTheme("Dark");
+           // AppTheme.SetTheme("Dark");
         }
         public void NavigationSelectionChanged()
         { 

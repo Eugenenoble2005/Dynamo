@@ -35,12 +35,12 @@
 			 <TextBlock 
 				 VerticalAlignment="Top" 
 				 HorizontalAlignment="Left" 
-				 Margin="10" 
+				 Margin="20" 
 				 Text="Dynamo Resource"/>
 		 </Grid>
 		 <!---App title-->
 		 <Grid Width="500" Height="30" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,8">
-			 <TextBox Watermark="Search Everywhere..." />
+			 <TextBox Watermark="Search Everywhere..."/>
 		 </Grid>
 		 <!--Main Content-->
 		 <Grid Margin="5,40,0,0">
@@ -49,9 +49,9 @@
 							IsSettingsVisible="True" 
 							PaneDisplayMode="{DynamicResource
 							PaneLocation}"
-                            IsBackButtonVisible="True"
-							Header=""
+                            IsBackButtonVisible="True"	
                             IsBackEnabled="True"
+							SelectedItem="Anime"
 							
 >			<fluent:NavigationView.MenuItems>
 	                <fluent:NavigationViewItem Content="Anime" Tag="Anime">
@@ -75,7 +75,7 @@
 						</fluent:NavigationViewItem.Icon>
 					</fluent:NavigationViewItem>
 			</fluent:NavigationView.MenuItems>
-            <fluent:Frame x:Name="ContentFrame" Margin="0,-80"/>
+				<fluent:Frame x:Name="ContentFrame"/>
         </fluent:NavigationView>
 		 </Grid>
        </Panel>

@@ -27,7 +27,6 @@ namespace Dynamo_Desktop.ViewModels.Anime
 
         //internal properties
         private GogoAnimeRecentEpisodes gogoAnimeRecentEpisodes = new GogoAnimeRecentEpisodes();
-        private ICommand RetryCommand { get; }
 
         //external properties
         public GogoAnimeRecentEpisodes GogoAnimeRecentEpisodes { get => gogoAnimeRecentEpisodes; set => this.RaiseAndSetIfChanged(ref gogoAnimeRecentEpisodes, value); }
@@ -54,11 +53,11 @@ namespace Dynamo_Desktop.ViewModels.Anime
                     DefaultButton=ContentDialogButton.Primary
                     
                 };
-                ContentDialogResult result = await cd.ShowAsync();
-                if(result == ContentDialogResult.Primary)
-                {
-                    GetRecentEpisodes();
-                }
+                //ContentDialogResult result = await cd.ShowAsync();
+                //if(result == ContentDialogResult.Primary)
+                //{
+                //    GetRecentEpisodes();
+                //}
             }
 
         }
