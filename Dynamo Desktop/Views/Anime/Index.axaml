@@ -10,82 +10,120 @@
 			 xmlns:loaders="using:AsyncImageLoader.Loaders"
 			 x:DataType="vm:IndexViewModel"
 			 d:DesignHeight="450"
+			 xmlns:ext="using:Dynamo_Desktop.Converters"
 			 xmlns:anime="using:Dynamo_Desktop.Models.Anime"
              x:Class="Dynamo_Desktop.Views.Anime.Index">
+	<UserControl.Resources>
+		<ext:EqualityConverter x:Key="EqualityConverter"/>
+	</UserControl.Resources>
 	<Grid>
+		<ProgressBar Width="1000"  IsIndeterminate="True" VerticalAlignment="Top" IsVisible="{Binding
+					  DataLoading}"/>
 		<TabControl>
+			<!--GOGOANIME-->
 			<TabItem
 				Header="GogoAnime">
 				<Grid>
-				<fluent:ComboBox Header="Sort" HorizontalAlignment="Right" Margin="0,-30,20,0" SelectedIndex="0">
-					<TextBlock>Newest</TextBlock>
-					<TextBlock>Popular</TextBlock>
-				</fluent:ComboBox>
-				<ScrollViewer>
-					<ItemsRepeater
-						Items="{Binding
+					<fluent:ComboBox Header="Sort" HorizontalAlignment="Right" Margin="0,-30,20,0" Items="{Binding
+									  SortOptions}" SelectedItem="{Binding
+									  Sort}">
+					
+			
+					</fluent:ComboBox>
+					<Grid>
+						<TextBlock Margin="25" FontSize="35" Text="{Binding
+								    Sort}"/>
+						
+						<Border Width="300" Height="10" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,47,20,0" >
+							<TextBox Watermark="Search Gogo ...."/>
+						</Border>
+						<!--Pagination-->
+						
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="30,85,0,0">
+						<Button Content="Prev" Command="{Binding
+								 PrevPage}"/>
+						<Button Content="{Binding
+								    Page}" IsEnabled="False"></Button>
+						<Button Content="Next" Command="{Binding
+								 NextPage}"/>
+					</StackPanel>
+					</Grid>
+					<ScrollViewer Margin="0,120,0,0" 
+								  IsVisible="{Binding Sort,Converter={StaticResource
+								   EqualityConverter},ConverterParameter='Newest'}"
+								  >
+						<ItemsRepeater
+							Items="{Binding
 									GogoAnimeRecentEpisodes.results}">
-						<ItemsRepeater.Layout>
-							<UniformGridLayout
-									ItemsStretch="Fill"
-									MaximumRowsOrColumns="4"
+							<ItemsRepeater.Layout>
+								<UniformGridLayout
+										ItemsStretch="Fill"
+										MaximumRowsOrColumns="4"
 										></UniformGridLayout>
-						</ItemsRepeater.Layout>
-						<ItemsRepeater.ItemTemplate>
+							</ItemsRepeater.Layout>
+							<ItemsRepeater.ItemTemplate>
 
-							<DataTemplate
-								x:DataType="anime:GogoResult">
-								<Border
-									Margin="10"		
-											>
-									<Border.Styles>
-										<Style Selector="Border:pointerover">
-											<Setter Property="Background">
-												<SolidColorBrush Color="{DynamicResource
-														  SystemAccentColor}" Opacity="0.2"/>
-											</Setter>
-										
-										</Style>
-									</Border.Styles>
-									<Grid
+								<DataTemplate
+									x:DataType="anime:GogoResult">
+									<Border
 										Margin="10"
-										Height="295">
-							<asyncImageLoader:AdvancedImage
-											Source="{Binding image}"	
-											Height="210"/>
-										<Border
-											HorizontalAlignment="Right"
-											VerticalAlignment="Bottom"
-											Margin="35"
-											CornerRadius="50"
-											Padding="15,5"
-											Background="{DynamicResource
+											>
+										<Border.Styles>
+											<Style Selector="Border:pointerover">
+												<Setter Property="Background">
+													<SolidColorBrush Color="{DynamicResource
+														  SystemAccentColor}" Opacity="0.2"/>
+												</Setter>
+
+											</Style>
+										</Border.Styles>
+										<Grid
+											Margin="10"
+											Height="295">
+											<asyncImageLoader:AdvancedImage
+															Source="{Binding image}"
+															Height="210"/>
+											<Border
+												HorizontalAlignment="Right"
+												VerticalAlignment="Bottom"
+												Margin="35"
+												CornerRadius="50"
+												Padding="15,5"
+												Background="{DynamicResource
 													SystemAccentColor}">
-											<TextBlock
-												Text="{Binding
+												<TextBlock
+													Text="{Binding
 													episodeNumber}"
 											/>
-										</Border>
+											</Border>
 
-										<TextBlock
-										Text="{Binding
+											<TextBlock
+											Text="{Binding
 													title}"
-										TextWrapping="Wrap"
-										VerticalAlignment="Bottom"
-										HorizontalAlignment="Center"
+											TextWrapping="Wrap"
+											VerticalAlignment="Bottom"
+											HorizontalAlignment="Center"
 														
 										/>
-
-									</Grid>
-								</Border>
-							</DataTemplate>
-						</ItemsRepeater.ItemTemplate>
-					</ItemsRepeater>
-				</ScrollViewer>
-			</Grid>
+										</Grid>
+									</Border>
+								</DataTemplate>
+							</ItemsRepeater.ItemTemplate>
+						</ItemsRepeater>
+					</ScrollViewer>
+					<ScrollViewer  Margin="0,120,0,0"   IsVisible="{Binding Sort,Converter={StaticResource
+								   EqualityConverter},ConverterParameter='Popular'}">
+						
+					</ScrollViewer>
+				
+				</Grid>
 			</TabItem>
+
+
+
+
 			<TabItem
-				Header="AnimePahe">
+					Header="AnimePahe">
 			</TabItem>
 			<TabItem
 				Header="KayoAnime">

@@ -1,34 +1,46 @@
 ﻿using Dynamo_Desktop.Models.Anime;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Dynamo_Desktop.Services.Anime
+namespace Dynamo_Desktop.Services.Anime;
+
+public class GogoAnimeService
 {
-    public class GogoAnimeService
+    private static HttpClient client = new HttpClient();
+    public static async Task<GogoAnimeRecentEpisodes> RecentEpisodes(int Page=1,int Type=1)
     {
-        private HttpClient client = new HttpClient();
-        public async Task<GogoAnimeRecentEpisodes> RecentEpisodes()
+        string recent_releases_endpoint = $"https://api.consumet.org/anime/gogoanime/recent-episodes?page={Page}&type={Type}";
+        try
         {
-            string recent_releases_endpoint = "https://api.consumet.org/anime/gogoanime/recent-episodes";
-            try
+            HttpResponseMessage response = await client.GetAsync(recent_releases_endpoint);
+            if (response.IsSuccessStatusCode)
             {
-                HttpResponseMessage response = await client.GetAsync(recent_releases_endpoint);
-                if (response.IsSuccessStatusCode)
-                {
-                    string json = await response.Content.ReadAsStringAsync();
-                    return JsonSerializer.Deserialize<GogoAnimeRecentEpisodes>(json);
-                }
-                return null;
+                string json = await response.Content.ReadAsStringAsync();
+                return JsonSerializer.Deserialize<GogoAnimeRecentEpisodes>(json);
             }
-            catch {
-                return null;
+            return null;
+        }
+        catch {
+            return null;
+        } 
+    }
+    public async Task<GogoAnimePopularAnime> PopularEpisodes(int Page=1)
+    {
+        string popular_anime_endpoint = $"https://api.consumet.org/anime/gogoanime/top-airing?page={Page}";
+        try
+        {
+            HttpResponseMessage response = await client.GetAsync(popular_anime_endpoint);
+            if (response.IsSuccessStatusCode)
+            {
+                string json = await response.Content.ReadAsStringAsync();
+                return JsonSerializer.Deserialize<GogoAnimePopularAnime>(json);
             }
+            return null;
+        }
+        catch
+        {
+            return null;
         }
     }
 }
