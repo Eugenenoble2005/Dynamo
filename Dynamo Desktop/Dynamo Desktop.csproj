@@ -35,4 +35,8 @@
   <ItemGroup>
     <UpToDateCheckInput Remove="Views\Anime\Subviews\Gogo\IndexSubView.axaml" />
   </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Anime\Subviews\AnimePahe\IndexSubView.axaml" />
+  </ItemGroup>
 </Project>

@@ -6,10 +6,11 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Dynamo_Desktop.Services.Anime;
 
-public class GogoAnimeService
+public class GogoAnimeService : IAnimeService
 {
     private static HttpClient client = new HttpClient();
-    public static async Task<GogoAnimeRecentEpisodes> RecentEpisodes(int Page=1,int Type=1)
+
+    public  async Task<T?> RecentEpisodes<T>(int Page=1,int Type=1)
     {
         string recent_releases_endpoint = $"https://api.consumet.org/anime/gogoanime/recent-episodes?page={Page}&type={Type}";
         try
@@ -18,15 +19,15 @@ public class GogoAnimeService
             if (response.IsSuccessStatusCode)
             {
                 string json = await response.Content.ReadAsStringAsync();
-                return JsonSerializer.Deserialize<GogoAnimeRecentEpisodes>(json);
+                return JsonSerializer.Deserialize<T>(json);
             }
-            return null;
+            return default;
         }
         catch {
-            return null;
+            return default;
         } 
     }
-    public static async Task<GogoAnimePopularAnime> PopularEpisodes(int Page=1)
+    public  async Task<T?> PopularEpisodes<T>(int Page=1)
     {
         string popular_anime_endpoint = $"https://api.consumet.org/anime/gogoanime/top-airing?page={Page}";
         try
@@ -35,16 +36,16 @@ public class GogoAnimeService
             if (response.IsSuccessStatusCode)
             {
                 string json = await response.Content.ReadAsStringAsync();
-                return JsonSerializer.Deserialize<GogoAnimePopularAnime>(json);
+                return JsonSerializer.Deserialize<T>(json);
             }
-            return null;
+            return default;
         }
         catch
         {
-            return null;
+            return default;
         }
     }
-    public static async Task<GogoAnimeSearch> Search(string Query="",int Page=1)
+    public  async Task<T?> Search<T>(string Query="",int Page=1)
     {
         string search_endpoint = $"https://api.consumet.org/anime/gogoanime/{Query}?page={Page}";
         try
@@ -53,13 +54,15 @@ public class GogoAnimeService
             if (response.IsSuccessStatusCode)
             {
                 string json = await response.Content.ReadAsStringAsync();
-                return JsonSerializer.Deserialize<GogoAnimeSearch>(json);
+                return JsonSerializer.Deserialize<T>(json);
             }
-            return null;
+            return default;
         }
         catch
         {
-            return null;
+            return default;
         }
     }
+
+  
 }

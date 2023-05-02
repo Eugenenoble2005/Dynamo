@@ -15,6 +15,7 @@ public class IndexViewModel : ViewModelBase
     private GogoAnimeRecentEpisodes _gogoAnimeRecentEpisodes = new GogoAnimeRecentEpisodes();
     private GogoAnimePopularAnime _gogoAnimePopularAnime = new GogoAnimePopularAnime();
     private GogoAnimeSearch _gogoAnimeSearch = new GogoAnimeSearch();
+    private GogoAnimeService GogoAnimeService = new GogoAnimeService();
     private int _page = 1;
     private bool _dataLoading = false;
     private string _searchTerm = "";
@@ -41,8 +42,8 @@ public class IndexViewModel : ViewModelBase
     {
             DataLoading = true;
             //Get Episodes for index pages
-            GogoAnimeRecentEpisodes = await GogoAnimeService.RecentEpisodes(Page:Page);
-            GogoAnimePopularAnime = await GogoAnimeService.PopularEpisodes(Page:Page);    
+            GogoAnimeRecentEpisodes = await GogoAnimeService.RecentEpisodes<GogoAnimeRecentEpisodes>(Page:Page);
+            GogoAnimePopularAnime = await GogoAnimeService.PopularEpisodes<GogoAnimePopularAnime>(Page:Page);    
             if(GogoAnimeRecentEpisodes == null)
         {
             var cd = new ContentDialog
@@ -54,11 +55,11 @@ public class IndexViewModel : ViewModelBase
                 DefaultButton=ContentDialogButton.Primary
                 
             };
-            //ContentDialogResult result = await cd.ShowAsync();
-            //if (result == ContentDialogResult.Primary)
-            //{
-            //    GetRecentEpisodes();
-            //}
+            ContentDialogResult result = await cd.ShowAsync();
+            if (result == ContentDialogResult.Primary)
+            {
+                GetEpisodes();
+            }
         }
         DataLoading = false;
 
@@ -84,6 +85,6 @@ public class IndexViewModel : ViewModelBase
     }
     public async void GeneralSearch()
     {
-        GogoAnimeSearch = await GogoAnimeService.Search(Query: SearchTerm, Page: Page);
+        GogoAnimeSearch = await GogoAnimeService.Search<GogoAnimeSearch>(Query: SearchTerm, Page: Page);
     }
 }

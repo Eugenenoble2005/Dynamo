@@ -11,6 +11,7 @@
 			 x:DataType="vm:IndexViewModel"
 			 d:DesignHeight="450"
 			 xmlns:GogoSubview="using:Dynamo_Desktop.Views.Anime.Subviews.Gogo"
+			 xmlns:AnimePaheSubview="using:Dynamo_Desktop.Views.Anime.Subviews.AnimePahe"
 			 xmlns:ext="using:Dynamo_Desktop.Converters"
 			 xmlns:anime="using:Dynamo_Desktop.Models.Anime"
              x:Class="Dynamo_Desktop.Views.Anime.Index">
@@ -51,13 +52,13 @@
 			<!--GOGOANIME-->
 			<TabItem
 				Header="GogoAnime">
-				
 				<GogoSubview:IndexSubView/>
 			</TabItem>
 
 
 			<TabItem
 					Header="AnimePahe">
+				<AnimePaheSubview:IndexSubView/>
 			</TabItem>
 			<TabItem
 				Header="KayoAnime">
