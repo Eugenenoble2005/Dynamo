@@ -25,7 +25,7 @@ public class GogoAnimeService
             return null;
         } 
     }
-    public async Task<GogoAnimePopularAnime> PopularEpisodes(int Page=1)
+    public static async Task<GogoAnimePopularAnime> PopularEpisodes(int Page=1)
     {
         string popular_anime_endpoint = $"https://api.consumet.org/anime/gogoanime/top-airing?page={Page}";
         try

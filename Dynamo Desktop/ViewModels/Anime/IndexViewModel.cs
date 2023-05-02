@@ -13,27 +13,30 @@ public class IndexViewModel : ViewModelBase
 
 
     private GogoAnimeRecentEpisodes _gogoAnimeRecentEpisodes = new GogoAnimeRecentEpisodes();
+    private GogoAnimePopularAnime _gogoAnimePopularAnime = new GogoAnimePopularAnime();
     private int _page = 1;
     private bool _dataLoading = false;
     private string _sort = "Newest";
-    //i'm doing this because i'm too lazy to figure out how to write a converter
-    private bool _isNewest => false;
+
     public int Page { get => _page; set => this.RaiseAndSetIfChanged(ref _page, value); }
     public bool DataLoading { get => _dataLoading; set => this.RaiseAndSetIfChanged(ref _dataLoading, value); }
     public GogoAnimeRecentEpisodes GogoAnimeRecentEpisodes { get => _gogoAnimeRecentEpisodes; set => this.RaiseAndSetIfChanged(ref _gogoAnimeRecentEpisodes, value); }
+    public GogoAnimePopularAnime GogoAnimePopularAnime { get => _gogoAnimePopularAnime; set => this.RaiseAndSetIfChanged(ref _gogoAnimePopularAnime, value); }
 
     public List<String> SortOptions { get => new List<string> { "Newest", "Popular" }; }
     public string Sort { get => _sort; set  {this.RaiseAndSetIfChanged(ref _sort, value); SortComboChanged();} }
 
     public IndexViewModel()
     {
-        GetRecentEpisodes();
+        GetEpisodes();
        
     }   
-    public async void GetRecentEpisodes()
+    public async void GetEpisodes()
     {
             DataLoading = true;
+            //Get Episodes for index pages
             GogoAnimeRecentEpisodes = await GogoAnimeService.RecentEpisodes(Page:Page);
+            GogoAnimePopularAnime = await GogoAnimeService.PopularEpisodes(Page:Page);    
             if(GogoAnimeRecentEpisodes == null)
         {
             var cd = new ContentDialog
@@ -59,13 +62,13 @@ public class IndexViewModel : ViewModelBase
         if (Page > 1)
         {
             Page--;
-            GetRecentEpisodes(); 
+            GetEpisodes(); 
         }    
     }
     public void NextPage()
     {
         Page++;
-        GetRecentEpisodes();
+        GetEpisodes();
     }
     public void SortComboChanged()
     {
