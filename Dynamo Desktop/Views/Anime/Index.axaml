@@ -21,17 +21,20 @@
 	<Grid>
 		<ProgressBar Width="1000"  IsIndeterminate="True" VerticalAlignment="Top" IsVisible="{Binding
 					  DataLoading}"/>
-		<!--Sort Selection-->
 		<!--Controls-->
 		<Grid Margin="0,40,0,0" ZIndex="1">
-			<!--SORT TITLE-->
+			<!--Sort Selection-->
 			<fluent:ComboBox Header="Sort" HorizontalAlignment="Right" Margin="0,-20,20,0" Items="{Binding
 									  SortOptions}" SelectedItem="{Binding
 									  Sort}">
 			</fluent:ComboBox>
+			<!--SORT TITLE-->
 			<TextBlock Margin="25" FontSize="35" Text="{Binding
 								    Sort}"/>
-
+			<!--Search-->
+			<Border Width="300" Height="10" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,47,20,0" >
+				<TextBox Watermark="Search Providers" Text="{Binding SearchTerm}"/>
+			</Border>
 			<!--Pagination-->
 
 			<StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="30,85,0,0">

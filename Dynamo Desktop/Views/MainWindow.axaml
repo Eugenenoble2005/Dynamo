@@ -31,7 +31,7 @@
                </ExperimentalAcrylicBorder.Material>
            </ExperimentalAcrylicBorder>
 		 <!--Search Bar-->
-		 <Grid>
+		 <Grid> 
 			 <TextBlock 
 				 VerticalAlignment="Top" 
 				 HorizontalAlignment="Left" 
@@ -49,6 +49,7 @@
 							IsSettingsVisible="True" 
 							PaneDisplayMode="{DynamicResource
 							PaneLocation}"
+							IsPaneOpen="False"
                             IsBackButtonVisible="True"	
                             IsBackEnabled="True"
 							SelectedItem="Anime"

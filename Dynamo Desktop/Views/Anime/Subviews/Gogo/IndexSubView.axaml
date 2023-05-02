@@ -17,10 +17,10 @@
 		<ext:EqualityConverter x:Key="EqualityConverter"/>
 	</UserControl.Resources>
 	<Grid>
-			<Border Width="300" Height="10" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,47,20,0" >
-				<TextBox Watermark="Search Gogo ...."/>
-			</Border>
-		<ScrollViewer Margin="0,120,0,0"
+	<Grid IsVisible="{Binding SearchTerm,Converter={x:Static
+		   StringConverters.IsNullOrEmpty}}">
+		<!--For sort displays. Must not show if search term has a value or user is searching-->
+	<Grid><ScrollViewer Margin="0,120,0,0"
 					   IsVisible="{Binding Sort,Converter={StaticResource
 								   EqualityConverter},ConverterParameter='Newest'}">
 			<ItemsRepeater
@@ -131,7 +131,74 @@
 					</DataTemplate>
 				</ItemsRepeater.ItemTemplate>
 			</ItemsRepeater>
-		</ScrollViewer>
+		</ScrollViewer>	 </Grid>
+	</Grid>
+	
 
+		<!--For search Displays-->
+	<Grid IsVisible="{Binding SearchTerm,Converter={x:Static
+		   StringConverters.IsNotNullOrEmpty}}">
+		<ScrollViewer Margin="0,120,0,0"
+					  >
+			<ItemsRepeater
+				Items="{Binding
+									GogoAnimeSearch.results}">
+				<ItemsRepeater.Layout>
+					<UniformGridLayout
+							ItemsStretch="Fill"
+							MaximumRowsOrColumns="4"
+										></UniformGridLayout>
+				</ItemsRepeater.Layout>
+				<ItemsRepeater.ItemTemplate>
+
+					<DataTemplate
+						x:DataType="anime:GogoSearchResult">
+						<Border
+							Margin="10"
+											>
+							<Border.Styles>
+								<Style Selector="Border:pointerover">
+									<Setter Property="Background">
+										<SolidColorBrush Color="{DynamicResource
+														  SystemAccentColor}" Opacity="0.2"/>
+									</Setter>
+
+								</Style>
+							</Border.Styles>
+							<Grid
+								Margin="10"
+								Height="295">
+								<asyncImageLoader:AdvancedImage
+												Source="{Binding image}"
+												Height="210"/>
+								<Border
+									HorizontalAlignment="Right"
+									VerticalAlignment="Bottom"
+									Margin="35"
+									CornerRadius="50"
+									Padding="15,5"
+									Background="{DynamicResource
+													SystemAccentColor}">
+									<TextBlock
+										Text="{Binding
+													 subOrDub}"
+											/>
+								</Border>
+
+								<TextBlock
+								Text="{Binding
+													title}"
+								TextWrapping="Wrap"
+								VerticalAlignment="Bottom"
+								HorizontalAlignment="Center"
+														
+										/>
+							</Grid>
+						</Border>
+					</DataTemplate>
+				</ItemsRepeater.ItemTemplate>
+			</ItemsRepeater>
+		</ScrollViewer>
+	</Grid>
 	</Grid>
 </UserControl>

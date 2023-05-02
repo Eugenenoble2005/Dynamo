@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Dynamo_Desktop.Services.Anime;
 
@@ -35,6 +36,24 @@ public class GogoAnimeService
             {
                 string json = await response.Content.ReadAsStringAsync();
                 return JsonSerializer.Deserialize<GogoAnimePopularAnime>(json);
+            }
+            return null;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+    public static async Task<GogoAnimeSearch> Search(string Query="",int Page=1)
+    {
+        string search_endpoint = $"https://api.consumet.org/anime/gogoanime/{Query}?page={Page}";
+        try
+        {
+            HttpResponseMessage response = await client.GetAsync(search_endpoint);
+            if (response.IsSuccessStatusCode)
+            {
+                string json = await response.Content.ReadAsStringAsync();
+                return JsonSerializer.Deserialize<GogoAnimeSearch>(json);
             }
             return null;
         }

@@ -14,17 +14,23 @@ public class IndexViewModel : ViewModelBase
 
     private GogoAnimeRecentEpisodes _gogoAnimeRecentEpisodes = new GogoAnimeRecentEpisodes();
     private GogoAnimePopularAnime _gogoAnimePopularAnime = new GogoAnimePopularAnime();
+    private GogoAnimeSearch _gogoAnimeSearch = new GogoAnimeSearch();
     private int _page = 1;
     private bool _dataLoading = false;
+    private string _searchTerm = "";
     private string _sort = "Newest";
 
     public int Page { get => _page; set => this.RaiseAndSetIfChanged(ref _page, value); }
     public bool DataLoading { get => _dataLoading; set => this.RaiseAndSetIfChanged(ref _dataLoading, value); }
     public GogoAnimeRecentEpisodes GogoAnimeRecentEpisodes { get => _gogoAnimeRecentEpisodes; set => this.RaiseAndSetIfChanged(ref _gogoAnimeRecentEpisodes, value); }
     public GogoAnimePopularAnime GogoAnimePopularAnime { get => _gogoAnimePopularAnime; set => this.RaiseAndSetIfChanged(ref _gogoAnimePopularAnime, value); }
-
-    public List<String> SortOptions { get => new List<string> { "Newest", "Popular" }; }
-    public string Sort { get => _sort; set  {this.RaiseAndSetIfChanged(ref _sort, value); SortComboChanged();} }
+    public string SearchTerm { get => _searchTerm; set { 
+            this.RaiseAndSetIfChanged(ref _searchTerm, value);
+            SearchTermChanged();
+        } }
+    public GogoAnimeSearch GogoAnimeSearch { get => _gogoAnimeSearch; set => this.RaiseAndSetIfChanged(ref _gogoAnimeSearch, value); }
+    public List<string> SortOptions { get => new List<string> { "Newest", "Popular" }; }
+    public string Sort { get => _sort; set  {this.RaiseAndSetIfChanged(ref _sort, value);} }
 
     public IndexViewModel()
     {
@@ -70,8 +76,14 @@ public class IndexViewModel : ViewModelBase
         Page++;
         GetEpisodes();
     }
-    public void SortComboChanged()
+  
+    public void SearchTermChanged()
     {
-        
+        Debug.WriteLine(SearchTerm);
+        GeneralSearch();
+    }
+    public async void GeneralSearch()
+    {
+        GogoAnimeSearch = await GogoAnimeService.Search(Query: SearchTerm, Page: Page);
     }
 }
