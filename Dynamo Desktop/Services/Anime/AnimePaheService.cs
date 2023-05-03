@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -35,9 +36,24 @@ namespace Dynamo_Desktop.Services.Anime
             }
         }
 
-        public Task<T?> Search<T>(string Query, int Page)
+        public async Task<T?> Search<T>(string Query, int Page)
         {
-            throw new NotImplementedException();
+            string endpoint = $"https://animepahe.com/api?m=search&q={Query}";
+            Debug.WriteLine(endpoint);
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(endpoint);
+                if (response.IsSuccessStatusCode)
+                {
+                    string json = await response.Content.ReadAsStringAsync();
+                    return JsonSerializer.Deserialize<T>(json);
+                }
+                return default;
+            }
+            catch
+            {
+                return default;
+            }
         }
     }
 }

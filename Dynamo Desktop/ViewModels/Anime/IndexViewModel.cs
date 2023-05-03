@@ -5,6 +5,8 @@ using FluentAvalonia.UI.Controls;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace Dynamo_Desktop.ViewModels.Anime;
 
@@ -15,7 +17,7 @@ public class IndexViewModel : ViewModelBase
     private GogoAnimeRecentEpisodes? _gogoAnimeRecentEpisodes;
     private GogoAnimePopularAnime? _gogoAnimePopularAnime;
     private GogoAnimeSearch? _gogoAnimeSearch;
-
+    private AnimePaheSearch? _animePaheSearch;
     private AnimePaheRecentEpisodes? _animePaheRecentEpisodes;
     private GogoAnimeService GogoAnimeService = new GogoAnimeService();
     private AnimePaheService AnimePaheService = new AnimePaheService();
@@ -35,6 +37,8 @@ public class IndexViewModel : ViewModelBase
     public GogoAnimeSearch? GogoAnimeSearch { get => _gogoAnimeSearch; set => this.RaiseAndSetIfChanged(ref _gogoAnimeSearch, value); }
 
     public AnimePaheRecentEpisodes? AnimePaheRecentEpisodes { get => _animePaheRecentEpisodes; set => this.RaiseAndSetIfChanged(ref _animePaheRecentEpisodes, value); }
+
+    public AnimePaheSearch? AnimePaheSearch { get => _animePaheSearch; set => this.RaiseAndSetIfChanged(ref _animePaheSearch, value); }
     public List<string> SortOptions { get => new List<string> { "Newest", "Popular" }; }
     public string Sort { get => _sort; set  {this.RaiseAndSetIfChanged(ref _sort, value);} }
 
@@ -47,10 +51,14 @@ public class IndexViewModel : ViewModelBase
     {
             DataLoading = true;
             //Get Episodes for index pages
-            GogoAnimeRecentEpisodes = await GogoAnimeService.RecentEpisodes<GogoAnimeRecentEpisodes>(Page:Page);
-            GogoAnimePopularAnime = await GogoAnimeService.PopularEpisodes<GogoAnimePopularAnime>(Page:Page);
+        var gogoAnimeRecentEpisodesTask =  GogoAnimeService.RecentEpisodes<GogoAnimeRecentEpisodes>(Page:Page);
+        var gogoAnimePopularEpisodesTask =  GogoAnimeService.PopularEpisodes<GogoAnimePopularAnime>(Page:Page);
+        var animePaheRecentEpisodesTask =  AnimePaheService.RecentEpisodes<AnimePaheRecentEpisodes>(Page: Page);
+        await Task.WhenAll(gogoAnimeRecentEpisodesTask, gogoAnimePopularEpisodesTask, animePaheRecentEpisodesTask);
+        GogoAnimeRecentEpisodes = await gogoAnimeRecentEpisodesTask;
+        GogoAnimePopularAnime = await gogoAnimePopularEpisodesTask;
+        AnimePaheRecentEpisodes = await animePaheRecentEpisodesTask;
 
-        AnimePaheRecentEpisodes = await AnimePaheService.RecentEpisodes<AnimePaheRecentEpisodes>(Page: Page);
             if(GogoAnimeRecentEpisodes == null)
         {
             var cd = new ContentDialog
@@ -87,13 +95,16 @@ public class IndexViewModel : ViewModelBase
   
     public void SearchTermChanged()
     {
-        Debug.WriteLine(SearchTerm);
         GeneralSearch();
     }
     public async void GeneralSearch()
     {
         DataLoading = true;
-        GogoAnimeSearch = await GogoAnimeService.Search<GogoAnimeSearch>(Query: SearchTerm, Page: Page);
+        var gogoAnimeSearchTask = GogoAnimeService.Search<GogoAnimeSearch>(Query: SearchTerm, Page: Page);
+        var animePaheSearchTask =  AnimePaheService.Search<AnimePaheSearch>(Query: SearchTerm, Page: Page);
+        await Task.WhenAll(gogoAnimeSearchTask, animePaheSearchTask);
+        GogoAnimeSearch = await gogoAnimeSearchTask;
+        AnimePaheSearch = await animePaheSearchTask;
         DataLoading = false;
     }
 }

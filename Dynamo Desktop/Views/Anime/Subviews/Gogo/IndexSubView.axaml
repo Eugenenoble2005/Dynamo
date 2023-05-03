@@ -11,10 +11,11 @@
 			 d:DesignHeight="450"
              x:Class="Dynamo_Desktop.Views.Anime.Subviews.Gogo.IndexSubView">
 	<Design.DataContext>
-		<vm:IndexViewModel/>
+		<vm:IndexViewModel SearchTerm="Fullmetal Alchemist"/>
 	</Design.DataContext>
 	<UserControl.Resources>
 		<ext:EqualityConverter x:Key="EqualityConverter"/>
+		<ext:EqualityConverter x:Key="EmptyObject"/>
 	</UserControl.Resources>
 	<Grid>
 	<Grid IsVisible="{Binding SearchTerm,Converter={x:Static
@@ -138,6 +139,14 @@
 		<!--For search Displays-->
 	<Grid IsVisible="{Binding SearchTerm,Converter={x:Static
 		   StringConverters.IsNotNullOrEmpty}}">
+		<TextBlock FontSize="20" Margin="10" HorizontalAlignment="Center">
+			<TextBlock.Text>
+				<MultiBinding StringFormat="Search for &quot;{0}&quot;. {1} Result(s)">
+					<Binding Path="SearchTerm"/>
+					<Binding Path="GogoAnimeSearch.ResultLength" FallbackValue="0 "/>
+				</MultiBinding>
+			</TextBlock.Text>
+		</TextBlock>
 		<ScrollViewer Margin="0,120,0,0"
 					  >
 			<ItemsRepeater
@@ -199,6 +208,10 @@
 				</ItemsRepeater.ItemTemplate>
 			</ItemsRepeater>
 		</ScrollViewer>
+	<TextBlock IsVisible="{Binding
+			   GogoAnimeSearch.ResultLength,Converter={StaticResource
+			   EqualityConverter},ConverterParameter=0}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Text="{Binding
+							    SearchTerm,StringFormat='No data available for &quot;{0}&quot; search'}"/> 
 	</Grid>
 	</Grid>
 </UserControl>

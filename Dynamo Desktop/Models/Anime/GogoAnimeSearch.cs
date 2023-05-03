@@ -21,6 +21,8 @@ namespace Dynamo_Desktop.Models.Anime
         public dynamic currentPage { get; set; }
         public bool hasNextPage { get; set; }
         public List<GogoSearchResult> results { get; set; }
+
+        public int ResultLength => results?.Count ?? 0;
     }
 
 
