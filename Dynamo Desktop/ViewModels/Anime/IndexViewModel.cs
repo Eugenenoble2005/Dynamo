@@ -59,23 +59,23 @@ public class IndexViewModel : ViewModelBase
         GogoAnimePopularAnime = await gogoAnimePopularEpisodesTask;
         AnimePaheRecentEpisodes = await animePaheRecentEpisodesTask;
 
-            if(GogoAnimeRecentEpisodes == null)
-        {
-            var cd = new ContentDialog
-            {
-                Title="Error",
-                Content="Could not fetch data. Please check your internet connection",
-                CloseButtonText="Close",
-                PrimaryButtonText="Retry",
-                DefaultButton=ContentDialogButton.Primary
+        //    if(GogoAnimeRecentEpisodes == null)
+        //{
+        //    var cd = new ContentDialog
+        //    {
+        //        Title="Error",
+        //        Content="Could not fetch data. Please check your internet connection",
+        //        CloseButtonText="Close",
+        //        PrimaryButtonText="Retry",
+        //        DefaultButton=ContentDialogButton.Primary
                 
-            };
-            ContentDialogResult result = await cd.ShowAsync();
-            if (result == ContentDialogResult.Primary)
-            {
-                GetEpisodes();
-            }
-        }
+        //    };
+        //    ContentDialogResult result = await cd.ShowAsync();
+        //    if (result == ContentDialogResult.Primary)
+        //    {
+        //        GetEpisodes();
+        //    }
+        //}
         DataLoading = false;
 
     }

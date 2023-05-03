@@ -49,17 +49,16 @@
 		</Grid>
 
 		<TabControl>
+			<TabItem
+					Header="AnimePahe">
+				<AnimePaheSubview:IndexSubView/>
+			</TabItem>
 			<!--GOGOANIME-->
 			<TabItem
 				Header="GogoAnime">
 				<GogoSubview:IndexSubView/>
 			</TabItem>
-
-
-			<TabItem
-					Header="AnimePahe">
-				<AnimePaheSubview:IndexSubView/>
-			</TabItem>
+			
 			<TabItem
 				Header="KayoAnime">
 				<TextBlock

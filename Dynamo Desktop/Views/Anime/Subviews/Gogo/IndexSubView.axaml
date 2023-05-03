@@ -37,24 +37,17 @@
 
 					<DataTemplate
 						x:DataType="anime:GogoResult">
-						<Border
+						<Grid
+							Classes="DataBox"
 							Margin="10"
 											>
-							<Border.Styles>
-								<Style Selector="Border:pointerover">
-									<Setter Property="Background">
-										<SolidColorBrush Color="{DynamicResource
-														  SystemAccentColor}" Opacity="0.2"/>
-									</Setter>
-
-								</Style>
-							</Border.Styles>
 							<Grid
 								Margin="10"
 								Height="295">
 								<asyncImageLoader:AdvancedImage
 												Source="{Binding image}"
-												Height="210"/>
+												Classes="DataImage"
+												/>
 								<Border
 									HorizontalAlignment="Right"
 									VerticalAlignment="Bottom"
@@ -78,7 +71,7 @@
 														
 										/>
 							</Grid>
-						</Border>
+						</Grid>
 					</DataTemplate>
 				</ItemsRepeater.ItemTemplate>
 			</ItemsRepeater>
@@ -99,24 +92,17 @@
 
 					<DataTemplate
 						x:DataType="anime:GogoPopularResult">
-						<Border
+						<Grid
 							Margin="10"
+							Classes="DataBox"
 											>
-							<Border.Styles>
-								<Style Selector="Border:pointerover">
-									<Setter Property="Background">
-										<SolidColorBrush Color="{DynamicResource
-														  SystemAccentColor}" Opacity="0.2"/>
-									</Setter>
-
-								</Style>
-							</Border.Styles>
 							<Grid
 								Margin="10"
 								Height="295">
 								<asyncImageLoader:AdvancedImage
 												Source="{Binding image}"
-												Height="210"/>
+												Classes="DataImage"
+												/>
 
 
 								<TextBlock
@@ -128,7 +114,7 @@
 														
 										/>
 							</Grid>
-						</Border>
+						</Grid>
 					</DataTemplate>
 				</ItemsRepeater.ItemTemplate>
 			</ItemsRepeater>
@@ -162,24 +148,18 @@
 
 					<DataTemplate
 						x:DataType="anime:GogoSearchResult">
-						<Border
+						<Grid
 							Margin="10"
+							Classes="DataBox"
 											>
-							<Border.Styles>
-								<Style Selector="Border:pointerover">
-									<Setter Property="Background">
-										<SolidColorBrush Color="{DynamicResource
-														  SystemAccentColor}" Opacity="0.2"/>
-									</Setter>
-
-								</Style>
-							</Border.Styles>
+							
 							<Grid
 								Margin="10"
 								Height="295">
 								<asyncImageLoader:AdvancedImage
 												Source="{Binding image}"
-												Height="210"/>
+												Classes="DataImage"
+												/>
 								<Border
 									HorizontalAlignment="Right"
 									VerticalAlignment="Bottom"
@@ -203,7 +183,7 @@
 														
 										/>
 							</Grid>
-						</Border>
+						</Grid>
 					</DataTemplate>
 				</ItemsRepeater.ItemTemplate>
 			</ItemsRepeater>
