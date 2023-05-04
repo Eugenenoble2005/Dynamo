@@ -27,6 +27,11 @@
 				<SolidColorBrush Color="{DynamicResource
 								 SystemAccentColor}" Opacity="0.1"/>
 			</Setter>
+			<Setter Property="Transitions">
+				<Transitions>
+					<BrushTransition Property="Background" Duration="0:0:0:0.15"/>
+				</Transitions>
+			</Setter>
 		</Style>
 		<Style Selector="Grid.DataBox:pointerover">
 			

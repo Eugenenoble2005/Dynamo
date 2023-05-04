@@ -31,7 +31,7 @@
 						<ItemsRepeater.Layout>
 							<UniformGridLayout
 									ItemsStretch="Fill"
-									MaximumRowsOrColumns="4"
+									MaximumRowsOrColumns="4
 										></UniformGridLayout>
 						</ItemsRepeater.Layout>
 						<ItemsRepeater.ItemTemplate>
