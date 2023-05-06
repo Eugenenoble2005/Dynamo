@@ -12,4 +12,5 @@ public interface IAnimeService
     Task<T?> RecentEpisodes<T>(int Page = 1,int Type = 1);
     Task<T?> PopularEpisodes<T>(int Page=1);
     Task<T?> Search<T>(string Query, int Page=1);
+    Task<T?> Info<T>(string Id="");
 }

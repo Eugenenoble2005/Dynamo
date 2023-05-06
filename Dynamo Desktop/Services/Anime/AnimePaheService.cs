@@ -12,6 +12,12 @@ namespace Dynamo_Desktop.Services.Anime
     public class AnimePaheService : IAnimeService
     {
         private static HttpClient client = new HttpClient();
+
+        public Task<T?> Info<T>(string Id = "")
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<T?> PopularEpisodes<T>(int Page)
         {
             throw new NotImplementedException();
@@ -39,7 +45,6 @@ namespace Dynamo_Desktop.Services.Anime
         public async Task<T?> Search<T>(string Query, int Page)
         {
             string endpoint = $"https://animepahe.com/api?m=search&q={Query}";
-            Debug.WriteLine(endpoint);
             try
             {
                 HttpResponseMessage response = await client.GetAsync(endpoint);

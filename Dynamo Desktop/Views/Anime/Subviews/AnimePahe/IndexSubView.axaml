@@ -1,159 +1,132 @@
-<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-			 xmlns:fluent="using:FluentAvalonia.UI.Controls"
-             mc:Ignorable="d" d:DesignWidth="800" 
-			  x:DataType="vm:IndexViewModel"
-			xmlns:vm="using:Dynamo_Desktop.ViewModels.Anime"			  xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
-			 	 xmlns:ext="using:Dynamo_Desktop.Converters"
-			 xmlns:anime="using:Dynamo_Desktop.Models.Anime"
-           d:DesignHeight="450"
-             x:Class="Dynamo_Desktop.Views.Anime.Subviews.AnimePahe.IndexSubView">
-	<Design.DataContext>
-		<vm:IndexViewModel/>
-	</Design.DataContext>
-	<UserControl.Resources>
-		<ext:EqualityConverter x:Key="EqualityConverter"/>
-		<ext:EmptyObject x:Key="EmptyObject"/>
-	</UserControl.Resources>
-	<Grid>
-		<Grid IsVisible="{Binding SearchTerm,Converter={x:Static
-		   StringConverters.IsNullOrEmpty}}">
-			<!--For sort displays. Must not show if search term has a value or user is searching-->
-			<Grid>
-				<ScrollViewer Margin="0,120,0,0"
-							 IsVisible="{Binding Sort,Converter={StaticResource
-								   EqualityConverter},ConverterParameter='Newest'}">
-					<ItemsRepeater
-						Items="{Binding
-									AnimePaheRecentEpisodes.data}">
-						<ItemsRepeater.Layout>
-							<UniformGridLayout
-									ItemsStretch="Fill"
-									MaximumRowsOrColumns="4
-										></UniformGridLayout>
-						</ItemsRepeater.Layout>
-						<ItemsRepeater.ItemTemplate>
+<UserControl
+    x:Class="Dynamo_Desktop.Views.Anime.Subviews.AnimePahe.IndexSubView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:anime="using:Dynamo_Desktop.Models.Anime"
+    xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:ext="using:Dynamo_Desktop.Converters"
+    xmlns:fluent="using:FluentAvalonia.UI.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:Dynamo_Desktop.ViewModels.Anime"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:IndexViewModel"
+    mc:Ignorable="d">
+    <Design.DataContext>
+        <vm:IndexViewModel />
+    </Design.DataContext>
+    <UserControl.Resources>
+        <ext:EqualityConverter x:Key="EqualityConverter" />
+        <ext:EmptyObject x:Key="EmptyObject" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid IsVisible="{Binding SearchTerm, Converter={x:Static StringConverters.IsNullOrEmpty}}">
+            <!--  For sort displays. Must not show if search term has a value or user is searching  -->
+            <Grid>
+                <ScrollViewer Margin="0,120,0,0" IsVisible="{Binding Sort, Converter={StaticResource EqualityConverter}, ConverterParameter='Newest'}">
+                    <ItemsRepeater Items="{Binding AnimePaheRecentEpisodes.data}">
+                        <ItemsRepeater.Layout>
+                            <UniformGridLayout ItemsStretch="Fill" MaximumRowsOrColumns="4" />
+                        </ItemsRepeater.Layout>
+                        <ItemsRepeater.ItemTemplate>
 
-							<DataTemplate
-								x:DataType="anime:PaheResult">
-								<Grid
-									Margin="10"
-									Classes="DataBox"
-											>
-									<Grid
-										Margin="10"
-										Height="295">			
-						<asyncImageLoader:AdvancedImage Source="{Binding snapshot}" Classes="DataImage"/>
-										
-										<Border
-											HorizontalAlignment="Right"
-											VerticalAlignment="Bottom"
-											Margin="35"
-											CornerRadius="50"
-											Padding="15,5"
-											Background="{DynamicResource
-													SystemAccentColor}">
-											<TextBlock
-												Text="{Binding
-													episode}"
-											/>
-										</Border>
+                            <DataTemplate x:DataType="anime:PaheResult">
+                                <Grid Margin="10" Classes="DataBox">
+                                    <ToolTip.Tip>
+                                        <Grid
+                                            Width="200"
+                                            Height="200"
+                                            ZIndex="10" />
 
-										<TextBlock
-										Text="{Binding
-													 anime_title}"
-										TextWrapping="Wrap"
-										VerticalAlignment="Bottom"
-										HorizontalAlignment="Center"
-														
-										/>
-									</Grid>
-								</Grid>
-							</DataTemplate>
-						</ItemsRepeater.ItemTemplate>
-					</ItemsRepeater>
-				</ScrollViewer>
-				<!--Popular Anime-->
-				<Grid  Margin="0,120,0,0" IsVisible="{Binding Sort,Converter={StaticResource
-								   EqualityConverter},ConverterParameter='Popular'}">
-					<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Text="{Binding
-							    Sort,StringFormat='No data available for &quot;{0}&quot; on this provider '}"/> 
-				</Grid>
-			</Grid>
-		</Grid>
+                                    </ToolTip.Tip>
+                                    <Grid Height="295" Margin="10">
+                                        <asyncImageLoader:AdvancedImage Classes="DataImage" Source="{Binding snapshot}" />
+                                        <Border
+                                            Margin="35"
+                                            Padding="15,5"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Bottom"
+                                            Background="{DynamicResource SystemAccentColor}"
+                                            CornerRadius="50">
+                                            <TextBlock Text="{Binding episode}" />
+                                        </Border>
+
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Bottom"
+                                            Text="{Binding anime_title}"
+                                            TextWrapping="Wrap" />
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsRepeater.ItemTemplate>
+                    </ItemsRepeater>
+                </ScrollViewer>
+                <!--  Popular Anime  -->
+                <Grid Margin="0,120,0,0" IsVisible="{Binding Sort, Converter={StaticResource EqualityConverter}, ConverterParameter='Popular'}">
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="20"
+                        Text="{Binding Sort, StringFormat='No data available for &quot;{0}&quot; on this provider '}" />
+                </Grid>
+            </Grid>
+        </Grid>
 
 
-		<!--For search Displays-->
-		<Grid IsVisible="{Binding SearchTerm,Converter={x:Static
-		   StringConverters.IsNotNullOrEmpty}}">
-			<TextBlock FontSize="20" Margin="10" HorizontalAlignment="Center">
-				<TextBlock.Text>
-					<MultiBinding StringFormat="Search for &quot;{0}&quot;. {1} Result(s)">
-						<Binding Path="SearchTerm"/>
-						<Binding Path="AnimePaheSearch.ResultLength" FallbackValue="0 "/>
-					</MultiBinding>
-				</TextBlock.Text>
-			</TextBlock>
-			<ScrollViewer Margin="0,120,0,0"
-					  >
-				<ItemsRepeater
-					Items="{Binding
-									AnimePaheSearch.data}">
-					<ItemsRepeater.Layout>
-						<UniformGridLayout
-								ItemsStretch="Fill"
-								MaximumRowsOrColumns="4"
-										></UniformGridLayout>
-					</ItemsRepeater.Layout>
-					<ItemsRepeater.ItemTemplate>
+        <!--  For search Displays  -->
+        <Grid IsVisible="{Binding SearchTerm, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
+            <TextBlock
+                Margin="10"
+                HorizontalAlignment="Center"
+                FontSize="20">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="Search for &quot;{0}&quot;. {1} Result(s)">
+                        <Binding Path="SearchTerm" />
+                        <Binding FallbackValue="0 " Path="AnimePaheSearch.ResultLength" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            <ScrollViewer Margin="0,120,0,0">
+                <ItemsRepeater Items="{Binding AnimePaheSearch.data}">
+                    <ItemsRepeater.Layout>
+                        <UniformGridLayout ItemsStretch="Fill" MaximumRowsOrColumns="4" />
+                    </ItemsRepeater.Layout>
+                    <ItemsRepeater.ItemTemplate>
 
-						<DataTemplate
-							x:DataType="anime:PaheSearchResult">
-							<Grid
-								Margin="10"
-								Classes="DataBox"			>
-								
-								<Grid
-									Margin="10"
-									Height="295">
-									<asyncImageLoader:AdvancedImage
-										Classes="DataImage"
-													Source="{Binding poster}"
-													/>
-									<Border
-										HorizontalAlignment="Right"
-										VerticalAlignment="Bottom"
-										Margin="35"
-										CornerRadius="50"
-										Padding="15,5"
-										Background="{DynamicResource
-													SystemAccentColor}">
-										<TextBlock
-											Text="{Binding
-													  episodes}"
-											/>
-									</Border>
+                        <DataTemplate x:DataType="anime:PaheSearchResult">
+                            <Grid Margin="10" Classes="DataBox">
 
-									<TextBlock
-									Text="{Binding
-													 title}"
-									TextWrapping="Wrap"
-									VerticalAlignment="Bottom"
-									HorizontalAlignment="Center"
-														
-										/>
-								</Grid>
-							</Grid>
-						</DataTemplate>
-					</ItemsRepeater.ItemTemplate>
-				</ItemsRepeater>
-			</ScrollViewer>
-			<TextBlock IsVisible="{Binding
-			   AnimePaheSearch.ResultLength,Converter={StaticResource
-			   EqualityConverter},ConverterParameter=0}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Text="{Binding
-							    SearchTerm,StringFormat='No data available for &quot;{0}&quot; search'}"/>
-		</Grid>
-	</Grid>
+                                <Grid Height="295" Margin="10">
+                                    <asyncImageLoader:AdvancedImage Classes="DataImage" Source="{Binding poster}" />
+                                    <Border
+                                        Margin="35"
+                                        Padding="15,5"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Bottom"
+                                        Background="{DynamicResource SystemAccentColor}"
+                                        CornerRadius="50">
+                                        <TextBlock Text="{Binding episodes}" />
+                                    </Border>
+
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Bottom"
+                                        Text="{Binding title}"
+                                        TextWrapping="Wrap" />
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsRepeater.ItemTemplate>
+                </ItemsRepeater>
+            </ScrollViewer>
+            <TextBlock
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="20"
+                IsVisible="{Binding AnimePaheSearch.ResultLength, Converter={StaticResource EqualityConverter}, ConverterParameter=0}"
+                Text="{Binding SearchTerm, StringFormat='No data available for &quot;{0}&quot; search'}" />
+        </Grid>
+    </Grid>
 </UserControl>

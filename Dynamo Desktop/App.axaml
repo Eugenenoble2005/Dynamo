@@ -1,49 +1,48 @@
-<Application xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="using:Dynamo_Desktop"		 
-                xmlns:sty="using:FluentAvalonia.Styling"
-			 xmlns:FluentControls="using:FluentAvalonia.UI.Controls"
-			   xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
-             x:Class="Dynamo_Desktop.App">
+<Application
+    x:Class="Dynamo_Desktop.App"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:FluentControls="using:FluentAvalonia.UI.Controls"
+    xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+    xmlns:local="using:Dynamo_Desktop"
+    xmlns:sty="using:FluentAvalonia.Styling">
 
     <Application.DataTemplates>
-        <local:ViewLocator/>
+        <local:ViewLocator />
     </Application.DataTemplates>
-	
-	<Application.Resources>
-		<Color x:Key="MicaBackground">Black</Color>
-		<FluentControls:NavigationViewPaneDisplayMode x:Key="PaneLocation">Left</FluentControls:NavigationViewPaneDisplayMode>
-		<WindowTransparencyLevel x:Key="TransparencyEffect">AcrylicBlur</WindowTransparencyLevel>
-	</Application.Resources>
-	
-	
+
+    <Application.Resources>
+        <Color x:Key="MicaBackground">Black</Color>
+        <FluentControls:NavigationViewPaneDisplayMode x:Key="PaneLocation">Left</FluentControls:NavigationViewPaneDisplayMode>
+        <WindowTransparencyLevel x:Key="TransparencyEffect">Mica</WindowTransparencyLevel>
+    </Application.Resources>
+
+
     <Application.Styles>
 
-		<FluentTheme Mode="Dark"/>
-		<sty:FluentAvaloniaTheme RequestedTheme="Dark"  PreferSystemTheme="False"/>
-		<StyleInclude Source="avares://AsyncImageLoader.Avalonia/AdvancedImage.axaml"/>
-		<Style Selector="Grid.DataBox">
-			<Setter Property="Background">
-				<SolidColorBrush Color="{DynamicResource
-								 SystemAccentColor}" Opacity="0.1"/>
-			</Setter>
-			<Setter Property="Transitions">
-				<Transitions>
-					<BrushTransition Property="Background" Duration="0:0:0:0.15"/>
-				</Transitions>
-			</Setter>
-		</Style>
-		<Style Selector="Grid.DataBox:pointerover">
-			
-			<Setter Property="Background">
-				<SolidColorBrush Color="{DynamicResource
-								  SystemAccentColor}" Opacity="0.4"/>
-			</Setter>
-		</Style>
-		<Style Selector="asyncImageLoader|AdvancedImage.DataImage">
-			<Setter Property="Height" Value="200"/>
-		</Style>
+        <FluentTheme Mode="Dark" />
+        <sty:FluentAvaloniaTheme PreferSystemTheme="False" RequestedTheme="Dark" />
+        <StyleInclude Source="avares://AsyncImageLoader.Avalonia/AdvancedImage.axaml" />
+        <Style Selector="Grid.DataBox">
+            <Setter Property="Background">
+                <SolidColorBrush Opacity="0.1" Color="{DynamicResource SystemAccentColor}" />
+            </Setter>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0:0.15" />
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Grid.DataBox:pointerover">
+
+            <Setter Property="Background">
+                <SolidColorBrush Opacity="0.4" Color="{DynamicResource SystemAccentColor}" />
+            </Setter>
+        </Style>
+        <Style Selector="asyncImageLoader|AdvancedImage.DataImage">
+            <Setter Property="Height" Value="200" />
+        </Style>
     </Application.Styles>
-	
-	
+
+
 </Application>

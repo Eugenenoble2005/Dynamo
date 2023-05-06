@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Themes.Fluent;
+using Dynamo_Desktop.Scrapers.Anime;
 using Dynamo_Desktop.Services;
 using Dynamo_Desktop.ViewModels;
 using Dynamo_Desktop.Views;
@@ -17,7 +18,9 @@ namespace Dynamo_Desktop.Views
             InitializeComponent();
             ContentFrame.Navigate(typeof(Anime.Index));
             DataContext = new MainWindowViewModel();
-           // AppTheme.SetTheme("Dark");
+            // AppTheme.SetTheme("Dark");
+
+          
         }
         public void NavigationSelectionChanged()
         { 

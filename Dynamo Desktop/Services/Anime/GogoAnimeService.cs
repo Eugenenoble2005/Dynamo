@@ -64,5 +64,8 @@ public class GogoAnimeService : IAnimeService
         }
     }
 
-  
+    public Task<T?> Info<T>(string Id = "")
+    {
+        throw new System.NotImplementedException();
+    }
 }
