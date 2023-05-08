@@ -59,6 +59,7 @@ public class IndexViewModel : ViewModelBase
         GogoAnimePopularAnime = await gogoAnimePopularEpisodesTask;
         AnimePaheRecentEpisodes = await animePaheRecentEpisodesTask;
 
+
         //    if(GogoAnimeRecentEpisodes == null)
         //{
         //    var cd = new ContentDialog

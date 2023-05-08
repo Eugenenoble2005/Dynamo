@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dynamo_Desktop.Scrapers.Anime;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -12,10 +13,12 @@ namespace Dynamo_Desktop.Services.Anime
     public class AnimePaheService : IAnimeService
     {
         private static HttpClient client = new HttpClient();
+        private static AnimePaheScraper _animePaheScraper = new AnimePaheScraper();
 
-        public Task<T?> Info<T>(string Id = "")
+        public async Task<T?> Info<T>(string Id = "")
         {
-            throw new NotImplementedException();
+            string json = await _animePaheScraper.AnimeInfo(Id: Id);
+            return JsonSerializer.Deserialize<T>(json);
         }
 
         public Task<T?> PopularEpisodes<T>(int Page)

@@ -32,14 +32,13 @@
                         <ItemsRepeater.ItemTemplate>
 
                             <DataTemplate x:DataType="anime:PaheResult">
-                                <Grid Margin="10" Classes="DataBox">
-                                    <ToolTip.Tip>
-                                        <Grid
-                                            Width="200"
-                                            Height="200"
-                                            ZIndex="10" />
-
-                                    </ToolTip.Tip>
+                                <Grid
+                                    Margin="10"
+                                    Classes="DataBox"
+                                    Tag="{Binding anime_session}"
+                                    Tapped="NavigateToDetails"
+                                    ToolTip.IsOpen="True">
+                                    <ContentControl Content="{Binding episode}" IsVisible="False" />
                                     <Grid Height="295" Margin="10">
                                         <asyncImageLoader:AdvancedImage Classes="DataImage" Source="{Binding snapshot}" />
                                         <Border

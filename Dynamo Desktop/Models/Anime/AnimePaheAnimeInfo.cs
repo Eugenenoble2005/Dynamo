@@ -9,7 +9,7 @@ namespace Dynamo_Desktop.Models.Anime;
 public class AnimePaheAnimeInfo
 {
     public string? CoverImage { get; set; }
-    public string? description { get; set; }
+    public string? Description { get; set; }
     public string? JapaneseName { get; set; }
     public string? Type { get; set; }
     public string? EpisodeCount { get; set; }

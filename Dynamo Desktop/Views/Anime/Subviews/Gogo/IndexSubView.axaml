@@ -32,7 +32,11 @@
                         <ItemsRepeater.ItemTemplate>
 
                             <DataTemplate x:DataType="anime:GogoResult">
-                                <Grid Margin="10" Classes="DataBox">
+                                <Grid
+                                    Margin="10"
+                                    Classes="DataBox"
+                                    Tag="{Binding id}"
+                                    Tapped="NavigateToDetails">
                                     <Grid Height="295" Margin="10">
                                         <asyncImageLoader:AdvancedImage Classes="DataImage" Source="{Binding image}" />
                                         <Border

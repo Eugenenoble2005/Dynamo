@@ -29,7 +29,7 @@
             <ExperimentalAcrylicBorder.Material>
                 <ExperimentalAcrylicMaterial
                     BackgroundSource="Digger"
-                    MaterialOpacity="0.7"
+                    MaterialOpacity="0.5"
                     TintColor="{DynamicResource ResourceKey=MicaBackground}"
                     TintOpacity="1" />
             </ExperimentalAcrylicBorder.Material>
@@ -55,14 +55,16 @@
         <Grid Margin="5,40,0,0">
             <fluent:NavigationView
                 x:Name="nvSample"
+                BackRequested="BackRequested"
                 IsBackButtonVisible="True"
                 IsBackEnabled="True"
                 IsPaneOpen="True"
                 IsPaneToggleButtonVisible="True"
                 IsSettingsVisible="True"
-                PaneDisplayMode="Top">
+                PaneDisplayMode="Top"
+                SelectedItem="Anime">
                 <fluent:NavigationView.MenuItems>
-                    <fluent:NavigationViewItem Content="Anime" Tag="Anime">
+                    <fluent:NavigationViewItem Content="Anime">
                         <fluent:NavigationViewItem.Icon>
                             <fluent:ImageIcon Source="/Assets/Images/anime-logo.png" />
                         </fluent:NavigationViewItem.Icon>
@@ -83,7 +85,7 @@
                         </fluent:NavigationViewItem.Icon>
                     </fluent:NavigationViewItem>
                 </fluent:NavigationView.MenuItems>
-                <fluent:Frame x:Name="ContentFrame" />
+                <fluent:Frame x:Name="ContentFrame" Navigating="Frame_Navigating" />
             </fluent:NavigationView>
         </Grid>
     </Panel>

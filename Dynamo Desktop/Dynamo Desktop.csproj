@@ -40,4 +40,12 @@
   <ItemGroup>
     <UpToDateCheckInput Remove="Views\Anime\Subviews\AnimePahe\IndexSubView.axaml" />
   </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Anime\Details.axaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Anime\Subviews\AnimePahe\DetailsSubView.axaml" />
+  </ItemGroup>
 </Project>
