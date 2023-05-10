@@ -35,7 +35,7 @@ public  class AnimePaheScraper
         foreach(var pElement in pElements)
         {
             string title = pElement.InnerText.Split(":")[0];
-            string value = pElement.InnerText.Split(":")[1];
+            string value = pElement.InnerText.Split(":")[1].Trim();
             switch (title.Trim().ToLower())
             {
                 case "japanese":
@@ -45,7 +45,7 @@ public  class AnimePaheScraper
                     AnimeDetails.Type = value;
                     break;
                 case "episodes":
-                    AnimeDetails.EpisodeCount = value;
+                    AnimeDetails.EpisodeCount =  value;
                     break;
                 case "status":
                     AnimeDetails.AnimeStatus = value;
@@ -69,6 +69,16 @@ public  class AnimePaheScraper
                     AnimeDetails.Themes = value;
                     break;
             }
+        }
+        HttpResponseMessage get_all_episodes_request = await _http.GetAsync($"https://animepahe.com/api?m=release&id={Id}&sort=episode_asc&page=1");
+        if(get_all_episodes_request.IsSuccessStatusCode)
+        {
+            AnimePaheRecentEpisodes ListOfEpisodes = JsonSerializer.Deserialize<AnimePaheRecentEpisodes>(await get_all_episodes_request.Content.ReadAsStringAsync());
+            AnimeDetails.ReleasedEpisodeCount = ListOfEpisodes.total;
+        }
+        else
+        {
+            AnimeDetails.ReleasedEpisodeCount = 1;
         }
         return JsonSerializer.Serialize(AnimeDetails);
     }

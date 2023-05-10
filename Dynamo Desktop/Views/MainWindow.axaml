@@ -29,7 +29,7 @@
             <ExperimentalAcrylicBorder.Material>
                 <ExperimentalAcrylicMaterial
                     BackgroundSource="Digger"
-                    MaterialOpacity="0.5"
+                    MaterialOpacity="0.7"
                     TintColor="{DynamicResource ResourceKey=MicaBackground}"
                     TintOpacity="1" />
             </ExperimentalAcrylicBorder.Material>

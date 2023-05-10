@@ -95,8 +95,12 @@
                     <ItemsRepeater.ItemTemplate>
 
                         <DataTemplate x:DataType="anime:PaheSearchResult">
-                            <Grid Margin="10" Classes="DataBox">
-
+                            <Grid
+                                Margin="10"
+                                Classes="DataBox"
+                                Tag="{Binding session}"
+                                Tapped="NavigateToDetails">
+                                <ContentControl Content="1" IsVisible="False" />
                                 <Grid Height="295" Margin="10">
                                     <asyncImageLoader:AdvancedImage Classes="DataImage" Source="{Binding poster}" />
                                     <Border

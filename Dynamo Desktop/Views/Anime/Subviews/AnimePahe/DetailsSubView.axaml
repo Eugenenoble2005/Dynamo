@@ -3,23 +3,94 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:AnimePaheSubView="using:Dynamo_Desktop.Views.Anime.Subviews.AnimePahe"
+    xmlns:AsyncImageLoader="using:AsyncImageLoader"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:ext="using:Dynamo_Desktop.Converters"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Dynamo_Desktop.ViewModels.Anime"
     d:DesignHeight="450"
     d:DesignWidth="800"
     x:DataType="vm:DetailsViewModel"
     mc:Ignorable="d">
+    <UserControl.Resources>
+        <ext:IntToListConverter x:Key="IntToList" />
+        <ext:IntToStringConverter x:Key="IntToString" />
+    </UserControl.Resources>
+    <UserControl.Styles>
+        <Style Selector="Panel">
+            <Setter Property="Margin" Value="5" />
+        </Style>
+    </UserControl.Styles>
     <Design.DataContext>
         <vm:DetailsViewModel>
             <vm:DetailsViewModel.RouteParams>
                 <AnimePaheSubView:AnimeIndexToDetailsRouteParams
-                    AnimeId="f5fe328f-4a19-34fe-038b-cd5a70a80ccf"
+                    AnimeId="f0fb9aca-2241-cc75-0e45-dec0fd540aac"
                     EpisodeId="null"
                     EpisodeNumber="10"
                     Provider="AnimePahe" />
             </vm:DetailsViewModel.RouteParams>
         </vm:DetailsViewModel>
     </Design.DataContext>
-    <TextBlock Text="{Binding AnimePaheAnimeInfo.Description}" TextWrapping="Wrap" />
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+        <Panel Grid.Column="0">
+            <AsyncImageLoader:AdvancedImage Source="{Binding AnimePaheAnimeInfo.CoverImage}" />
+        </Panel>
+        <Panel Grid.Column="1">
+            <ScrollViewer>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Panel Grid.Row="0">
+                        <Grid Height="300" Background="Black">
+                            <TextBlock HorizontalAlignment="Center">Video will be here</TextBlock>
+                        </Grid>
+                    </Panel>
+                    <Panel Grid.Row="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Panel Grid.Column="0">
+                                <TextBlock Text="{Binding AnimePaheAnimeInfo.Description}" TextWrapping="Wrap" />
+                            </Panel>
+                            <Panel Grid.Column="1">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding AnimePaheAnimeInfo.JapaneseName, StringFormat='Japanese Name: {0}'}" />
+                                    <TextBlock Text="{Binding AnimePaheAnimeInfo.Type, StringFormat='Type: {0}'}" />
+                                    <TextBlock Text="{Binding AnimePaheAnimeInfo.EpisodeCount, StringFormat='Number Of Episodes: {0}'}" />
+                                    <TextBlock Text="{Binding AnimePaheAnimeInfo.AnimeStatus, StringFormat='Air Status:{0}'}" />
+                                    <TextBlock Text="{Binding AnimePaheAnimeInfo.Duration, StringFormat='Avg. Duration:{0}'}" />
+                                    <TextBlock Text="{Binding AnimePaheAnimeInfo.AirRange, StringFormat='Aired:{0}'}" />
+                                    <TextBlock Text="{Binding AnimePaheAnimeInfo.Season, StringFormat='Season:{0}'}" />
+                                    <TextBlock Text="{Binding AnimePaheAnimeInfo.Studio, StringFormat='Studio:{0}'}" />
+                                    <TextBlock Text="{Binding AnimePaheAnimeInfo.Themes, StringFormat='Themes:{0}'}" />
+                                </StackPanel>
+                            </Panel>
+                        </Grid>
+                    </Panel>
+                    <Panel Grid.Row="2">
+                        <ItemsRepeater Items="{Binding AnimePaheAnimeInfo.ReleasedEpisodeCount, Converter={StaticResource IntToList}}">
+                            <ItemsRepeater.Layout>
+                                <WrapLayout Orientation="Horizontal" />
+                            </ItemsRepeater.Layout>
+                            <ItemsRepeater.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Content="{Binding}" />
+                                </DataTemplate>
+                            </ItemsRepeater.ItemTemplate>
+                        </ItemsRepeater>
+                    </Panel>
+                </Grid>
+            </ScrollViewer>
+        </Panel>
+    </Grid>
 </UserControl>
