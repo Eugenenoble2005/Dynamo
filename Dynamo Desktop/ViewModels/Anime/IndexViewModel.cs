@@ -51,9 +51,9 @@ public class IndexViewModel : ViewModelBase
     {
             DataLoading = true;
             //Get Episodes for index pages
-        var gogoAnimeRecentEpisodesTask =  GogoAnimeService.RecentEpisodes<GogoAnimeRecentEpisodes>(Page:Page);
-        var gogoAnimePopularEpisodesTask =  GogoAnimeService.PopularEpisodes<GogoAnimePopularAnime>(Page:Page);
-        var animePaheRecentEpisodesTask =  AnimePaheService.RecentEpisodes<AnimePaheRecentEpisodes>(Page: Page);
+        var gogoAnimeRecentEpisodesTask =  GogoAnimeService.RecentEpisodes(Page:Page);
+        var gogoAnimePopularEpisodesTask =  GogoAnimeService.PopularEpisodes(Page:Page);
+        var animePaheRecentEpisodesTask =  AnimePaheService.RecentEpisodes(Page: Page);
         await Task.WhenAll(gogoAnimeRecentEpisodesTask, gogoAnimePopularEpisodesTask, animePaheRecentEpisodesTask);
         GogoAnimeRecentEpisodes = await gogoAnimeRecentEpisodesTask;
         GogoAnimePopularAnime = await gogoAnimePopularEpisodesTask;
@@ -101,8 +101,8 @@ public class IndexViewModel : ViewModelBase
     public async void GeneralSearch()
     {
         DataLoading = true;
-        var gogoAnimeSearchTask = GogoAnimeService.Search<GogoAnimeSearch>(Query: SearchTerm, Page: Page);
-        var animePaheSearchTask =  AnimePaheService.Search<AnimePaheSearch>(Query: SearchTerm, Page: Page);
+        var gogoAnimeSearchTask = GogoAnimeService.Search(Query: SearchTerm, Page: Page);
+        var animePaheSearchTask =  AnimePaheService.Search(Query: SearchTerm, Page: Page);
         await Task.WhenAll(gogoAnimeSearchTask, animePaheSearchTask);
         GogoAnimeSearch = await gogoAnimeSearchTask;
         AnimePaheSearch = await animePaheSearchTask;

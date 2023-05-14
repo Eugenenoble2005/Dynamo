@@ -1,18 +1,18 @@
 <UserControl
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d"
     x:Class="Dynamo_Desktop.Views.Anime.Details"
+    x:DataType="vm:DetailsViewModel"
     xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:AnimePaheSubView="using:Dynamo_Desktop.Views.Anime.Subviews.AnimePahe"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:ext="using:Dynamo_Desktop.Converters"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Dynamo_Desktop.ViewModels.Anime"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
-    x:DataType="vm:DetailsViewModel"
-    mc:Ignorable="d">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Design.DataContext>
-        <vm:DetailsViewModel Provider="AnimePahef" />
+        <vm:DetailsViewModel RouteParams="" />
     </Design.DataContext>
     <UserControl.Resources>
         <ext:EqualityConverter x:Key="EqualityConverter" />

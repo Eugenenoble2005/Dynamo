@@ -24,7 +24,7 @@ public class PaheResult
     public int filler { get; set; }
     public string created_at { get; set; }
     public int completed { get; set; }
-
+    public bool IsCurrentEpisode { get; set; }
 
 }
 

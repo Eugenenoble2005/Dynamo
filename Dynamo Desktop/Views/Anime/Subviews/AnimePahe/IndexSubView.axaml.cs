@@ -21,8 +21,7 @@ public partial class IndexSubView : UserControl
     {
         var grid = sender as Grid;
         ContentControl episode = grid.Children.OfType<ContentControl>().FirstOrDefault();
-        List<object> anime_details = new List<object> { grid.Tag, episode.Content };
-        var navParams = new  AnimeIndexToDetailsRouteParams {Provider = "AnimePahe",AnimeId=grid.Tag as string,EpisodeNumber=episode.Content as string };
+        var navParams = new  AnimeIndexToDetailsRouteParams {Provider = "AnimePahe",AnimeId=grid.Tag as string,EpisodeNumber=episode.Content.ToString() };
         Frame frame = this.FindAncestorOfType<Frame>();
         frame.Navigate(typeof(Details),navParams);
     }

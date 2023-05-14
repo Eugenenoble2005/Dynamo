@@ -1,11 +1,11 @@
 <Application
     x:Class="Dynamo_Desktop.App"
     xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:FluentControls="using:FluentAvalonia.UI.Controls"
     xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
     xmlns:local="using:Dynamo_Desktop"
-    xmlns:sty="using:FluentAvalonia.Styling">
+    xmlns:sty="using:FluentAvalonia.Styling"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Application.DataTemplates>
         <local:ViewLocator />
@@ -25,18 +25,18 @@
         <StyleInclude Source="avares://AsyncImageLoader.Avalonia/AdvancedImage.axaml" />
         <Style Selector="Grid.DataBox">
             <Setter Property="Background">
-                <SolidColorBrush Opacity="0.1" Color="{DynamicResource SystemAccentColor}" />
+                <SolidColorBrush Color="{DynamicResource SystemAccentColor}" Opacity="0.1" />
             </Setter>
             <Setter Property="Transitions">
                 <Transitions>
-                    <BrushTransition Property="Background" Duration="0:0:0:0.15" />
+                    <BrushTransition Duration="0:0:0:0.15" Property="Background" />
                 </Transitions>
             </Setter>
         </Style>
         <Style Selector="Grid.DataBox:pointerover">
 
             <Setter Property="Background">
-                <SolidColorBrush Opacity="0.4" Color="{DynamicResource SystemAccentColor}" />
+                <SolidColorBrush Color="{DynamicResource SystemAccentColor}" Opacity="0.4" />
             </Setter>
         </Style>
         <Style Selector="asyncImageLoader|AdvancedImage.DataImage">

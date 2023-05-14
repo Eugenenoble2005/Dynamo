@@ -1,20 +1,23 @@
 <UserControl
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d"
     x:Class="Dynamo_Desktop.Views.Anime.Subviews.AnimePahe.DetailsSubView"
+    x:DataType="vm:DetailsViewModel"
     xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:AnimePaheSubView="using:Dynamo_Desktop.Views.Anime.Subviews.AnimePahe"
     xmlns:AsyncImageLoader="using:AsyncImageLoader"
+    xmlns:anime="using:Dynamo_Desktop.Models.Anime"
+    xmlns:anime_views="using:Dynamo_Desktop.Views.Anime"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:ext="using:Dynamo_Desktop.Converters"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Dynamo_Desktop.ViewModels.Anime"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
-    x:DataType="vm:DetailsViewModel"
-    mc:Ignorable="d">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <UserControl.Resources>
         <ext:IntToListConverter x:Key="IntToList" />
         <ext:IntToStringConverter x:Key="IntToString" />
+        <ext:EqualityConverter x:Key="EqualityConverter" />
     </UserControl.Resources>
     <UserControl.Styles>
         <Style Selector="Panel">
@@ -25,7 +28,7 @@
         <vm:DetailsViewModel>
             <vm:DetailsViewModel.RouteParams>
                 <AnimePaheSubView:AnimeIndexToDetailsRouteParams
-                    AnimeId="f0fb9aca-2241-cc75-0e45-dec0fd540aac"
+                    AnimeId="db6bf62c-9935-4209-becd-483a64218e1c"
                     EpisodeId="null"
                     EpisodeNumber="10"
                     Provider="AnimePahe" />
@@ -49,7 +52,7 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Panel Grid.Row="0">
-                        <Grid Height="300" Background="Black">
+                        <Grid Background="Black" Height="300">
                             <TextBlock HorizontalAlignment="Center">Video will be here</TextBlock>
                         </Grid>
                     </Panel>
@@ -67,24 +70,31 @@
                                     <TextBlock Text="{Binding AnimePaheAnimeInfo.JapaneseName, StringFormat='Japanese Name: {0}'}" />
                                     <TextBlock Text="{Binding AnimePaheAnimeInfo.Type, StringFormat='Type: {0}'}" />
                                     <TextBlock Text="{Binding AnimePaheAnimeInfo.EpisodeCount, StringFormat='Number Of Episodes: {0}'}" />
-                                    <TextBlock Text="{Binding AnimePaheAnimeInfo.AnimeStatus, StringFormat='Air Status:{0}'}" />
-                                    <TextBlock Text="{Binding AnimePaheAnimeInfo.Duration, StringFormat='Avg. Duration:{0}'}" />
-                                    <TextBlock Text="{Binding AnimePaheAnimeInfo.AirRange, StringFormat='Aired:{0}'}" />
-                                    <TextBlock Text="{Binding AnimePaheAnimeInfo.Season, StringFormat='Season:{0}'}" />
-                                    <TextBlock Text="{Binding AnimePaheAnimeInfo.Studio, StringFormat='Studio:{0}'}" />
-                                    <TextBlock Text="{Binding AnimePaheAnimeInfo.Themes, StringFormat='Themes:{0}'}" />
+                                    <TextBlock Text="{Binding AnimePaheAnimeInfo.AnimeStatus, StringFormat='Air Status: {0}'}" />
+                                    <TextBlock Text="{Binding AnimePaheAnimeInfo.Duration, StringFormat='Avg. Duration: {0}'}" />
+                                    <TextBlock Text="{Binding AnimePaheAnimeInfo.AirRange, StringFormat='Aired: {0}'}" />
+                                    <TextBlock Text="{Binding AnimePaheAnimeInfo.Season, StringFormat='Season: {0}'}" />
+                                    <TextBlock Text="{Binding AnimePaheAnimeInfo.Studio, StringFormat='Studio: {0}'}" />
+                                    <TextBlock Text="{Binding AnimePaheAnimeInfo.Themes, StringFormat='Themes: {0}'}" />
                                 </StackPanel>
                             </Panel>
                         </Grid>
                     </Panel>
                     <Panel Grid.Row="2">
-                        <ItemsRepeater Items="{Binding AnimePaheAnimeInfo.ReleasedEpisodeCount, Converter={StaticResource IntToList}}">
+                        <ItemsRepeater Items="{Binding AnimePaheEpisodes}">
                             <ItemsRepeater.Layout>
-                                <WrapLayout Orientation="Horizontal" />
+                                <WrapLayout />
                             </ItemsRepeater.Layout>
                             <ItemsRepeater.ItemTemplate>
-                                <DataTemplate>
-                                    <Button Content="{Binding}" />
+                                <DataTemplate x:DataType="anime:PaheResult">
+                                    <Button Classes.accent="{Binding IsCurrentEpisode}" Content="{Binding episode}">
+                                        <Button.Tag>
+                                            <MultiBinding StringFormat="{}{0}|{1}|{2}">
+                                                <Binding Path="episode" />
+                                                <Binding Path="session" />
+                                            </MultiBinding>
+                                        </Button.Tag>
+                                    </Button>
                                 </DataTemplate>
                             </ItemsRepeater.ItemTemplate>
                         </ItemsRepeater>

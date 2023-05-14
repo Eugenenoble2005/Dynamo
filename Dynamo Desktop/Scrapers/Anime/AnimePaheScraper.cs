@@ -70,16 +70,7 @@ public  class AnimePaheScraper
                     break;
             }
         }
-        HttpResponseMessage get_all_episodes_request = await _http.GetAsync($"https://animepahe.com/api?m=release&id={Id}&sort=episode_asc&page=1");
-        if(get_all_episodes_request.IsSuccessStatusCode)
-        {
-            AnimePaheRecentEpisodes ListOfEpisodes = JsonSerializer.Deserialize<AnimePaheRecentEpisodes>(await get_all_episodes_request.Content.ReadAsStringAsync());
-            AnimeDetails.ReleasedEpisodeCount = ListOfEpisodes.total;
-        }
-        else
-        {
-            AnimeDetails.ReleasedEpisodeCount = 1;
-        }
+       
         return JsonSerializer.Serialize(AnimeDetails);
     }
 }

@@ -1,4 +1,5 @@
-﻿using Dynamo_Desktop.Scrapers.Anime;
+﻿using Dynamo_Desktop.Models.Anime;
+using Dynamo_Desktop.Scrapers.Anime;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,15 +11,47 @@ using System.Threading.Tasks;
 
 namespace Dynamo_Desktop.Services.Anime
 {
-    public class AnimePaheService : IAnimeService
+    public class AnimePaheService
     {
         private static HttpClient client = new HttpClient();
         private static AnimePaheScraper _animePaheScraper = new AnimePaheScraper();
 
-        public async Task<T?> Info<T>(string Id = "")
+        public async Task<List<PaheResult>> AllEpisodes(string Id = "",int Page=1)
+        {
+            List<PaheResult> Episode_List = new List<PaheResult>();
+            async Task GetEpisodes(int Page)
+            {
+                string endpoint = $"https://animepahe.com/api?m=release&id={Id}&sort=episode_asc&page={Page}&per_page=2";
+                try
+                {
+                    HttpResponseMessage response = await client.GetAsync(endpoint);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string json = await response.Content.ReadAsStringAsync();
+                        AnimePaheRecentEpisodes Episodes = JsonSerializer.Deserialize<AnimePaheRecentEpisodes>(json);
+                        foreach(var episode in Episodes.data)
+                        {
+                            Episode_List.Add(episode);
+                        }
+                        //use recursion to obtain all episodes.
+                        if(Episodes.next_page_url != null)
+                        {
+                            await GetEpisodes(Page + 1);
+                        }
+                    }
+                }
+                catch {
+                    return;
+                }
+            }
+             await GetEpisodes(Page);
+            return Episode_List;
+        }
+
+        public  async Task<AnimePaheAnimeInfo> Info(string Id = "")
         {
             string json = await _animePaheScraper.AnimeInfo(Id: Id);
-            return JsonSerializer.Deserialize<T>(json);
+            return JsonSerializer.Deserialize<AnimePaheAnimeInfo>(json);
         }
 
         public Task<T?> PopularEpisodes<T>(int Page)
@@ -26,7 +59,7 @@ namespace Dynamo_Desktop.Services.Anime
             throw new NotImplementedException();
         }
 
-        public async Task<T?> RecentEpisodes<T>(int Page=1, int Type=1)
+        public async Task<AnimePaheRecentEpisodes> RecentEpisodes(int Page=1, int Type=1)
         {
             string recent_releases_endpoint = $"https://animepahe.com/api?m=airing&page={Page}";
             try
@@ -35,7 +68,7 @@ namespace Dynamo_Desktop.Services.Anime
                 if (response.IsSuccessStatusCode)
                 {
                     string json = await response.Content.ReadAsStringAsync();
-                    return JsonSerializer.Deserialize<T>(json);
+                    return JsonSerializer.Deserialize<AnimePaheRecentEpisodes>(json);
                 }
                 return default;
             }
@@ -45,7 +78,7 @@ namespace Dynamo_Desktop.Services.Anime
             }
         }
 
-        public async Task<T?> Search<T>(string Query, int Page)
+        public async Task<AnimePaheSearch> Search(string Query, int Page)
         {
             string endpoint = $"https://animepahe.com/api?m=search&q={Query}";
             try
@@ -54,7 +87,7 @@ namespace Dynamo_Desktop.Services.Anime
                 if (response.IsSuccessStatusCode)
                 {
                     string json = await response.Content.ReadAsStringAsync();
-                    return JsonSerializer.Deserialize<T>(json);
+                    return JsonSerializer.Deserialize<AnimePaheSearch>(json);
                 }
                 return default;
             }
