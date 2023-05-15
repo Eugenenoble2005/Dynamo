@@ -50,8 +50,15 @@ namespace Dynamo_Desktop.Services.Anime
 
         public  async Task<AnimePaheAnimeInfo> Info(string Id = "")
         {
-            string json = await _animePaheScraper.AnimeInfo(Id: Id);
-            return JsonSerializer.Deserialize<AnimePaheAnimeInfo>(json);
+            try
+            {
+                string json = await _animePaheScraper.AnimeInfo(Id: Id);
+                return JsonSerializer.Deserialize<AnimePaheAnimeInfo>(json);
+            }
+            catch
+            {
+                return default;
+            }
         }
 
         public Task<T?> PopularEpisodes<T>(int Page)

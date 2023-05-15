@@ -30,7 +30,7 @@
                 <AnimePaheSubView:AnimeIndexToDetailsRouteParams
                     AnimeId="db6bf62c-9935-4209-becd-483a64218e1c"
                     EpisodeId="null"
-                    EpisodeNumber="10"
+                    EpisodeNumber="21"
                     Provider="AnimePahe" />
             </vm:DetailsViewModel.RouteParams>
         </vm:DetailsViewModel>
@@ -62,7 +62,11 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Panel Grid.Column="0">
+                            <TextBlock
+                                FontSize="35"
+                                Foreground="{DynamicResource SystemAccentColorDark1}"
+                                Text="{Binding AnimePaheAnimeInfo.Title}" />
+                            <Panel Grid.Column="0" Margin="0,50,0,0">
                                 <TextBlock Text="{Binding AnimePaheAnimeInfo.Description}" TextWrapping="Wrap" />
                             </Panel>
                             <Panel Grid.Column="1">
@@ -81,7 +85,11 @@
                         </Grid>
                     </Panel>
                     <Panel Grid.Row="2">
-                        <ItemsRepeater Items="{Binding AnimePaheEpisodes}">
+                        <TextBlock
+                            FontSize="25"
+                            Foreground="{DynamicResource SystemAccentColorDark1}"
+                            Text="{Binding AnimePaheEpisodes.Count, StringFormat='Released Episodes ({0})'}" />
+                        <ItemsRepeater Items="{Binding AnimePaheEpisodes}" Margin="0,35,0,0">
                             <ItemsRepeater.Layout>
                                 <WrapLayout />
                             </ItemsRepeater.Layout>

@@ -31,6 +31,7 @@ public  class AnimePaheScraper
             .InnerText;
 
         var anime_info = htmlDoc.DocumentNode.SelectSingleNode("//div[contains(@class,'anime-info')]");
+        AnimeDetails.Title = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='title-wrapper']/h1/span").InnerText;
         var pElements = anime_info.SelectNodes(".//p");
         foreach(var pElement in pElements)
         {
