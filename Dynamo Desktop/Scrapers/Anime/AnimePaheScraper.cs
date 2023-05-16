@@ -90,6 +90,24 @@ public  class AnimePaheScraper
             string kwik_server = button.GetAttributeValue("data-src", null);
             var kwik_response = await _http.GetStringAsync(kwik_server);
             HtmlDocument kwik_body = new HtmlDocument();
+            kwik_body.LoadHtml(kwik_response);
+            int number_of_script_tags = kwik_body.DocumentNode.SelectNodes("//script").Count;
+            var target_script = kwik_body.DocumentNode.SelectNodes("//script")[number_of_script_tags - 2];
+            List<string> data_list = target_script.InnerText.Split("'player||")[1].Split("|").ToList();
+            //https://eu-99.files.nextcdn.org/stream/99/01/8b08d64d96c9d6978dee6cb90dc289905517ae932f301c8a71c2e08e7719845f/uwu.m3u8
+            string title = "https:"+kwik_body.DocumentNode.SelectNodes("//link[@rel='preconnect']")[1].GetAttributeValue("href",null);
+            string m3u8_link = title + "/stream" + $"/{title.Split("-")[1].Split(".")[0]}" + "/01" + $"/{data_list[90]}" + $"/{data_list[89]}" +
+                               $".{data_list[88]}";
+           // Debug.WriteLine(m3u8_link);
+            for (int i = 0; i <= data_list.Count-1; i++)
+            {
+                if (i == 2)
+                {
+                     Debug.WriteLine(i);
+                     Debug.WriteLine(data_list[i]);
+                }
+               
+            }
         }
     }
 }
