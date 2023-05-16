@@ -74,4 +74,22 @@ public  class AnimePaheScraper
        
         return JsonSerializer.Serialize(AnimeDetails);
     }
+
+    public async void EpisodeStreamLinks(String AnimeId,string EpisodeId)
+    {
+        string url = $"https://animepahe.com/play/{AnimeId}/{EpisodeId}";
+        string response = await _http.GetStringAsync(url);
+        HtmlDocument htmlDoc = new HtmlDocument();
+        htmlDoc.LoadHtml(response);
+
+        HtmlNode resolutionMenu = htmlDoc.DocumentNode.SelectSingleNode("//div[@id='resolutionMenu']");
+        _http.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36"); // Replace with an appropriate User-Agent value
+        _http.DefaultRequestHeaders.Add("Referer",url);
+        foreach (var button in resolutionMenu.SelectNodes(".//button"))
+        {
+            string kwik_server = button.GetAttributeValue("data-src", null);
+            var kwik_response = await _http.GetStringAsync(kwik_server);
+            HtmlDocument kwik_body = new HtmlDocument();
+        }
+    }
 }

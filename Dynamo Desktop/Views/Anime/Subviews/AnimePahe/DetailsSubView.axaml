@@ -28,7 +28,7 @@
         <vm:DetailsViewModel>
             <vm:DetailsViewModel.RouteParams>
                 <AnimePaheSubView:AnimeIndexToDetailsRouteParams
-                    AnimeId="db6bf62c-9935-4209-becd-483a64218e1c"
+                    AnimeId="fed87bb9-2ae7-f5fc-07a5-b8b015d3e1a1"
                     EpisodeId="null"
                     EpisodeNumber="21"
                     Provider="AnimePahe" />
@@ -65,7 +65,8 @@
                             <TextBlock
                                 FontSize="35"
                                 Foreground="{DynamicResource SystemAccentColorDark1}"
-                                Text="{Binding AnimePaheAnimeInfo.Title}" />
+                                Text="{Binding AnimePaheAnimeInfo.Title}"
+                                TextTrimming="CharacterEllipsis" />
                             <Panel Grid.Column="0" Margin="0,50,0,0">
                                 <TextBlock Text="{Binding AnimePaheAnimeInfo.Description}" TextWrapping="Wrap" />
                             </Panel>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="Dynamo Desktop/App.axaml" value="Dynamo Desktop/Dynamo Desktop.csproj" />
+        <entry key="Dynamo Desktop/Views/Anime/Details.axaml" value="Dynamo Desktop/Dynamo Desktop.csproj" />
+        <entry key="Dynamo Desktop/Views/Anime/Index.axaml" value="Dynamo Desktop/Dynamo Desktop.csproj" />
+        <entry key="Dynamo Desktop/Views/Anime/Subviews/AnimePahe/DetailsSubView.axaml" value="Dynamo Desktop/Dynamo Desktop.csproj" />
+        <entry key="Dynamo Desktop/Views/Anime/Subviews/AnimePahe/IndexSubView.axaml" value="Dynamo Desktop/Dynamo Desktop.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

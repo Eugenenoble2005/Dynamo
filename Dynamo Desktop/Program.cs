@@ -13,8 +13,8 @@ namespace Dynamo_Desktop
         [STAThread]
         public  static void Main(string[] args)
         {
-            //var scrape_test = new AnimePaheScraper();
-            //scrape_test.AnimeInfo("1c376b19-ffef-f66f-3345-0174d2775cbc");
+            var scrape_test = new AnimePaheScraper();
+            scrape_test.EpisodeStreamLinks("fed87bb9-2ae7-f5fc-07a5-b8b015d3e1a1","e34c9629142f9adb6c909024b8e1843637d10c9a06cce6f1f277bfc7f39ab811");
             BuildAvaloniaApp()
             .StartWithClassicDesktopLifetime(args);
         }
