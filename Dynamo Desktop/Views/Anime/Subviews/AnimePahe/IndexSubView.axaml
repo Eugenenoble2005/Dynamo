@@ -39,6 +39,7 @@
                                     Tapped="NavigateToDetails"
                                     ToolTip.IsOpen="True">
                                     <ContentControl Content="{Binding episode}" IsVisible="False" />
+                                    <ContentControl Content="{Binding session}" IsVisible="False"/>
                                     <Grid Height="295" Margin="10">
                                         <asyncImageLoader:AdvancedImage Classes="DataImage" Source="{Binding snapshot}" />
                                         <Border

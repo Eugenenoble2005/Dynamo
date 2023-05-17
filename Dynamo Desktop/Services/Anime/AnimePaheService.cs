@@ -16,6 +16,18 @@ namespace Dynamo_Desktop.Services.Anime
         private static HttpClient client = new HttpClient();
         private static AnimePaheScraper _animePaheScraper = new AnimePaheScraper();
 
+        public async Task<List<AnimePaheStreamingLinks>> StreaminLinks(string AnimeId, string EpisodeId)
+        {
+            try
+            {
+                string json = await _animePaheScraper.EpisodeStreamLinks(AnimeId: AnimeId, EpisodeId: EpisodeId);
+                return JsonSerializer.Deserialize<List<AnimePaheStreamingLinks>>(json);
+            }
+            catch (Exception e)
+            {
+                return default;
+            }
+        }
         public async Task<List<PaheResult>> AllEpisodes(string Id = "",int Page=1)
         {
             List<PaheResult> Episode_List = new List<PaheResult>();
