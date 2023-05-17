@@ -75,7 +75,7 @@ public  class AnimePaheScraper
         return JsonSerializer.Serialize(AnimeDetails);
     }
 
-    public async void EpisodeStreamLinks(String AnimeId,string EpisodeId)
+    public async Task<string> EpisodeStreamLinks(String AnimeId,string EpisodeId)
     {
         string url = $"https://animepahe.com/play/{AnimeId}/{EpisodeId}";
         string response = await _http.GetStringAsync(url);
@@ -85,8 +85,13 @@ public  class AnimePaheScraper
         HtmlNode resolutionMenu = htmlDoc.DocumentNode.SelectSingleNode("//div[@id='resolutionMenu']");
         _http.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36"); // Replace with an appropriate User-Agent value
         _http.DefaultRequestHeaders.Add("Referer",url);
+        List<AnimePaheStreamingLinks> Streaming_links = new List<AnimePaheStreamingLinks>();
         foreach (var button in resolutionMenu.SelectNodes(".//button"))
         {
+            AnimePaheStreamingLinks StreamingLink = new AnimePaheStreamingLinks();
+            StreamingLink.Audio = button.GetAttributeValue("data-audio", null);
+            StreamingLink.Fansub = button.GetAttributeValue("data-fansub", null);
+            StreamingLink.Resolution = button.GetAttributeValue("data-resolution", null);
             string kwik_server = button.GetAttributeValue("data-src", null);
             var kwik_response = await _http.GetStringAsync(kwik_server);
             HtmlDocument kwik_body = new HtmlDocument();
@@ -94,20 +99,21 @@ public  class AnimePaheScraper
             int number_of_script_tags = kwik_body.DocumentNode.SelectNodes("//script").Count;
             var target_script = kwik_body.DocumentNode.SelectNodes("//script")[number_of_script_tags - 2];
             List<string> data_list = target_script.InnerText.Split("'player||")[1].Split("|").ToList();
-            //https://eu-99.files.nextcdn.org/stream/99/01/8b08d64d96c9d6978dee6cb90dc289905517ae932f301c8a71c2e08e7719845f/uwu.m3u8
+            string path = data_list[92] == "stream"  ? "stream"  : "hls";
+            //https://eu-11.cache.nextcdn.org/hls/11/03/0c4a79d85fbdbadc8e7ac99d84c581bfabedebf668f7b9c435e4a27cff3abcff/owo.m3u8
             string title = "https:"+kwik_body.DocumentNode.SelectNodes("//link[@rel='preconnect']")[1].GetAttributeValue("href",null);
-            string m3u8_link = title + "/stream" + $"/{title.Split("-")[1].Split(".")[0]}" + "/01" + $"/{data_list[90]}" + $"/{data_list[89]}" +
+            string m3u8_link = title + $"/{path}" + $"/{title.Split("-")[1].Split(".")[0]}" + $"/{data_list[91]}" + $"/{data_list[90]}" + $"/{data_list[89]}" +
                                $".{data_list[88]}";
-           // Debug.WriteLine(m3u8_link);
-            for (int i = 0; i <= data_list.Count-1; i++)
-            {
-                if (i == 2)
-                {
-                     Debug.WriteLine(i);
-                     Debug.WriteLine(data_list[i]);
-                }
-               
-            }
+            StreamingLink.M3u8_link = m3u8_link;
+            Streaming_links.Add(StreamingLink);
+            // for (int i = 0; i <= data_list.Count-1; i++)
+            // {
+            //
+            //          Debug.WriteLine(i);
+            //          Debug.WriteLine(data_list[i]);
+            // }
         }
+        Debug.WriteLine(JsonSerializer.Serialize(Streaming_links));
+        return JsonSerializer.Serialize(Streaming_links);
     }
 }
