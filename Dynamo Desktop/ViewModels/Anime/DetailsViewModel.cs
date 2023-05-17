@@ -44,6 +44,7 @@ public class DetailsViewModel : ViewModelBase
                 AnimePaheEpisodes = await _animePaheService.AllEpisodes(RouteParams.AnimeId);
                 AnimePaheStreamingLinks =
                     await _animePaheService.StreaminLinks(RouteParams.AnimeId, RouteParams.EpisodeId);
+                //test
                 Debug.WriteLine(JsonSerializer.Serialize(AnimePaheStreamingLinks));
                 foreach (var episode in AnimePaheEpisodes)
                 {
