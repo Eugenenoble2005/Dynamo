@@ -17,5 +17,12 @@
     <UserControl.Resources>
         <ext:EqualityConverter x:Key="EqualityConverter" />
     </UserControl.Resources>
-    <AnimePaheSubView:DetailsSubView IsVisible="{Binding RouteParams.Provider, Converter={StaticResource EqualityConverter}, ConverterParameter='AnimePahe'}" />
+    <Grid>
+        <ProgressBar
+            IsIndeterminate="True"
+            IsVisible="{Binding DataLoading}"
+            VerticalAlignment="Top"
+            Width="1000" />
+        <AnimePaheSubView:DetailsSubView IsVisible="{Binding RouteParams.Provider, Converter={StaticResource EqualityConverter}, ConverterParameter='AnimePahe'}" />
+    </Grid>
 </UserControl>

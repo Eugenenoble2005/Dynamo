@@ -84,6 +84,8 @@ public  class AnimePaheScraper
 
         HtmlNode resolutionMenu = htmlDoc.DocumentNode.SelectSingleNode("//div[@id='resolutionMenu']");
         _http.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36"); // Replace with an appropriate User-Agent value
+        //remove previous referer before adding new one
+        _http.DefaultRequestHeaders.Remove("Referer");
         _http.DefaultRequestHeaders.Add("Referer",url);
         List<AnimePaheStreamingLinks> Streaming_links = new List<AnimePaheStreamingLinks>();
         foreach (var button in resolutionMenu.SelectNodes(".//button"))
@@ -102,6 +104,7 @@ public  class AnimePaheScraper
             string path = data_list[92] == "stream"  ? "stream"  : "hls";
             //https://eu-11.cache.nextcdn.org/hls/11/03/0c4a79d85fbdbadc8e7ac99d84c581bfabedebf668f7b9c435e4a27cff3abcff/owo.m3u8
             string title = "https:"+kwik_body.DocumentNode.SelectNodes("//link[@rel='preconnect']")[1].GetAttributeValue("href",null);
+            //looking back at this, i could have just used one interpolation, dont wanna touch it again
             string m3u8_link = title + $"/{path}" + $"/{title.Split("-")[1].Split(".")[0]}" + $"/{data_list[91]}" + $"/{data_list[90]}" + $"/{data_list[89]}" +
                                $".{data_list[88]}";
             StreamingLink.M3u8_link = m3u8_link;
@@ -113,7 +116,6 @@ public  class AnimePaheScraper
             //          Debug.WriteLine(data_list[i]);
             // }
         }
-        Debug.WriteLine(JsonSerializer.Serialize(Streaming_links));
         return JsonSerializer.Serialize(Streaming_links);
     }
 }
