@@ -6,11 +6,11 @@
     xmlns:AsyncImageLoader="using:AsyncImageLoader"
     xmlns:anime="using:Dynamo_Desktop.Models.Anime"
     xmlns:anime_views="using:Dynamo_Desktop.Views.Anime"
-    xmlns:cefnet="using:CefNet.Avalonia"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:ext="using:Dynamo_Desktop.Converters"
     xmlns:fluent="using:FluentAvalonia.UI.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vlc="using:LibVLCSharp.Avalonia"
     xmlns:vm="using:Dynamo_Desktop.ViewModels.Anime"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -30,8 +30,8 @@
         <vm:DetailsViewModel>
             <vm:DetailsViewModel.RouteParams>
                 <AnimePaheSubView:AnimeIndexToDetailsRouteParams
-                    AnimeId="fed87bb9-2ae7-f5fc-07a5-b8b015d3e1a1"
-                    EpisodeId="null"
+                    AnimeId="1d97fa54-3740-5648-69aa-7d39575bfe1c"
+                    EpisodeId="b2e3ab2f92541b15c7d8c37be07c66526ae0ddf9b82737205d60302a1d0bff5c"
                     EpisodeNumber="21"
                     Provider="AnimePahe" />
             </vm:DetailsViewModel.RouteParams>
@@ -53,11 +53,7 @@
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <Panel Grid.Row="0">
-                        <Grid Height="300">
-                            <cefnet:WebView />
-                        </Grid>
-                    </Panel>
+                    <Panel Grid.Row="0" />
                     <Panel Grid.Row="1">
                         <Grid>
                             <Grid.ColumnDefinitions>

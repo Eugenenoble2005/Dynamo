@@ -1,0 +1,41 @@
+<Window
+    x:Class="Dynamo_Desktop.Video.Video"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vlc="using:LibVLCSharp.Avalonia"
+    xmlns:vm="using:Dynamo_Desktop.ViewModels"
+    Title="Video"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:MainWindowViewModel"
+    Background="Transparent"
+    ExtendClientAreaToDecorationsHint="True"
+    Icon="/Assets/avalonia-logo.ico"
+    TransparencyLevelHint="AcrylicBlur"
+    mc:Ignorable="d">
+    <Panel>
+        <ExperimentalAcrylicBorder IsHitTestVisible="False">
+            <ExperimentalAcrylicBorder.Material>
+                <ExperimentalAcrylicMaterial
+                    BackgroundSource="Digger"
+                    MaterialOpacity="0.5"
+                    TintColor="{DynamicResource ResourceKey=MicaBackground}"
+                    TintOpacity="1" />
+            </ExperimentalAcrylicBorder.Material>
+        </ExperimentalAcrylicBorder>
+        <Panel Margin="0,60,0,60">
+            <vlc:VideoView
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                MediaPlayer="{Binding MediaPlayer}" />
+        </Panel>
+        <Button
+            VerticalAlignment="Top"
+            Command="{Binding Play}"
+            Content="Play"
+            ZIndex="1" />
+    </Panel>
+
+</Window>

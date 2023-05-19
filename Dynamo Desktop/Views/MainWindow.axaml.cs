@@ -16,6 +16,7 @@ namespace Dynamo_Desktop.Views
     {
         public MainWindow()
         {
+
             InitializeComponent();
             ContentFrame.Navigate(typeof(Anime.Index));
             DataContext = new MainWindowViewModel();
