@@ -53,7 +53,29 @@
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <Panel Grid.Row="0" />
+                    <Panel Grid.Row="0">
+                        <ItemsRepeater Items="{Binding AnimePaheStreamingLinks}">
+                            <ItemsRepeater.Layout>
+                                <UniformGridLayout />
+                            </ItemsRepeater.Layout>
+                            <ItemsRepeater.ItemTemplate>
+                                <DataTemplate x:DataType="anime:AnimePaheStreamingLinks">
+                                    <Button
+                                        Classes="accent"
+                                        Click="PlayVideo"
+                                        Tag="{Binding M3u8_link}"
+                                        ToolTip.Tip="{Binding Audio}">
+                                        <Button.Content>
+                                            <MultiBinding StringFormat="{}{0} ({1}p)">
+                                                <Binding Path="Fansub" />
+                                                <Binding Path="Resolution" />
+                                            </MultiBinding>
+                                        </Button.Content>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsRepeater.ItemTemplate>
+                        </ItemsRepeater>
+                    </Panel>
                     <Panel Grid.Row="1">
                         <Grid>
                             <Grid.ColumnDefinitions>

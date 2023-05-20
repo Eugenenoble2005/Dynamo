@@ -17,9 +17,9 @@ namespace Dynamo_Desktop
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                desktop.MainWindow = new Video.Video
+                desktop.MainWindow = new Video.Video("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
                 {
-                    DataContext = new MainWindowViewModel(),
+                   //DataContext = new MainWindowViewModel(),
                 };
             }
 
