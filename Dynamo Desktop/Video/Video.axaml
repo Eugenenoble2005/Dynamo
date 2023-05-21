@@ -5,14 +5,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:fluent="using:FluentAvalonia.UI.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vlc="clr-namespace:LibVLCSharp.Avalonia;assembly=LibVLCSharp.Avalonia"
+    xmlns:vlc="using:Dynamo_Desktop.Video"
     xmlns:vm="using:Dynamo_Desktop.ViewModels"
     Title="Video"
     d:DesignHeight="450"
     d:DesignWidth="800"
     x:DataType="vm:VideoViewModel"
     Background="Transparent"
-    ExtendClientAreaToDecorationsHint="True"
     Icon="/Assets/avalonia-logo.ico"
     TransparencyLevelHint="AcrylicBlur"
     mc:Ignorable="d">
@@ -26,31 +25,44 @@
                     TintOpacity="1" />
             </ExperimentalAcrylicBorder.Material>
         </ExperimentalAcrylicBorder>
-        <Panel Margin="0,30,0,60">
+        <Panel x:Name="MainPanel">
             <vlc:VideoView
+                x:Name="VideoViewer"
                 HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                MediaPlayer="{Binding MediaPlayer}" />
+                VerticalAlignment="Stretch">
+                <Panel Height="60" VerticalAlignment="Bottom">
+                    <Panel.Styles>
+                        <Style Selector="Panel">
+                            <Setter Property="Background">
+                                <SolidColorBrush Opacity="0.2" Color="{DynamicResource SystemAccentColor}" />
+                            </Setter>
+                        </Style>
+                    </Panel.Styles>
+                    <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal">
+                        <Button
+                            Margin="30,0,0,0"
+                            Padding="20"
+                            Background="Transparent"
+                            Command="{Binding #MainPanel.DataContext.TogglePause}"
+                            CornerRadius="100">
+                            <Button.Content>
+                                <fluent:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="{Binding #MainPanel.DataContext.PlayButtonIcon}" />
+                            </Button.Content>
+                        </Button>
+                        <TextBlock Text="{Binding #MainPanel.DataContext.CurrentTimeStamp}" />
+                        <Slider
+                            Width="700"
+                            Margin="10,4,0,0"
+                            HorizontalAlignment="Center"
+                            Maximum="{Binding #MainPanel.DataContext.VideoMillSecs}"
+                            Value="{Binding #MainPanel.DataContext.CurrentMillSecs}" />
+                        <TextBlock Text="{Binding #MainPanel.DataContext.VideoTimeStamp}" />
+
+                    </StackPanel>
+                </Panel>
+            </vlc:VideoView>
         </Panel>
-        <Panel Height="60" VerticalAlignment="Bottom">
-            <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal">
-                <Button
-                    Margin="30,0,0,0"
-                    Padding="20"
-                    Background="Transparent"
-                    Command="{Binding TogglePause}"
-                    Content="{}"
-                    CornerRadius="100">
-                    <Button.Content>
-                        <fluent:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="{Binding PlayButtonIcon}" />
-                    </Button.Content>
-                </Button>
-                <Slider
-                    Width="700"
-                    Margin="10,4,0,0"
-                    HorizontalAlignment="Center" />
-            </StackPanel>
-        </Panel>
+
     </Panel>
 
 </Window>
