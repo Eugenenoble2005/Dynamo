@@ -46,7 +46,7 @@ namespace Dynamo_Desktop.ViewModels
                 VideoTimeStamp = timespan.ToString("mm\\:ss");
                 VideoMillSecs = args.Duration;
             };
-           
+            MediaPlayer.Dispose();
         }
         public void SeekToTime()
         {
