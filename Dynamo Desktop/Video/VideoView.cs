@@ -142,14 +142,14 @@ namespace Dynamo_Desktop.Video
 
         public void Controls_PointerEnter(object sender, PointerEventArgs e)
         {
-            Debug.WriteLine("POINTER ENTER");
+           // Debug.WriteLine("POINTER ENTER");
             _floatingContent.Opacity = 0.8;
 
         }
 
         public void Controls_PointerLeave(object sender, PointerEventArgs e)
         {
-            Debug.WriteLine("POINTER LEAVE");
+           // Debug.WriteLine("POINTER LEAVE");
             _floatingContent.Opacity = 0;
 
         }
