@@ -16,7 +16,8 @@
     Icon="/Assets/avalonia-logo.ico"
     TransparencyLevelHint="AcrylicBlur"
     mc:Ignorable="d">
-    <Panel>
+
+    <Panel Background="Transparent" IsHitTestVisible="True">
         <ExperimentalAcrylicBorder IsHitTestVisible="False">
             <ExperimentalAcrylicBorder.Material>
                 <ExperimentalAcrylicMaterial
@@ -26,11 +27,12 @@
                     TintOpacity="1" />
             </ExperimentalAcrylicBorder.Material>
         </ExperimentalAcrylicBorder>
-        <Panel x:Name="MainPanel">
+        <Panel x:Name="MainPanel" ClipToBounds="True">
             <vlc:VideoView
                 x:Name="VideoViewer"
                 HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch">
+                VerticalAlignment="Stretch"
+                IsHitTestVisible="False">
                 <Panel
                     Height="60"
                     VerticalAlignment="Bottom"
@@ -40,6 +42,7 @@
                             <Setter Property="Background">
                                 <SolidColorBrush Opacity="0.5" Color="{DynamicResource SystemAccentColor}" />
                             </Setter>
+
                         </Style>
                     </Panel.Styles>
                     <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
@@ -61,7 +64,19 @@
                             Value="{Binding #MainPanel.DataContext.CurrentMillSecs}" />
 
                         <TextBlock Margin="20" Text="{Binding #MainPanel.DataContext.VideoTimeStamp}" />
-
+                        <Button
+                            Margin="1,0,0,0"
+                            Padding="20"
+                            Background="Transparent"
+                            Click="ToggleFullscreen"
+                            CornerRadius="100">
+                            <Button.Content>
+                                <fluent:FontIcon
+                                    FontFamily="Segoe MDL2 Assets"
+                                    Foreground="{DynamicResource SystemAccentColor}"
+                                    Glyph="&#xF0D8;" />
+                            </Button.Content>
+                        </Button>
                     </StackPanel>
                 </Panel>
             </vlc:VideoView>

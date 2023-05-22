@@ -19,6 +19,8 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Input;
 using System.Diagnostics;
 using Avalonia.Media.Immutable;
+using Avalonia.Animation;
+
 namespace Dynamo_Desktop.Video
 {
     /// <summary>
@@ -118,9 +120,10 @@ namespace Dynamo_Desktop.Video
                     ZIndex = Int32.MaxValue,
 
                     Opacity = 1,
-
-                };
-
+                    
+                    };
+                   
+                
                 _floatingContent.PointerEnter += Controls_PointerEnter;
                 _floatingContent.PointerLeave += Controls_PointerLeave;
 
@@ -143,7 +146,7 @@ namespace Dynamo_Desktop.Video
         public void Controls_PointerEnter(object sender, PointerEventArgs e)
         {
            // Debug.WriteLine("POINTER ENTER");
-            _floatingContent.Opacity = 0.8;
+            _floatingContent.Opacity = 1;
 
         }
 

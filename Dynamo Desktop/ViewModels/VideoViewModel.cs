@@ -21,7 +21,13 @@ namespace Dynamo_Desktop.ViewModels
         public string _playButtonIcon = WebUtility.HtmlDecode("&#xF8AE;");
         public string VideoTimeStamp { get => _videoTimestamp; set => this.RaiseAndSetIfChanged(ref _videoTimestamp, value); }
         public long VideoMillSecs { get => _videoMillSecs; set => this.RaiseAndSetIfChanged(ref _videoMillSecs, value); } 
-        public long CurrentMillSecs { get => _currentMillSecs; set { this.RaiseAndSetIfChanged(ref _currentMillSecs, value);Seek(); } }
+        public long CurrentMillSecs { get => _currentMillSecs; set { this.RaiseAndSetIfChanged(ref _currentMillSecs, value);
+                if (isSeeking)
+                {
+                    Seek();
+                }
+               
+            } }
         public string CurrentTimeStamp { get => _currentTimestamp; set => this.RaiseAndSetIfChanged(ref _currentTimestamp, value); }
         public string PlayButtonIcon { get => _playButtonIcon; set => this.RaiseAndSetIfChanged(ref _playButtonIcon, value); }
         private bool isSeeking = false;
@@ -39,10 +45,10 @@ namespace Dynamo_Desktop.ViewModels
                 {
                     TimeSpan timespan = TimeSpan.FromMilliseconds(args.Time);
                     CurrentTimeStamp = timespan.ToString("mm\\:ss");
-                    if (isSeeking == false)
-                    {
+                    isSeeking = false;
                         CurrentMillSecs = args.Time;
-                    }
+                    isSeeking = true;
+                    
 
                 };
                 media.DurationChanged += (sender, args) =>
@@ -70,13 +76,7 @@ namespace Dynamo_Desktop.ViewModels
         }
         public void Seek()
         {
-            if(CurrentMillSecs - _previousMillSecs > 1000 || _previousMillSecs - CurrentMillSecs > 1000)
-            {
-                isSeeking = true;
-                MediaPlayer.Time = CurrentMillSecs;
-                isSeeking = false;
-            }
-            _previousMillSecs = CurrentMillSecs;
+            MediaPlayer.Time = CurrentMillSecs;
         }
         public void StopPlayer()
         {

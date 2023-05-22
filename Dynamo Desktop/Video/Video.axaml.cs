@@ -5,7 +5,7 @@ using Avalonia.Markup.Xaml;
 using Dynamo_Desktop.ViewModels;
 using FluentAvalonia.UI.Controls;
 using System.Diagnostics;
-
+using Avalonia.Interactivity;
 namespace Dynamo_Desktop.Video;
 
 public partial class Video : Window
@@ -27,7 +27,20 @@ public partial class Video : Window
     {
         (DataContext as VideoViewModel).StopPlayer();
     }
-  
+  public void ToggleFullscreen(object sender, RoutedEventArgs e)
+    {
+        if (WindowState == WindowState.FullScreen)
+        {
+            WindowState = WindowState.Normal;
+        }
+        else
+        {
+            WindowState = WindowState.FullScreen;
+        }
+   
+    }
+ 
+ 
     public Video()
     {
         InitializeComponent();  
