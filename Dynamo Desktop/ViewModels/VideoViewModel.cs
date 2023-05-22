@@ -13,12 +13,15 @@ namespace Dynamo_Desktop.ViewModels
         private readonly LibVLC _libVlc = new LibVLC(enableDebugLogs:true);
         private string _videoTimestamp = "00:00";
         private long _videoMillSecs = 0;
+        private string _title;
         private long _currentMillSecs = 0;
+        private bool _videoBuffering = false;
         private long _previousMillSecs = 0;
         private string _currentTimestamp = "00:00";
         public string Url { get; set; }
         public MediaPlayer MediaPlayer { get; }
         public string _playButtonIcon = WebUtility.HtmlDecode("&#xF8AE;");
+        public string Title { get => _title; set => this.RaiseAndSetIfChanged(ref _title, value); }
         public string VideoTimeStamp { get => _videoTimestamp; set => this.RaiseAndSetIfChanged(ref _videoTimestamp, value); }
         public long VideoMillSecs { get => _videoMillSecs; set => this.RaiseAndSetIfChanged(ref _videoMillSecs, value); } 
         public long CurrentMillSecs { get => _currentMillSecs; set { this.RaiseAndSetIfChanged(ref _currentMillSecs, value);
@@ -28,6 +31,7 @@ namespace Dynamo_Desktop.ViewModels
                 }
                
             } }
+        public bool VideoBuffering { get => _videoBuffering; set => this.RaiseAndSetIfChanged(ref _videoBuffering, value); }
         public string CurrentTimeStamp { get => _currentTimestamp; set => this.RaiseAndSetIfChanged(ref _currentTimestamp, value); }
         public string PlayButtonIcon { get => _playButtonIcon; set => this.RaiseAndSetIfChanged(ref _playButtonIcon, value); }
         private bool isSeeking = false;
@@ -40,24 +44,36 @@ namespace Dynamo_Desktop.ViewModels
                 //Debug.WriteLine(args.Level);
             };
             using var media = new Media(_libVlc, new Uri(Url));
-                MediaPlayer.Play(media);
-                MediaPlayer.TimeChanged += (sender, args) =>
+            MediaPlayer.Play(media);
+           // MediaPlayer.EnableKeyInput = true;
+            MediaPlayer.TimeChanged += (sender, args) =>
                 {
                     TimeSpan timespan = TimeSpan.FromMilliseconds(args.Time);
                     CurrentTimeStamp = timespan.ToString("mm\\:ss");
+                    //do not seek during playback 
                     isSeeking = false;
                         CurrentMillSecs = args.Time;
                     isSeeking = true;
                     
 
                 };
+            MediaPlayer.Buffering += (sender, args) =>
+            {
+                VideoBuffering = true;
+                Debug.WriteLine(args.Cache);
+                if(args.Cache == 100)
+                {
+                    VideoBuffering = false;
+                }
+                //Debug.WriteLine(args.Cache);
+            };
                 media.DurationChanged += (sender, args) =>
                 {
                     TimeSpan timespan = TimeSpan.FromMilliseconds(args.Duration);
                     VideoTimeStamp = timespan.ToString("mm\\:ss");
                     VideoMillSecs = args.Duration;
                 };
-          
+         
           //  MediaPlayer.Dispose();
         }
       
@@ -76,7 +92,8 @@ namespace Dynamo_Desktop.ViewModels
         }
         public void Seek()
         {
-            MediaPlayer.Time = CurrentMillSecs;
+            Debug.WriteLine("Seeking");
+            MediaPlayer.SeekTo(TimeSpan.FromMilliseconds(CurrentMillSecs));
         }
         public void StopPlayer()
         {

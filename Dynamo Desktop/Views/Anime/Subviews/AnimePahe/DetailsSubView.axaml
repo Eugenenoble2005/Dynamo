@@ -27,7 +27,7 @@
         </Style>
     </UserControl.Styles>
     <Design.DataContext>
-        <vm:DetailsViewModel>
+        <vm:DetailsViewModel DataLoading="False">
             <vm:DetailsViewModel.RouteParams>
                 <AnimePaheSubView:AnimeIndexToDetailsRouteParams
                     AnimeId="1d97fa54-3740-5648-69aa-7d39575bfe1c"
@@ -50,8 +50,8 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
+                        <RowDefinition Height="5*" />
+                        <RowDefinition Height="5*" />
                     </Grid.RowDefinitions>
                     <Panel Grid.Row="0">
                         <ItemsRepeater Items="{Binding AnimePaheStreamingLinks}">
@@ -87,11 +87,16 @@
                                 Foreground="{DynamicResource SystemAccentColorDark1}"
                                 Text="{Binding AnimePaheAnimeInfo.Title}"
                                 TextTrimming="CharacterEllipsis" />
+
                             <Panel Grid.Column="0" Margin="0,50,0,0">
                                 <TextBlock Text="{Binding AnimePaheAnimeInfo.Description}" TextWrapping="Wrap" />
                             </Panel>
                             <Panel Grid.Column="1">
                                 <StackPanel>
+                                    <TextBlock
+                                        FontSize="20"
+                                        Foreground="{DynamicResource SystemAccentColorDark1}"
+                                        Text="{Binding RouteParams.EpisodeNumber, StringFormat='Episode {0}'}" />
                                     <TextBlock Text="{Binding AnimePaheAnimeInfo.JapaneseName, StringFormat='Japanese Name: {0}'}" />
                                     <TextBlock Text="{Binding AnimePaheAnimeInfo.Type, StringFormat='Type: {0}'}" />
                                     <TextBlock Text="{Binding AnimePaheAnimeInfo.EpisodeCount, StringFormat='Number Of Episodes: {0}'}" />
@@ -116,9 +121,12 @@
                             </ItemsRepeater.Layout>
                             <ItemsRepeater.ItemTemplate>
                                 <DataTemplate x:DataType="anime:PaheResult">
-                                    <Button Classes.accent="{Binding IsCurrentEpisode}" Content="{Binding episode}">
+                                    <Button
+                                        Classes="accent"
+                                        Click="ChangeEpisode"
+                                        Content="{Binding episode}">
                                         <Button.Tag>
-                                            <MultiBinding StringFormat="{}{0}|{1}|{2}">
+                                            <MultiBinding StringFormat="{}{0}|{1}">
                                                 <Binding Path="episode" />
                                                 <Binding Path="session" />
                                             </MultiBinding>

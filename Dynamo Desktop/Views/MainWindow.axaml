@@ -31,7 +31,7 @@
             <ExperimentalAcrylicBorder.Material>
                 <ExperimentalAcrylicMaterial
                     BackgroundSource="Digger"
-                    MaterialOpacity="0.7"
+                    MaterialOpacity="0.6"
                     TintColor="{DynamicResource ResourceKey=MicaBackground}"
                     TintOpacity="1" />
             </ExperimentalAcrylicBorder.Material>
@@ -63,7 +63,7 @@
                 IsPaneOpen="True"
                 IsPaneToggleButtonVisible="True"
                 IsSettingsVisible="True"
-                PaneDisplayMode="Top"
+                PaneDisplayMode="Left"
                 SelectedItem="Anime">
                 <fluent:NavigationView.MenuItems>
                     <fluent:NavigationViewItem Content="Anime">

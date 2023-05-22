@@ -1,28 +1,26 @@
 <UserControl
-    d:DesignHeight="450"
-    d:DesignWidth="800"
-    mc:Ignorable="d"
     x:Class="Dynamo_Desktop.Views.Anime.Details"
-    x:DataType="vm:DetailsViewModel"
     xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:AnimePaheSubView="using:Dynamo_Desktop.Views.Anime.Subviews.AnimePahe"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:ext="using:Dynamo_Desktop.Converters"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Dynamo_Desktop.ViewModels.Anime"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Design.DataContext>
-        <vm:DetailsViewModel RouteParams="" />
-    </Design.DataContext>
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:DetailsViewModel"
+    mc:Ignorable="d">
+
     <UserControl.Resources>
         <ext:EqualityConverter x:Key="EqualityConverter" />
     </UserControl.Resources>
     <Grid>
         <ProgressBar
-            IsIndeterminate="True"
-            IsVisible="{Binding DataLoading}"
+            Width="1000"
             VerticalAlignment="Top"
-            Width="1000" />
+            IsIndeterminate="True"
+            IsVisible="{Binding DataLoading}" />
         <AnimePaheSubView:DetailsSubView IsVisible="{Binding RouteParams.Provider, Converter={StaticResource EqualityConverter}, ConverterParameter='AnimePahe'}" />
     </Grid>
 </UserControl>

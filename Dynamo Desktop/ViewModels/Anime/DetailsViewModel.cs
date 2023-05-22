@@ -42,6 +42,7 @@ public class DetailsViewModel : ViewModelBase
     }
     public async void GetAnimeDetails()
     {
+        DataLoading = true;
         switch (RouteParams.Provider)
         {
             case "AnimePahe":
@@ -56,11 +57,16 @@ public class DetailsViewModel : ViewModelBase
                 AnimePaheAnimeInfo = await AnimePaheAnimeInfoTask;
                 AnimePaheEpisodes = await AnimePaheEpisodesTask;
                 AnimePaheStreamingLinks = await AnimePaheStreamingLinksTask;
+                Debug.WriteLine(RouteParams.EpisodeNumber);
                 foreach (var episode in AnimePaheEpisodes)
                 {
                     if (episode.episode.ToString() == RouteParams.EpisodeNumber)
                     {
                         episode.IsCurrentEpisode = true;
+                    }
+                    else
+                    {
+                        episode.IsCurrentEpisode = false;
                     }
                 }
                 break;

@@ -15,9 +15,10 @@ namespace Dynamo_Desktop
 
         public override void OnFrameworkInitializationCompleted()
         {
+
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                desktop.MainWindow = new Video.Video("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
+                desktop.MainWindow = new MainWindow()
                 {
                    //DataContext = new MainWindowViewModel(),
                 };
