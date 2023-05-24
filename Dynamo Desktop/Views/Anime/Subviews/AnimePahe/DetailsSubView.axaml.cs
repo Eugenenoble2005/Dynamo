@@ -1,6 +1,8 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Layout;
+using Avalonia.LogicalTree;
 using Avalonia.Markup.Xaml;
 using Avalonia.VisualTree;
 using Dynamo_Desktop.ViewModels.Anime;
@@ -21,21 +23,19 @@ public partial class DetailsSubView : UserControl
     {
         string link = (sender as Button).Tag.ToString();
         string Title = (this.FindAncestorOfType<Details>().DataContext as DetailsViewModel).AnimePaheAnimeInfo.Title;
-        Video.Video videoWindow = new Video.Video(link,Title);
+        Video.Video videoWindow = new Video.Video(link,Title, "https://kwik.cx");
         videoWindow.Show();
-        videoWindow.Closing += (s, e) =>
-        {
-            videoWindow.StopAllPlayers();
-        };
+       
     }
     public void ChangeEpisode(object sender, RoutedEventArgs e)
     {
+      
         Button button = (sender as Button);
         List<string> parameters = button.Tag.ToString().Split("|").ToList();
         Details DetailsParent = this.FindAncestorOfType<Details>();
         (DataContext as DetailsViewModel).RouteParams = new AnimeIndexToDetailsRouteParams
         {
-
+            
             Provider = (DataContext as DetailsViewModel).RouteParams.Provider,
             EpisodeNumber = parameters[0],
             EpisodeId = parameters[1],
@@ -43,4 +43,13 @@ public partial class DetailsSubView : UserControl
         };
         //(DataContext as DetailsViewModel).GetAnimeDetails();
     }
+    public void EpisodesListAttached(object sender, VisualTreeAttachmentEventArgs e)
+    {
+        //apply wraplayout dynamically. This is to avoid runtime problems and cache tha arise from setting this before the content is ready.
+        (sender as ItemsRepeater).Layout = new WrapLayout();
+    
+       
+    }
+ 
+
 }

@@ -110,31 +110,38 @@
                             </Panel>
                         </Grid>
                     </Panel>
-                    <Panel Grid.Row="2">
+                    <Panel x:Name="EpisodeListPanel" Grid.Row="2">
                         <TextBlock
                             FontSize="25"
                             Foreground="{DynamicResource SystemAccentColorDark1}"
                             Text="{Binding AnimePaheEpisodes.Count, StringFormat='Released Episodes ({0})'}" />
-                        <ItemsRepeater Margin="0,35,0,0" Items="{Binding AnimePaheEpisodes}">
-                            <ItemsRepeater.Layout>
-                                <WrapLayout />
-                            </ItemsRepeater.Layout>
-                            <ItemsRepeater.ItemTemplate>
-                                <DataTemplate x:DataType="anime:PaheResult">
-                                    <Button
-                                        Classes="accent"
-                                        Click="ChangeEpisode"
-                                        Content="{Binding episode}">
-                                        <Button.Tag>
-                                            <MultiBinding StringFormat="{}{0}|{1}">
-                                                <Binding Path="episode" />
-                                                <Binding Path="session" />
-                                            </MultiBinding>
-                                        </Button.Tag>
-                                    </Button>
-                                </DataTemplate>
-                            </ItemsRepeater.ItemTemplate>
-                        </ItemsRepeater>
+                        <ScrollViewer>
+                            <ItemsRepeater
+                                x:Name="EpisodeList"
+                                Margin="0,35,0,0"
+                                AttachedToVisualTree="EpisodesListAttached"
+                                Items="{Binding AnimePaheEpisodes}"
+                                UseLayoutRounding="False">
+
+                                <ItemsRepeater.ItemTemplate>
+                                    <DataTemplate x:DataType="anime:PaheResult">
+                                        <Button
+                                            Classes="accent"
+                                            Click="ChangeEpisode"
+                                            Content="{Binding episode}">
+
+                                            <Button.Tag>
+                                                <MultiBinding StringFormat="{}{0}|{1}">
+                                                    <Binding Path="episode" />
+                                                    <Binding Path="session" />
+                                                </MultiBinding>
+                                            </Button.Tag>
+                                        </Button>
+                                    </DataTemplate>
+                                </ItemsRepeater.ItemTemplate>
+                            </ItemsRepeater>
+                        </ScrollViewer>
+
                     </Panel>
                 </Grid>
             </ScrollViewer>

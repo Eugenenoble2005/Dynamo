@@ -1,10 +1,7 @@
 <UserControl
-    d:DesignHeight="450"
-    d:DesignWidth="800"
-    mc:Ignorable="d"
     x:Class="Dynamo_Desktop.Views.Anime.Subviews.AnimePahe.IndexSubView"
-    x:DataType="vm:IndexViewModel"
     xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:anime="using:Dynamo_Desktop.Models.Anime"
     xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -12,7 +9,10 @@
     xmlns:fluent="using:FluentAvalonia.UI.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Dynamo_Desktop.ViewModels.Anime"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:IndexViewModel"
+    mc:Ignorable="d">
     <Design.DataContext>
         <vm:IndexViewModel />
     </Design.DataContext>
@@ -24,7 +24,7 @@
         <Grid IsVisible="{Binding SearchTerm, Converter={x:Static StringConverters.IsNullOrEmpty}}">
             <!--  For sort displays. Must not show if search term has a value or user is searching  -->
             <Grid>
-                <ScrollViewer IsVisible="{Binding Sort, Converter={StaticResource EqualityConverter}, ConverterParameter='Newest'}" Margin="0,120,0,0">
+                <ScrollViewer Margin="0,120,0,0" IsVisible="{Binding Sort, Converter={StaticResource EqualityConverter}, ConverterParameter='Newest'}">
                     <ItemsRepeater Items="{Binding AnimePaheRecentEpisodes.data}">
                         <ItemsRepeater.Layout>
                             <UniformGridLayout ItemsStretch="Fill" MaximumRowsOrColumns="4" />
@@ -33,30 +33,30 @@
 
                             <DataTemplate x:DataType="anime:PaheResult">
                                 <Grid
-                                    Classes="DataBox"
                                     Margin="10"
+                                    Classes="DataBox"
                                     Tag="{Binding anime_session}"
                                     Tapped="NavigateToDetails"
                                     ToolTip.IsOpen="True">
                                     <ContentControl Content="{Binding episode}" IsVisible="False" />
-                                    <ContentControl Content="{Binding session}" IsVisible="False"/>
+                                    <ContentControl Content="{Binding session}" IsVisible="False" />
                                     <Grid Height="295" Margin="10">
                                         <asyncImageLoader:AdvancedImage Classes="DataImage" Source="{Binding snapshot}" />
                                         <Border
-                                            Background="{DynamicResource SystemAccentColor}"
-                                            CornerRadius="50"
-                                            HorizontalAlignment="Right"
                                             Margin="35"
                                             Padding="15,5"
-                                            VerticalAlignment="Bottom">
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Bottom"
+                                            Background="{DynamicResource SystemAccentColor}"
+                                            CornerRadius="50">
                                             <TextBlock Text="{Binding episode}" />
                                         </Border>
 
                                         <TextBlock
                                             HorizontalAlignment="Center"
+                                            VerticalAlignment="Bottom"
                                             Text="{Binding anime_title}"
-                                            TextWrapping="Wrap"
-                                            VerticalAlignment="Bottom" />
+                                            TextWrapping="Wrap" />
                                     </Grid>
                                 </Grid>
                             </DataTemplate>
@@ -64,12 +64,12 @@
                     </ItemsRepeater>
                 </ScrollViewer>
                 <!--  Popular Anime  -->
-                <Grid IsVisible="{Binding Sort, Converter={StaticResource EqualityConverter}, ConverterParameter='Popular'}" Margin="0,120,0,0">
+                <Grid Margin="0,120,0,0" IsVisible="{Binding Sort, Converter={StaticResource EqualityConverter}, ConverterParameter='Popular'}">
                     <TextBlock
-                        FontSize="20"
                         HorizontalAlignment="Center"
-                        Text="{Binding Sort, StringFormat='No data available for &quot;{0}&quot; on this provider '}"
-                        VerticalAlignment="Center" />
+                        VerticalAlignment="Center"
+                        FontSize="20"
+                        Text="{Binding Sort, StringFormat='No data available for &quot;{0}&quot; on this provider '}" />
                 </Grid>
             </Grid>
         </Grid>
@@ -78,9 +78,9 @@
         <!--  For search Displays  -->
         <Grid IsVisible="{Binding SearchTerm, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
             <TextBlock
-                FontSize="20"
+                Margin="10"
                 HorizontalAlignment="Center"
-                Margin="10">
+                FontSize="20">
                 <TextBlock.Text>
                     <MultiBinding StringFormat="Search for &quot;{0}&quot;. {1} Result(s)">
                         <Binding Path="SearchTerm" />
@@ -97,28 +97,29 @@
 
                         <DataTemplate x:DataType="anime:PaheSearchResult">
                             <Grid
-                                Classes="DataBox"
                                 Margin="10"
+                                Classes="DataBox"
                                 Tag="{Binding session}"
                                 Tapped="NavigateToDetails">
                                 <ContentControl Content="1" IsVisible="False" />
+                                <ContentControl Content="null" IsVisible="False" />
                                 <Grid Height="295" Margin="10">
                                     <asyncImageLoader:AdvancedImage Classes="DataImage" Source="{Binding poster}" />
                                     <Border
-                                        Background="{DynamicResource SystemAccentColor}"
-                                        CornerRadius="50"
-                                        HorizontalAlignment="Right"
                                         Margin="35"
                                         Padding="15,5"
-                                        VerticalAlignment="Bottom">
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Bottom"
+                                        Background="{DynamicResource SystemAccentColor}"
+                                        CornerRadius="50">
                                         <TextBlock Text="{Binding episodes}" />
                                     </Border>
 
                                     <TextBlock
                                         HorizontalAlignment="Center"
+                                        VerticalAlignment="Bottom"
                                         Text="{Binding title}"
-                                        TextWrapping="Wrap"
-                                        VerticalAlignment="Bottom" />
+                                        TextWrapping="Wrap" />
                                 </Grid>
                             </Grid>
                         </DataTemplate>
@@ -126,11 +127,11 @@
                 </ItemsRepeater>
             </ScrollViewer>
             <TextBlock
-                FontSize="20"
                 HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="20"
                 IsVisible="{Binding AnimePaheSearch.ResultLength, Converter={StaticResource EqualityConverter}, ConverterParameter=0}"
-                Text="{Binding SearchTerm, StringFormat='No data available for &quot;{0}&quot; search'}"
-                VerticalAlignment="Center" />
+                Text="{Binding SearchTerm, StringFormat='No data available for &quot;{0}&quot; search'}" />
         </Grid>
     </Grid>
 </UserControl>

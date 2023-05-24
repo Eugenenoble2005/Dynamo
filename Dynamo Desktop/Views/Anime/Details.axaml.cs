@@ -32,7 +32,9 @@ public partial class Details : UserControl
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);
-        //purge data context on exit to prevent unnecessary caching
+       // purge data context on exit to prevent unnecessary caching
          DataContext = new DetailsViewModel();
+        
+
     }
 }   

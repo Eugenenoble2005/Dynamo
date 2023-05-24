@@ -2,6 +2,7 @@
 using Dynamo_Desktop.Scrapers.Anime;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
@@ -23,14 +24,15 @@ namespace Dynamo_Desktop.Services.Anime
                 string json = await _animePaheScraper.EpisodeStreamLinks(AnimeId: AnimeId, EpisodeId: EpisodeId);
                 return JsonSerializer.Deserialize<List<AnimePaheStreamingLinks>>(json);
             }
-            catch
+            catch(Exception E)
             {
                 return default;
             }
+           
         }
-        public async Task<List<PaheResult>> AllEpisodes(string Id = "",int Page=1)
+        public async Task<ObservableCollection<PaheResult>> AllEpisodes(string Id = "",int Page=1)
         {
-            List<PaheResult> Episode_List = new List<PaheResult>();
+            ObservableCollection<PaheResult> Episode_List = new ObservableCollection<PaheResult>();
             async Task GetEpisodes(int Page)
             {
                 string endpoint = $"https://animepahe.com/api?m=release&id={Id}&sort=episode_asc&page={Page}&per_page=2";

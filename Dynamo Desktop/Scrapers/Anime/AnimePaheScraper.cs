@@ -83,6 +83,10 @@ public  class AnimePaheScraper
         htmlDoc.LoadHtml(response);
 
         HtmlNode resolutionMenu = htmlDoc.DocumentNode.SelectSingleNode("//div[@id='resolutionMenu']");
+        if(resolutionMenu == null)
+        {
+            return "";
+        }
         _http.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36"); // Replace with an appropriate User-Agent value
         //remove previous referer before adding new one
         _http.DefaultRequestHeaders.Remove("Referer");

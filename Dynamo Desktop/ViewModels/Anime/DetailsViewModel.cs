@@ -4,6 +4,7 @@ using Dynamo_Desktop.Views.Anime.Subviews.AnimePahe;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -20,13 +21,13 @@ public class DetailsViewModel : ViewModelBase
 
     private AnimeIndexToDetailsRouteParams _routeParams;
     private AnimePaheAnimeInfo _animePaheAnimeInfo;
-    private List<PaheResult> _animePaheEpisodes;
+    private ObservableCollection<PaheResult> _animePaheEpisodes;
     private List<AnimePaheStreamingLinks> _animePaheStreamingLinks;
     private AnimePaheService _animePaheService = new AnimePaheService();
     private bool _dataLoading = true;
     public AnimePaheAnimeInfo AnimePaheAnimeInfo { get => _animePaheAnimeInfo; set => this.RaiseAndSetIfChanged(ref _animePaheAnimeInfo, value); }
     public AnimeIndexToDetailsRouteParams RouteParams { get => _routeParams; set { this.RaiseAndSetIfChanged(ref _routeParams, value);GetAnimeDetails(); } }
-    public List<PaheResult> AnimePaheEpisodes { get => _animePaheEpisodes;set { this.RaiseAndSetIfChanged(ref _animePaheEpisodes, value); } }
+    public ObservableCollection<PaheResult> AnimePaheEpisodes { get => _animePaheEpisodes;set { this.RaiseAndSetIfChanged(ref _animePaheEpisodes, value); } }
     public List<AnimePaheStreamingLinks> AnimePaheStreamingLinks
     {
         get => _animePaheStreamingLinks;
@@ -52,21 +53,16 @@ public class DetailsViewModel : ViewModelBase
                      _animePaheService.StreamingLinks(RouteParams.AnimeId, RouteParams?.EpisodeId);
                 await Task.WhenAll(AnimePaheStreamingLinksTask, AnimePaheEpisodesTask, AnimePaheAnimeInfoTask);
                 //test
-                
+               
                 DataLoading = false;
                 AnimePaheAnimeInfo = await AnimePaheAnimeInfoTask;
                 AnimePaheEpisodes = await AnimePaheEpisodesTask;
                 AnimePaheStreamingLinks = await AnimePaheStreamingLinksTask;
-                Debug.WriteLine(RouteParams.EpisodeNumber);
-                foreach (var episode in AnimePaheEpisodes)
+                foreach(var episode in AnimePaheEpisodes)
                 {
-                    if (episode.episode.ToString() == RouteParams.EpisodeNumber)
+                    if(episode.episode.ToString() == RouteParams.EpisodeNumber)
                     {
                         episode.IsCurrentEpisode = true;
-                    }
-                    else
-                    {
-                        episode.IsCurrentEpisode = false;
                     }
                 }
                 break;
