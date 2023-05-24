@@ -26,6 +26,7 @@ public partial class Details : UserControl
         {
             var routeParams = frame.Tag as AnimeIndexToDetailsRouteParams;
             (DataContext as DetailsViewModel).RouteParams = routeParams;
+             Debug.WriteLine(JsonSerializer.Serialize(routeParams));
         }
     }
 

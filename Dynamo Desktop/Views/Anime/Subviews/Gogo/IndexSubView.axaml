@@ -14,7 +14,7 @@
     x:DataType="vm:IndexViewModel"
     mc:Ignorable="d">
     <Design.DataContext>
-        <vm:IndexViewModel SearchTerm="Fullmetal Alchemist" />
+        <vm:IndexViewModel SearchTerm="" />
     </Design.DataContext>
     <UserControl.Resources>
         <ext:EqualityConverter x:Key="EqualityConverter" />
@@ -37,6 +37,8 @@
                                     Classes="DataBox"
                                     Tag="{Binding id}"
                                     Tapped="NavigateToDetails">
+                                    <ContentControl Content="{Binding episodeNumber}" IsVisible="False" />
+                                    <ContentControl Content="{Binding episodeId}" IsVisible="False" />
                                     <Grid Height="295" Margin="10">
                                         <asyncImageLoader:AdvancedImage Classes="DataImage" Source="{Binding image}" />
                                         <Border

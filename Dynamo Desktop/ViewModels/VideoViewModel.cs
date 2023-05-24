@@ -47,6 +47,7 @@ namespace Dynamo_Desktop.ViewModels
             string user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36";
             Debug.WriteLine(Referrer);
             Debug.WriteLine(Url);
+            media.Parse(MediaParseOptions.ParseNetwork);
             media.AddOption(":http-referrer="+Referrer);
             media.AddOption(":http-user-agent="+user_agent);
             media.AddOption(":verbose="+2);
@@ -98,7 +99,6 @@ namespace Dynamo_Desktop.ViewModels
         }
         public void Seek()
         {
-   
             MediaPlayer.SeekTo(TimeSpan.FromMilliseconds(CurrentMillSecs));
          
         }
