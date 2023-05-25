@@ -71,7 +71,13 @@
                         <ItemsRepeater.ItemTemplate>
 
                             <DataTemplate x:DataType="anime:GogoPopularResult">
-                                <Grid Margin="10" Classes="DataBox">
+                                <Grid
+                                    Margin="10"
+                                    Classes="DataBox"
+                                    Tag="{Binding id}"
+                                    Tapped="NavigateToDetails">
+                                    <ContentControl Content="1" IsVisible="False" />
+                                    <ContentControl Content="null" IsVisible="False" />
                                     <Grid Height="295" Margin="10">
                                         <asyncImageLoader:AdvancedImage Classes="DataImage" Source="{Binding image}" />
 
@@ -112,8 +118,13 @@
                     <ItemsRepeater.ItemTemplate>
 
                         <DataTemplate x:DataType="anime:GogoSearchResult">
-                            <Grid Margin="10" Classes="DataBox">
-
+                            <Grid
+                                Margin="10"
+                                Classes="DataBox"
+                                Tag="{Binding id}"
+                                Tapped="NavigateToDetails">
+                                <ContentControl Content="1" IsVisible="False" />
+                                <ContentControl Content="null" IsVisible="False" />
                                 <Grid Height="295" Margin="10">
                                     <asyncImageLoader:AdvancedImage Classes="DataImage" Source="{Binding image}" />
                                     <Border

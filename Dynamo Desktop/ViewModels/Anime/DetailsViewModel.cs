@@ -24,10 +24,17 @@ public class DetailsViewModel : ViewModelBase
     private ObservableCollection<PaheResult> _animePaheEpisodes;
     private List<AnimePaheStreamingLinks> _animePaheStreamingLinks;
     private AnimePaheService _animePaheService = new AnimePaheService();
+
+
+    private GogoAnimeService _gogoAnimeService = new GogoAnimeService();
+    private GogoAnimeStreamingLinks _gogoStreamingLinks;
+    private GogoAnimeInfo _gogoAnimeInfo;
     private bool _dataLoading = true;
     public AnimePaheAnimeInfo AnimePaheAnimeInfo { get => _animePaheAnimeInfo; set => this.RaiseAndSetIfChanged(ref _animePaheAnimeInfo, value); }
     public AnimeIndexToDetailsRouteParams RouteParams { get => _routeParams; set { this.RaiseAndSetIfChanged(ref _routeParams, value);GetAnimeDetails(); } }
     public ObservableCollection<PaheResult> AnimePaheEpisodes { get => _animePaheEpisodes;set { this.RaiseAndSetIfChanged(ref _animePaheEpisodes, value); } }
+    public GogoAnimeStreamingLinks GogoStreamingLinks { get => _gogoStreamingLinks; set => this.RaiseAndSetIfChanged(ref _gogoStreamingLinks, value); }
+    public GogoAnimeInfo GogoAnimeInfo { get => _gogoAnimeInfo; set => this.RaiseAndSetIfChanged(ref _gogoAnimeInfo, value); }
     public List<AnimePaheStreamingLinks> AnimePaheStreamingLinks
     {
         get => _animePaheStreamingLinks;
@@ -54,18 +61,20 @@ public class DetailsViewModel : ViewModelBase
                 await Task.WhenAll(AnimePaheStreamingLinksTask, AnimePaheEpisodesTask, AnimePaheAnimeInfoTask);
                 //test
                
-                DataLoading = false;
                 AnimePaheAnimeInfo = await AnimePaheAnimeInfoTask;
                 AnimePaheEpisodes = await AnimePaheEpisodesTask;
                 AnimePaheStreamingLinks = await AnimePaheStreamingLinksTask;
-                foreach(var episode in AnimePaheEpisodes)
-                {
-                    if(episode.episode.ToString() == RouteParams.EpisodeNumber)
-                    {
-                        episode.IsCurrentEpisode = true;
-                    }
-                }
+                DataLoading = false;
                 break;
+            case "GogoAnime":
+                var GogoAnimeInfoTask = _gogoAnimeService.Info(RouteParams?.AnimeId);
+                var GogoStreamingLinksTask = _gogoAnimeService.StreamingLinks(EpisodeId: RouteParams.EpisodeId,AnimeId:null);
+                await Task.WhenAll(GogoAnimeInfoTask);
+                GogoAnimeInfo = await GogoAnimeInfoTask;
+                GogoStreamingLinks = await GogoStreamingLinksTask;
+                DataLoading = false;
+                break;
+             
             default:
                 break;
         }

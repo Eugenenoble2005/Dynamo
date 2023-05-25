@@ -1,4 +1,4 @@
-﻿using Dynamo_Desktop.Models.Anime;
+﻿ using Dynamo_Desktop.Models.Anime;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;
@@ -10,7 +10,24 @@ namespace Dynamo_Desktop.Services.Anime;
 public class GogoAnimeService
 {
     private static HttpClient client = new HttpClient();
-
+    public async Task<GogoAnimeStreamingLinks> StreamingLinks(string AnimeId,string EpisodeId)
+    {
+        string streaming_links = $"https://api.consumet.org/anime/gogoanime/watch/{EpisodeId}";
+        try
+        {
+            HttpResponseMessage response = await client.GetAsync(streaming_links);
+            if (response.IsSuccessStatusCode)
+            {
+                string json = await response.Content.ReadAsStringAsync();
+                return JsonSerializer.Deserialize<GogoAnimeStreamingLinks>(json);
+            }
+            return default;
+        }
+        catch
+        {
+            return default;
+        }
+    }
     public  async Task<GogoAnimeRecentEpisodes> RecentEpisodes(int Page=1,int Type=1)
     {
         string recent_releases_endpoint = $"https://api.consumet.org/anime/gogoanime/recent-episodes?page={Page}&type={Type}";
@@ -65,9 +82,23 @@ public class GogoAnimeService
         }
     }
 
-    public Task<T?> Info<T>(string Id = "")
+    public async Task<GogoAnimeInfo> Info(string Id = "")
     {
-        throw new System.NotImplementedException();
+        string url = $"https://api.consumet.org/anime/gogoanime/info/{Id}";
+        try
+        {
+            HttpResponseMessage response = await client.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+            {
+                string json = await response.Content.ReadAsStringAsync();
+                return JsonSerializer.Deserialize<GogoAnimeInfo>(json);
+            }
+            return default;
+        }
+        catch
+        {
+            return default;
+        }
     }
 
     public Task<T> AllEpisodes<T>(string Id = "",int Page=1)

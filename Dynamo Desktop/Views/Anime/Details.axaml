@@ -3,6 +3,7 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:AnimePaheSubView="using:Dynamo_Desktop.Views.Anime.Subviews.AnimePahe"
+    xmlns:GogoAnimeSubView="using:Dynamo_Desktop.Views.Anime.Subviews.Gogo"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:ext="using:Dynamo_Desktop.Converters"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -22,5 +23,7 @@
             IsIndeterminate="True"
             IsVisible="{Binding DataLoading}" />
         <AnimePaheSubView:DetailsSubView IsVisible="{Binding RouteParams.Provider, Converter={StaticResource EqualityConverter}, ConverterParameter='AnimePahe'}" />
+        <GogoAnimeSubView:DetailsSubView IsVisible="{Binding RouteParams.Provider, Converter={StaticResource EqualityConverter}, ConverterParameter='GogoAnime'}" />
+
     </Grid>
 </UserControl>

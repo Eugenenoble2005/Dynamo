@@ -30,7 +30,6 @@
         <ExperimentalAcrylicBorder IsHitTestVisible="False">
             <ExperimentalAcrylicBorder.Material>
                 <ExperimentalAcrylicMaterial
-                    BackgroundSource="Digger"
                     MaterialOpacity="0.6"
                     TintColor="{DynamicResource ResourceKey=MicaBackground}"
                     TintOpacity="1" />
