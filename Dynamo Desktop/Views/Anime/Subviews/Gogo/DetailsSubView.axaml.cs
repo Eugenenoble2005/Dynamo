@@ -51,4 +51,4 @@ public partial class DetailsSubView : UserControl
 
 
     }
-}
+} 

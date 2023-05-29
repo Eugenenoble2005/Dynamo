@@ -91,7 +91,7 @@
                                         FontSize="20"
                                         Foreground="{DynamicResource SystemAccentColorDark1}"
                                         Text="{Binding RouteParams.EpisodeNumber, StringFormat='Episode {0}'}" />
-                                    <TextBlock Text="{Binding GogoAnimeInfo.otherName, StringFormat='Other Name(s): {0}'}" />
+                                    <TextBlock Text="{Binding GogoAnimeInfo.otherName, StringFormat='Other Name(s): {0}'}" TextWrapping="Wrap" />
                                     <TextBlock Text="{Binding GogoAnimeInfo.type, StringFormat='Type: {0}'}" />
                                     <TextBlock Text="{Binding GogoAnimeInfo.totalEpisodes, StringFormat='Number Of Episodes: {0}'}" />
                                     <TextBlock Text="{Binding GogoAnimeInfo.status, StringFormat='Air Status: {0}'}" />
@@ -99,7 +99,7 @@
 
                                     <TextBlock Text="{Binding GogoAnimeInfo.subOrDub, StringFormat='Sub/Dub: {0}'}" />
 
-                                    <TextBlock Text="{Binding GogoAnimeInfo.genres, StringFormat='Genre: {0}'}" />
+
                                     <TextBlock Text="{Binding GogoAnimeInfo.releaseDate, StringFormat='Release Date: {0}'}" />
 
                                 </StackPanel>

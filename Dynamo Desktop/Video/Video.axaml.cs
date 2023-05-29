@@ -13,6 +13,7 @@ public partial class Video : Window
     public Video(string? Url,string? Title,string? Referrer)
     {
         InitializeComponent();
+        
         DataContext = new VideoViewModel();
         (DataContext as VideoViewModel).Url = Url;
         (DataContext as VideoViewModel).Title = Title;

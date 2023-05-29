@@ -104,9 +104,8 @@ namespace Dynamo_Desktop.ViewModels
         }
         public void StopPlayer()
         {
-            MediaPlayer.Stop();
-          
-        }
+            MediaPlayer.Pause();
+		}
         public VideoViewModel()
         {
             MediaPlayer = new MediaPlayer(_libVlc);

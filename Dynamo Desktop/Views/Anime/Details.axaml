@@ -22,7 +22,9 @@
             VerticalAlignment="Top"
             IsIndeterminate="True"
             IsVisible="{Binding DataLoading}" />
+
         <AnimePaheSubView:DetailsSubView IsVisible="{Binding RouteParams.Provider, Converter={StaticResource EqualityConverter}, ConverterParameter='AnimePahe'}" />
+
         <GogoAnimeSubView:DetailsSubView IsVisible="{Binding RouteParams.Provider, Converter={StaticResource EqualityConverter}, ConverterParameter='GogoAnime'}" />
 
     </Grid>

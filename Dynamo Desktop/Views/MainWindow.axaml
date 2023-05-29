@@ -30,15 +30,26 @@
         <ExperimentalAcrylicBorder IsHitTestVisible="False">
             <ExperimentalAcrylicBorder.Material>
                 <ExperimentalAcrylicMaterial
-                    MaterialOpacity="0.6"
+                    MaterialOpacity="0.7"
                     TintColor="{DynamicResource ResourceKey=MicaBackground}"
                     TintOpacity="1" />
             </ExperimentalAcrylicBorder.Material>
         </ExperimentalAcrylicBorder>
         <!--  Search Bar  -->
         <Grid>
+
+            <fluent:FontIcon
+                Margin="20,20,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontFamily="Segoe MDL2 Assets"
+                Glyph="&#xE830;"
+                IsVisible="{Binding #ContentFrame.CanGoBack}"
+                Tapped="BackRequested" />
+
+
             <TextBlock
-                Margin="20"
+                Margin="60,20,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Text="Dynamo Desktop" />
@@ -53,19 +64,23 @@
             <TextBox Watermark="Search Everywhere..." />
         </Grid>
         <!--  Main Content  -->
-        <Grid Margin="5,40,0,0">
+        <Grid Margin="3,40,0,0">
             <fluent:NavigationView
                 x:Name="nvSample"
-                BackRequested="BackRequested"
-                IsBackButtonVisible="True"
+                IsBackButtonVisible="False"
                 IsBackEnabled="True"
-                IsPaneOpen="True"
-                IsPaneToggleButtonVisible="True"
+                IsPaneOpen="False"
+                IsPaneToggleButtonVisible="False"
                 IsSettingsVisible="True"
+                OpenPaneLength="72"
                 PaneDisplayMode="Left"
+                PropertyChanged="NavigationItemChanged"
                 SelectedItem="Anime">
                 <fluent:NavigationView.MenuItems>
-                    <fluent:NavigationViewItem Content="Anime">
+                    <fluent:NavigationViewItem
+                        x:Name="AnimePage"
+                        Content="Anime"
+                        Tag="Anime">
                         <fluent:NavigationViewItem.Icon>
                             <fluent:ImageIcon Source="/Assets/Images/anime-logo.png" />
                         </fluent:NavigationViewItem.Icon>

@@ -1,4 +1,7 @@
+using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Themes.Fluent;
 using Dynamo_Desktop.Scrapers.Anime;
 using Dynamo_Desktop.Services;
@@ -16,15 +19,15 @@ namespace Dynamo_Desktop.Views
     {
         public MainWindow()
         {
-
-            InitializeComponent();
+			InitializeComponent();
             ContentFrame.Navigate(typeof(Anime.Index));
-            DataContext = new MainWindowViewModel();
+			DataContext = new MainWindowViewModel();
+         
             // AppTheme.SetTheme("Dark");
 
  
         }
-        public void BackRequested(object sender, NavigationViewBackRequestedEventArgs e)
+        public void BackRequested(object sender, RoutedEventArgs e)
         {
             if (ContentFrame.CanGoBack)
             {
@@ -35,6 +38,10 @@ namespace Dynamo_Desktop.Views
         {
             ContentFrame.Tag = e.Parameter;
         }
-
+        public void NavigationItemChanged(object sender, AvaloniaPropertyChangedEventArgs e)
+        {
+            Debug.WriteLine(e.Property);
+        }
+        
     }
 }
