@@ -55,7 +55,7 @@
                                             HorizontalAlignment="Center"
                                             VerticalAlignment="Bottom"
                                             Text="{Binding title}"
-                                            TextWrapping="Wrap" />
+                                            TextTrimming="WordEllipsis" />
                                     </Grid>
                                 </Grid>
                             </DataTemplate>
@@ -86,7 +86,7 @@
                                             HorizontalAlignment="Center"
                                             VerticalAlignment="Bottom"
                                             Text="{Binding title}"
-                                            TextWrapping="Wrap" />
+                                            TextTrimming="WordEllipsis" />
                                     </Grid>
                                 </Grid>
                             </DataTemplate>
@@ -141,7 +141,7 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Bottom"
                                         Text="{Binding title}"
-                                        TextWrapping="Wrap" />
+                                        TextTrimming="WordEllipsis" />
                                 </Grid>
                             </Grid>
                         </DataTemplate>

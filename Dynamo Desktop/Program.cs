@@ -16,9 +16,9 @@ namespace Dynamo_Desktop
         [STAThread]
         public  static void Main(string[] args)
         {
-            // var scrape_test = new AnimePaheScraper();
-            // scrape_test.EpisodeStreamLinks("1d97fa54-3740-5648-69aa-7d39575bfe1c","b2e3ab2f92541b15c7d8c37be07c66526ae0ddf9b82737205d60302a1d0bff5c");
-     
+            //var scrape_test = new ZoroAnimeScraper();
+            //scrape_test.PopularEpisodes(1);
+
             BuildAvaloniaApp()
             .StartWithClassicDesktopLifetime(args);
            

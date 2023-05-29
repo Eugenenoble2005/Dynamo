@@ -16,11 +16,16 @@ public class IndexViewModel : ViewModelBase
 
     private GogoAnimeRecentEpisodes? _gogoAnimeRecentEpisodes;
     private GogoAnimePopularAnime? _gogoAnimePopularAnime;
+    private ZoroAnimeSearch? _zoroAnimeSearch;
     private GogoAnimeSearch? _gogoAnimeSearch;
-    private AnimePaheSearch? _animePaheSearch;
+    //models are the same. I fucked up with this structure.
+	private List<ZoroAnimeRecentEpisodes> _zoroRecentEpisodes;
+    private List<ZoroAnimeRecentEpisodes> _zoroPopularAnime;
+	private AnimePaheSearch? _animePaheSearch;
     private AnimePaheRecentEpisodes? _animePaheRecentEpisodes;
     private GogoAnimeService GogoAnimeService = new GogoAnimeService();
     private AnimePaheService AnimePaheService = new AnimePaheService();
+    private ZoroAnimeService ZoroAnimeService = new ZoroAnimeService();
     private int _page = 1;
     private bool _dataLoading = false;
     private string _searchTerm = "";
@@ -30,10 +35,13 @@ public class IndexViewModel : ViewModelBase
     public bool DataLoading { get => _dataLoading; set => this.RaiseAndSetIfChanged(ref _dataLoading, value); }
     public GogoAnimeRecentEpisodes? GogoAnimeRecentEpisodes { get => _gogoAnimeRecentEpisodes; set => this.RaiseAndSetIfChanged(ref _gogoAnimeRecentEpisodes, value); }
     public GogoAnimePopularAnime? GogoAnimePopularAnime { get => _gogoAnimePopularAnime; set => this.RaiseAndSetIfChanged(ref _gogoAnimePopularAnime, value); }
+    public ZoroAnimeSearch? ZoroAnimeSearch { get => _zoroAnimeSearch; set => this.RaiseAndSetIfChanged(ref _zoroAnimeSearch, value); }
     public string SearchTerm { get => _searchTerm; set { 
             this.RaiseAndSetIfChanged(ref _searchTerm, value);
             SearchTermChanged();
         } }
+    public List<ZoroAnimeRecentEpisodes> ZoroRecentEpisodes { get => _zoroRecentEpisodes; set => this.RaiseAndSetIfChanged(ref _zoroRecentEpisodes, value); }
+    public List<ZoroAnimeRecentEpisodes> ZoroPopularAnime { get => _zoroPopularAnime; set => this.RaiseAndSetIfChanged(ref _zoroPopularAnime, value); }
     public GogoAnimeSearch? GogoAnimeSearch { get => _gogoAnimeSearch; set => this.RaiseAndSetIfChanged(ref _gogoAnimeSearch, value); }
 
     public AnimePaheRecentEpisodes? AnimePaheRecentEpisodes { get => _animePaheRecentEpisodes; set => this.RaiseAndSetIfChanged(ref _animePaheRecentEpisodes, value); }
@@ -54,11 +62,14 @@ public class IndexViewModel : ViewModelBase
         var gogoAnimeRecentEpisodesTask =  GogoAnimeService.RecentEpisodes(Page:Page);
         var gogoAnimePopularEpisodesTask =  GogoAnimeService.PopularEpisodes(Page:Page);
         var animePaheRecentEpisodesTask =  AnimePaheService.RecentEpisodes(Page: Page);
-        await Task.WhenAll(gogoAnimeRecentEpisodesTask, gogoAnimePopularEpisodesTask, animePaheRecentEpisodesTask);
+        var zoroAnimeRecentEpisodesTask = ZoroAnimeService.RecentEpisodes(Page: Page);
+        var zoroPopularAnimeTask = ZoroAnimeService.PopularAnime(Page: Page);
+        await Task.WhenAll(gogoAnimeRecentEpisodesTask, gogoAnimePopularEpisodesTask, animePaheRecentEpisodesTask,zoroAnimeRecentEpisodesTask,zoroPopularAnimeTask);
         GogoAnimeRecentEpisodes = await gogoAnimeRecentEpisodesTask;
         GogoAnimePopularAnime = await gogoAnimePopularEpisodesTask;
         AnimePaheRecentEpisodes = await animePaheRecentEpisodesTask;
-
+        ZoroRecentEpisodes = await zoroAnimeRecentEpisodesTask;
+        ZoroPopularAnime = await zoroPopularAnimeTask;
 
         //    if(GogoAnimeRecentEpisodes == null)
         //{
@@ -85,13 +96,15 @@ public class IndexViewModel : ViewModelBase
         if (Page > 1)
         {
             Page--;
-            GetEpisodes(); 
+            GetEpisodes();
+            GeneralSearch();
         }    
     }
     public void NextPage()
     {
         Page++;
         GetEpisodes();
+        GeneralSearch();
     }
   
     public void SearchTermChanged()
@@ -103,9 +116,11 @@ public class IndexViewModel : ViewModelBase
         DataLoading = true;
         var gogoAnimeSearchTask = GogoAnimeService.Search(Query: SearchTerm, Page: Page);
         var animePaheSearchTask =  AnimePaheService.Search(Query: SearchTerm, Page: Page);
-        await Task.WhenAll(gogoAnimeSearchTask, animePaheSearchTask);
+        var zoroAnimeSearchTask = ZoroAnimeService.Search(Query: SearchTerm, Page: Page);
+        await Task.WhenAll(gogoAnimeSearchTask, animePaheSearchTask,zoroAnimeSearchTask);
         GogoAnimeSearch = await gogoAnimeSearchTask;
         AnimePaheSearch = await animePaheSearchTask;
+        ZoroAnimeSearch = await zoroAnimeSearchTask;
         DataLoading = false;
     }
 }

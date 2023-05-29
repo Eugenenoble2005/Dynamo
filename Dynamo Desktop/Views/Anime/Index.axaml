@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:AnimePaheSubview="using:Dynamo_Desktop.Views.Anime.Subviews.AnimePahe"
     xmlns:GogoSubview="using:Dynamo_Desktop.Views.Anime.Subviews.Gogo"
+    xmlns:ZoroSubView="using:Dynamo_Desktop.Views.Anime.Subviews.ZoroAnime"
     xmlns:anime="using:Dynamo_Desktop.Models.Anime"
     xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -67,10 +68,15 @@
                 <GogoSubview:IndexSubView />
             </TabItem>
 
+            <!--  AnimePahe  -->
             <TabItem Header="AnimePahe">
                 <AnimePaheSubview:IndexSubView />
             </TabItem>
 
+            <!--  ZoroAnime  -->
+            <TabItem Header="ZoroAnime">
+                <ZoroSubView:IndexSubView />
+            </TabItem>
 
             <TabItem Header="KayoAnime">
                 <TextBlock Text="kayoanime" />
