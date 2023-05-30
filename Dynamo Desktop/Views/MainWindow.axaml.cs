@@ -40,7 +40,7 @@ namespace Dynamo_Desktop.Views
         }
         public void NavigationItemChanged(object sender, AvaloniaPropertyChangedEventArgs e)
         {
-            Debug.WriteLine(e.Property);
+          
         }
         
     }

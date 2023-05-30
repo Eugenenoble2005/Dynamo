@@ -1,0 +1,146 @@
+<UserControl
+    x:Class="Dynamo_Desktop.Views.Anime.Subviews.ZoroAnime.DetailsSubView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:AnimePaheSubView="using:Dynamo_Desktop.Views.Anime.Subviews.AnimePahe"
+    xmlns:AsyncImageLoader="using:AsyncImageLoader"
+    xmlns:anime="using:Dynamo_Desktop.Models.Anime"
+    xmlns:anime_views="using:Dynamo_Desktop.Views.Anime"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:ext="using:Dynamo_Desktop.Converters"
+    xmlns:fluent="using:FluentAvalonia.UI.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vlc="using:LibVLCSharp.Avalonia"
+    xmlns:vm="using:Dynamo_Desktop.ViewModels.Anime"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:DetailsViewModel"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <ext:IntToListConverter x:Key="IntToList" />
+        <ext:IntToStringConverter x:Key="IntToString" />
+        <ext:EqualityConverter x:Key="EqualityConverter" />
+    </UserControl.Resources>
+    <UserControl.Styles>
+        <Style Selector="Panel">
+            <Setter Property="Margin" Value="5" />
+        </Style>
+    </UserControl.Styles>
+    <Design.DataContext>
+        <vm:DetailsViewModel DataLoading="False">
+            <vm:DetailsViewModel.RouteParams>
+                <AnimePaheSubView:AnimeIndexToDetailsRouteParams
+                    AnimeId="spy-x-family-17977"
+                    EpisodeId="spy-x-family-episode-1"
+                    EpisodeNumber="1"
+                    Provider="ZoroAnime" />
+            </vm:DetailsViewModel.RouteParams>
+        </vm:DetailsViewModel>
+    </Design.DataContext>
+    <Grid IsVisible="{Binding !DataLoading}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+        <Panel Grid.Column="0">
+            <AsyncImageLoader:AdvancedImage Source="{Binding ZoroAnimeInfo.image}" />
+        </Panel>
+        <Panel Grid.Column="1">
+            <ScrollViewer>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="5*" />
+                        <RowDefinition Height="5*" />
+                    </Grid.RowDefinitions>
+                    <Panel Grid.Row="0">
+                        <ItemsRepeater Items="{Binding ZoroStreamingLinks.sources}">
+                            <ItemsRepeater.Layout>
+                                <UniformGridLayout />
+                            </ItemsRepeater.Layout>
+                            <ItemsRepeater.ItemTemplate>
+                                <DataTemplate x:DataType="anime:ZoroAnimeStreamingSource">
+                                    <Button
+                                        Classes="accent"
+                                        Click="PlayVideo"
+                                        Content="{Binding quality}"
+                                        Tag="{Binding url}" />
+                                </DataTemplate>
+                            </ItemsRepeater.ItemTemplate>
+                        </ItemsRepeater>
+                    </Panel>
+                    <Panel Grid.Row="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                FontSize="35"
+                                Foreground="{DynamicResource SystemAccentColorDark1}"
+                                Text="{Binding ZoroAnimeInfo.title}"
+                                TextTrimming="CharacterEllipsis" />
+
+                            <Panel Grid.Column="0" Margin="0,50,0,0">
+                                <TextBlock Text="{Binding ZoroAnimeInfo.description}" TextWrapping="Wrap" />
+                            </Panel>
+                            <Panel Grid.Column="1">
+                                <StackPanel>
+                                    <TextBlock
+                                        FontSize="20"
+                                        Foreground="{DynamicResource SystemAccentColorDark1}"
+                                        Text="{Binding RouteParams.EpisodeNumber, StringFormat='Episode {0}'}" />
+                                    <TextBlock Text="{Binding ZoroAnimeInfo.otherName, StringFormat='Other Name(s): {0}'}" TextWrapping="Wrap" />
+                                    <TextBlock Text="{Binding ZoroAnimeInfo.type, StringFormat='Type: {0}'}" />
+                                    <TextBlock Text="{Binding ZoroAnimeInfo.totalEpisodes, StringFormat='Number Of Episodes: {0}'}" />
+                                    <TextBlock Text="{Binding ZoroAnimeInfo.status, StringFormat='Air Status: {0}'}" />
+
+
+                                    <TextBlock Text="{Binding ZoroAnimeInfo.subOrDub, StringFormat='Sub/Dub: {0}'}" />
+
+
+                                    <TextBlock Text="{Binding ZoroAnimeInfo.releaseDate, StringFormat='Release Date: {0}'}" />
+
+                                </StackPanel>
+                            </Panel>
+                        </Grid>
+                    </Panel>
+                    <Panel x:Name="EpisodeListPanel" Grid.Row="2">
+                        <TextBlock
+                            FontSize="25"
+                            Foreground="{DynamicResource SystemAccentColorDark1}"
+                            Text="{Binding ZoroAnimeInfo.episodes.Count, StringFormat='Released Episodes ({0})'}" />
+                        <ScrollViewer>
+                            <ItemsRepeater
+                                x:Name="EpisodeList"
+                                Margin="0,35,0,0"
+                                AttachedToVisualTree="EpisodesListAttached"
+                                Items="{Binding ZoroAnimeInfo.episodes}"
+                                UseLayoutRounding="False">
+
+                                <ItemsRepeater.ItemTemplate>
+                                    <DataTemplate x:DataType="anime:ZoroEpisode">
+                                        <Button
+                                            Classes="accent"
+                                            Click="ChangeEpisode"
+                                            Content="{Binding number}"
+                                            ToolTip.Tip="{Binding title}">
+
+                                            <Button.Tag>
+                                                <MultiBinding StringFormat="{}{0}|{1}">
+                                                    <Binding Path="number" />
+                                                    <Binding Path="id" />
+                                                </MultiBinding>
+                                            </Button.Tag>
+                                        </Button>
+                                    </DataTemplate>
+                                </ItemsRepeater.ItemTemplate>
+                            </ItemsRepeater>
+                        </ScrollViewer>
+
+                    </Panel>
+                </Grid>
+            </ScrollViewer>
+        </Panel>
+    </Grid>
+</UserControl>

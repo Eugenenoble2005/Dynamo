@@ -57,5 +57,9 @@
   <ItemGroup>
     <Folder Include="Webcomponents\Video\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Anime\Subviews\ZoroAnime\DetailsSubView.axaml" />
+  </ItemGroup>
 	
 </Project>
