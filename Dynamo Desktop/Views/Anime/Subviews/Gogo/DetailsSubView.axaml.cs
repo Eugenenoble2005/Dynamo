@@ -24,7 +24,7 @@ public partial class DetailsSubView : UserControl
     {
         string link = (sender as Button).Tag.ToString();
         string Title = (this.FindAncestorOfType<Details>().DataContext as DetailsViewModel).GogoAnimeInfo.title;
-        Video.Video videoWindow = new Video.Video(link, Title, "https://kwik.cx");
+        Video.Video videoWindow = new Video.Video(link, Title, Referrer:null,Subtitle:null);
         videoWindow.Show();
 
     }

@@ -5,6 +5,8 @@ using System.Net;
 using ReactiveUI;
 using System.Diagnostics;
 using FluentAvalonia.UI.Controls;
+using LibVLCSharp.Shared.Structures;
+
 namespace Dynamo_Desktop.ViewModels
 {
     public class VideoViewModel : ViewModelBase
@@ -20,6 +22,7 @@ namespace Dynamo_Desktop.ViewModels
         private string _currentTimestamp = "00:00";
         public string Url { get; set; }
         public string Referrer { get; set; }
+        public string Subitle { get; set; }
         public MediaPlayer MediaPlayer { get; }
         public string _playButtonIcon = WebUtility.HtmlDecode("&#xF8AE;");
         public string Title { get => _title; set => this.RaiseAndSetIfChanged(ref _title, value); }
@@ -52,8 +55,19 @@ namespace Dynamo_Desktop.ViewModels
             media.AddOption(":http-user-agent="+user_agent);
             media.AddOption(":verbose="+2);
             media.AddOption(":no-eit");
+            if(Subitle != null)
+            {
+                MediaPlayer.AddSlave(MediaSlaveType.Subtitle, Subitle, true);
+                Debug.WriteLine(Subitle);
+            }
             MediaPlayer.Play(media);
-           // MediaPlayer.EnableKeyInput = true;
+            if(Subitle != null)
+            {
+				MediaPlayer.AddSlave(MediaSlaveType.Subtitle, Subitle, true);
+			}
+       
+            MediaPlayer.EnableKeyInput = true;
+   
             MediaPlayer.TimeChanged += (sender, args) =>
                 {
 
@@ -104,7 +118,11 @@ namespace Dynamo_Desktop.ViewModels
         }
         public void StopPlayer()
         {
-            MediaPlayer.Pause();
+            if(MediaPlayer.IsPlaying)
+            {
+				MediaPlayer.Pause();
+			}
+         
 		}
         public VideoViewModel()
         {

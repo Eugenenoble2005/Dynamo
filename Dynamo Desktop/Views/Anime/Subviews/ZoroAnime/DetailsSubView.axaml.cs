@@ -24,7 +24,16 @@ public partial class DetailsSubView : UserControl
 	{
 		string link = (sender as Button).Tag.ToString();
 		string Title = (this.FindAncestorOfType<Details>().DataContext as DetailsViewModel).ZoroAnimeInfo.title;
-		Video.Video videoWindow = new Video.Video(link, Title, "");
+		var subtitles = (this.FindAncestorOfType<Details>().DataContext as DetailsViewModel).ZoroStreamingLinks.subtitles;
+		string english_subtitle = null;
+		foreach(var subtitle in subtitles)
+		{
+			if(subtitle.lang == "English")
+			{
+				english_subtitle = subtitle.url;
+			}
+		}
+		Video.Video videoWindow = new Video.Video(link, Title, "",english_subtitle);
 		videoWindow.Show();
 
 	}

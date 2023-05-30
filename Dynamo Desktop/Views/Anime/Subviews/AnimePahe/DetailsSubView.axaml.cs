@@ -23,7 +23,7 @@ public partial class DetailsSubView : UserControl
     {
         string link = (sender as Button).Tag.ToString();
         string Title = (this.FindAncestorOfType<Details>().DataContext as DetailsViewModel).AnimePaheAnimeInfo.Title;
-        Video.Video videoWindow = new Video.Video(link,Title, "https://kwik.cx");
+        Video.Video videoWindow = new Video.Video(link,Title, Referrer:"https://kwik.cx",Subtitle:null);
         videoWindow.Show();
        
     }
