@@ -68,18 +68,19 @@
                 <GogoSubview:IndexSubView />
             </TabItem>
 
-            <!--  AnimePahe  -->
-            <TabItem Header="AnimePahe">
-                <AnimePaheSubview:IndexSubView />
-            </TabItem>
-
             <!--  ZoroAnime  -->
             <TabItem Header="ZoroAnime">
                 <ZoroSubView:IndexSubView />
             </TabItem>
 
-            <TabItem Header="KayoAnime">
-                <TextBlock Text="kayoanime" />
+            <!--  AnimePahe  -->
+            <TabItem Header="AnimePahe">
+                <AnimePaheSubview:IndexSubView />
+            </TabItem>
+
+
+            <TabItem Header="KayoAnime(Bulk Downloads)">
+                <TextBlock Text="kayoanime(supports downloads)" />
             </TabItem>
         </TabControl>
 
