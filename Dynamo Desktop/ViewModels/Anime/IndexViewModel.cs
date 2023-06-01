@@ -16,6 +16,8 @@ public class IndexViewModel : ViewModelBase
 
     private GogoAnimeRecentEpisodes? _gogoAnimeRecentEpisodes;
     private GogoAnimePopularAnime? _gogoAnimePopularAnime;
+    private List<KayoAnimeRecentEpisodes>? _kayoAnimeRecentEpisodes;
+    private List<KayoAnimeSearch>? _kayoAnimeSearch;
     private ZoroAnimeSearch? _zoroAnimeSearch;
     private GogoAnimeSearch? _gogoAnimeSearch;
     //models are the same. I fucked up with this structure.
@@ -26,6 +28,7 @@ public class IndexViewModel : ViewModelBase
     private GogoAnimeService GogoAnimeService = new GogoAnimeService();
     private AnimePaheService AnimePaheService = new AnimePaheService();
     private ZoroAnimeService ZoroAnimeService = new ZoroAnimeService();
+    private KayoAnimeService KayoAnimeService = new KayoAnimeService();
     private int _page = 1;
     private bool _dataLoading = false;
     private string _searchTerm = "";
@@ -40,10 +43,11 @@ public class IndexViewModel : ViewModelBase
             this.RaiseAndSetIfChanged(ref _searchTerm, value);
             SearchTermChanged();
         } }
+    public List<KayoAnimeRecentEpisodes> KayoAnimeRecentEpisodes { get => _kayoAnimeRecentEpisodes; set => this.RaiseAndSetIfChanged(ref _kayoAnimeRecentEpisodes, value); }
     public List<ZoroAnimeRecentEpisodes> ZoroRecentEpisodes { get => _zoroRecentEpisodes; set => this.RaiseAndSetIfChanged(ref _zoroRecentEpisodes, value); }
     public List<ZoroAnimeRecentEpisodes> ZoroPopularAnime { get => _zoroPopularAnime; set => this.RaiseAndSetIfChanged(ref _zoroPopularAnime, value); }
     public GogoAnimeSearch? GogoAnimeSearch { get => _gogoAnimeSearch; set => this.RaiseAndSetIfChanged(ref _gogoAnimeSearch, value); }
-
+    public List<KayoAnimeSearch> KayoAnimeSearch { get => _kayoAnimeSearch; set => this.RaiseAndSetIfChanged(ref _kayoAnimeSearch, value); }
     public AnimePaheRecentEpisodes? AnimePaheRecentEpisodes { get => _animePaheRecentEpisodes; set => this.RaiseAndSetIfChanged(ref _animePaheRecentEpisodes, value); }
 
     public AnimePaheSearch? AnimePaheSearch { get => _animePaheSearch; set => this.RaiseAndSetIfChanged(ref _animePaheSearch, value); }
@@ -63,14 +67,15 @@ public class IndexViewModel : ViewModelBase
         var gogoAnimePopularEpisodesTask =  GogoAnimeService.PopularEpisodes(Page:Page);
         var animePaheRecentEpisodesTask =  AnimePaheService.RecentEpisodes(Page: Page);
         var zoroAnimeRecentEpisodesTask = ZoroAnimeService.RecentEpisodes(Page: Page);
+        var kayoAnimeRecentEpisodesTask = KayoAnimeService.RecentEpisodes();
         var zoroPopularAnimeTask = ZoroAnimeService.PopularAnime(Page: Page);
-        await Task.WhenAll(gogoAnimeRecentEpisodesTask, gogoAnimePopularEpisodesTask, animePaheRecentEpisodesTask,zoroAnimeRecentEpisodesTask,zoroPopularAnimeTask);
+        await Task.WhenAll(gogoAnimeRecentEpisodesTask, gogoAnimePopularEpisodesTask, animePaheRecentEpisodesTask,zoroAnimeRecentEpisodesTask,zoroPopularAnimeTask,kayoAnimeRecentEpisodesTask);
         GogoAnimeRecentEpisodes = await gogoAnimeRecentEpisodesTask;
         GogoAnimePopularAnime = await gogoAnimePopularEpisodesTask;
         AnimePaheRecentEpisodes = await animePaheRecentEpisodesTask;
         ZoroRecentEpisodes = await zoroAnimeRecentEpisodesTask;
         ZoroPopularAnime = await zoroPopularAnimeTask;
-
+        KayoAnimeRecentEpisodes = await kayoAnimeRecentEpisodesTask;
         //    if(GogoAnimeRecentEpisodes == null)
         //{
         //    var cd = new ContentDialog
@@ -117,9 +122,11 @@ public class IndexViewModel : ViewModelBase
         var gogoAnimeSearchTask = GogoAnimeService.Search(Query: SearchTerm, Page: Page);
         var animePaheSearchTask =  AnimePaheService.Search(Query: SearchTerm, Page: Page);
         var zoroAnimeSearchTask = ZoroAnimeService.Search(Query: SearchTerm, Page: Page);
+        var kayoAnimeSearchTask = KayoAnimeService.Search(Query: SearchTerm);
         await Task.WhenAll(gogoAnimeSearchTask, animePaheSearchTask,zoroAnimeSearchTask);
         GogoAnimeSearch = await gogoAnimeSearchTask;
         AnimePaheSearch = await animePaheSearchTask;
+        KayoAnimeSearch = await kayoAnimeSearchTask;
         ZoroAnimeSearch = await zoroAnimeSearchTask;
         DataLoading = false;
     }

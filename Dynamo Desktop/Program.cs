@@ -16,8 +16,8 @@ namespace Dynamo_Desktop
         [STAThread]
         public  static void Main(string[] args)
         {
-            var scrape_test = new KayoAnimeScraper();
-            scrape_test.RecentEpisodes();
+            //var scrape_test = new KayoAnimeScraper();
+            //scrape_test.Search("SS");
 
             BuildAvaloniaApp()
             .StartWithClassicDesktopLifetime(args);

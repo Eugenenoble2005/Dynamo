@@ -8,6 +8,7 @@ using System.Text.Json;
 using HtmlAgilityPack;
 using System.Diagnostics;
 using Dynamo_Desktop.Models.Anime;
+using System.Net.Http.Json;
 
 namespace Dynamo_Desktop.Scrapers.Anime;
 
@@ -34,4 +35,43 @@ public class KayoAnimeScraper
         return JsonSerializer.Serialize(recent_episodes);
        
     }
+    public async Task<string> Search(string Query)
+    {
+
+        string url = "https://kayoanime.com/wp-admin/admin-ajax.php";
+      
+        var response = await _http.PostAsync(url,new StringContent($"action=tie_ajax_search&query={Query}",Encoding.UTF8, "application/x-www-form-urlencoded"));
+        string json = await response.Content.ReadAsStringAsync();
+        var search_response = JsonSerializer.Deserialize<SearchResponseType>(json);
+        List<KayoAnimeSearch> search_results = new List<KayoAnimeSearch>();
+        foreach(Suggestion suggestion in search_response.suggestions)
+        {
+            //43
+            HtmlDocument htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(suggestion.layout);
+            Debug.WriteLine(suggestion.layout);
+            KayoAnimeSearch search_result = new KayoAnimeSearch();
+            HtmlNode ImageNode = htmlDoc.DocumentNode.SelectSingleNode("//img");
+            if(ImageNode != null)
+            {
+                search_result.Image = ImageNode.GetAttributeValue("src", null);
+            }
+            search_result.AnimeId = suggestion.url.TrimStart("https://kayoanime.com/".ToCharArray()).TrimEnd("/".ToCharArray()); ;
+            search_result.Title = suggestion.value;
+            search_results.Add(search_result);
+        }
+        return JsonSerializer.Serialize(search_results);
+    }
+}
+ class SearchResponseType
+{
+    public string query { get; set; }
+    public List<Suggestion> suggestions { get; set; }
+}
+
+ class Suggestion
+{
+    public string layout { get; set; }
+    public string value { get; set; }
+    public string url { get; set; }
 }

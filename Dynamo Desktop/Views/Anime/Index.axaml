@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:AnimePaheSubview="using:Dynamo_Desktop.Views.Anime.Subviews.AnimePahe"
     xmlns:GogoSubview="using:Dynamo_Desktop.Views.Anime.Subviews.Gogo"
+    xmlns:KayoSubView="using:Dynamo_Desktop.Views.Anime.Subviews.KayoAnime"
     xmlns:ZoroSubView="using:Dynamo_Desktop.Views.Anime.Subviews.ZoroAnime"
     xmlns:anime="using:Dynamo_Desktop.Models.Anime"
     xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
@@ -79,8 +80,9 @@
             </TabItem>
 
 
+            <!--  Kayoanime subviews  -->
             <TabItem Header="KayoAnime(Bulk Downloads)">
-                <TextBlock Text="kayoanime(supports downloads)" />
+                <KayoSubView:IndexSubView />
             </TabItem>
         </TabControl>
 

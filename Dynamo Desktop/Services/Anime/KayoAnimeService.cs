@@ -24,4 +24,16 @@ public class KayoAnimeService
             return default;
         }
     }
+    public async Task<List<KayoAnimeSearch>> Search(string Query)
+    {
+        try
+        {
+            string json = await _kayoScraper.Search(Query);
+            return JsonSerializer.Deserialize<List<KayoAnimeSearch>>(json);
+        }
+        catch
+        {
+            return default;
+        }
+    }
 }

@@ -14,8 +14,9 @@ public class PaheResult
     public int anime_id { get; set; }
     public string anime_title { get; set; }
     public string anime_session { get; set; }
-    public int episode { get; set; }
-    public int episode2 { get; set; }
+    //i havent a fucking clue why but sometimes animepahe sends this as a float
+    public dynamic episode { get; set; }
+    public dynamic episode2 { get; set; }
     public string edition { get; set; }
     public string fansub { get; set; }
     public string snapshot { get; set; }
