@@ -48,11 +48,11 @@
                 Tapped="BackRequested" />
 
 
-            <TextBlock
+            <!--<TextBlock
                 Margin="60,20,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Text="Dynamo Desktop" />
+                Text="Dynamo Desktop" />-->
         </Grid>
         <!--  -App title  -->
         <Grid
@@ -85,17 +85,13 @@
                             <fluent:ImageIcon Source="/Assets/Images/anime-logo.png" />
                         </fluent:NavigationViewItem.Icon>
                     </fluent:NavigationViewItem>
-                    <fluent:NavigationViewItem Content="Manga" Tag="SamplePage1">
-                        <fluent:NavigationViewItem.Icon>
-                            <fluent:ImageIcon Source="/Assets/Images/manga-logo.png" />
-                        </fluent:NavigationViewItem.Icon>
-                    </fluent:NavigationViewItem>
+
                     <fluent:NavigationViewItem Content="Movies/TV" Tag="SamplePage1">
                         <fluent:NavigationViewItem.Icon>
                             <fluent:ImageIcon Source="/Assets/Images/tv-logo.png" />
                         </fluent:NavigationViewItem.Icon>
                     </fluent:NavigationViewItem>
-                    <fluent:NavigationViewItem Content="Books" Tag="SamplePage1">
+                    <fluent:NavigationViewItem Content="Hentai" Tag="SamplePage1">
                         <fluent:NavigationViewItem.Icon>
                             <fluent:ImageIcon Source="/Assets/Images/book-logo.png" />
                         </fluent:NavigationViewItem.Icon>

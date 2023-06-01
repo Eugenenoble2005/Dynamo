@@ -22,6 +22,10 @@ namespace Dynamo_Desktop.Views
 			InitializeComponent();
             ContentFrame.Navigate(typeof(Anime.Index));
 			DataContext = new MainWindowViewModel();
+            nvSample.AttachedToVisualTree += (sender, args) =>
+            {
+                nvSample.SelectedItem = nvSample.MenuItems.ElementAt(0);
+            };
          
             // AppTheme.SetTheme("Dark");
 

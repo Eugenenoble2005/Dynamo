@@ -80,10 +80,7 @@
             </TabItem>
 
 
-            <!--  Kayoanime subviews  -->
-            <TabItem Header="KayoAnime(Bulk Downloads)">
-                <KayoSubView:IndexSubView />
-            </TabItem>
+
         </TabControl>
 
     </Grid>

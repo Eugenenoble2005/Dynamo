@@ -2,6 +2,7 @@
 using Avalonia.ReactiveUI;
 using Avalonia.Threading;
 using Dynamo_Desktop.Scrapers.Anime;
+using Dynamo_Desktop.Scrapers.Hentai;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -16,8 +17,8 @@ namespace Dynamo_Desktop
         [STAThread]
         public  static void Main(string[] args)
         {
-            //var scrape_test = new KayoAnimeScraper();
-            //scrape_test.Search("SS");
+            var scrape_test = new HanimeScraper();
+            scrape_test.Recent(); 
 
             BuildAvaloniaApp()
             .StartWithClassicDesktopLifetime(args);
