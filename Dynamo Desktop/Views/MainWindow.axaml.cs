@@ -7,6 +7,7 @@ using Dynamo_Desktop.Scrapers.Anime;
 using Dynamo_Desktop.Services;
 using Dynamo_Desktop.ViewModels;
 using Dynamo_Desktop.Views;
+using Dynamo_Desktop.Views.Hentai;
 using FluentAvalonia.Core;
 using FluentAvalonia.UI.Controls;
 using FluentAvalonia.UI.Navigation;
@@ -26,7 +27,21 @@ namespace Dynamo_Desktop.Views
             {
                 nvSample.SelectedItem = nvSample.MenuItems.ElementAt(0);
             };
-         
+           
+            nvSample.PropertyChanged += (sender, args) =>
+            {
+                if(args.Property.ToString() == "SelectedItem")
+                {
+                    switch(args.NewValue.ToString()){
+                        case "Hentai":
+                            ContentFrame.Navigate(typeof(Hentai.Index));
+                            break;
+                        case "Anime":
+                            ContentFrame.Navigate(typeof(Anime.Index));
+                            break;
+                    }
+                }
+            };
             // AppTheme.SetTheme("Dark");
 
  

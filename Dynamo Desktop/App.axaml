@@ -13,7 +13,7 @@
     </Application.DataTemplates>
 
     <Application.Resources>
-        <Color x:Key="MicaBackground">White</Color>
+        <Color x:Key="MicaBackground">Black</Color>
         <FluentControls:NavigationViewPaneDisplayMode x:Key="PaneLocation">Left</FluentControls:NavigationViewPaneDisplayMode>
         <WindowTransparencyLevel x:Key="TransparencyEffect">Mica</WindowTransparencyLevel>
     </Application.Resources>
@@ -21,8 +21,8 @@
 
     <Application.Styles>
 
-        <FluentTheme Mode="Light" />
-        <sty:FluentAvaloniaTheme PreferSystemTheme="False" RequestedTheme="Lig" />
+        <FluentTheme Mode="Dark" />
+        <sty:FluentAvaloniaTheme PreferSystemTheme="False" RequestedTheme="Dark" />
         <StyleInclude Source="avares://AsyncImageLoader.Avalonia/AdvancedImage.axaml" />
 
 

@@ -91,7 +91,7 @@
                             <fluent:ImageIcon Source="/Assets/Images/tv-logo.png" />
                         </fluent:NavigationViewItem.Icon>
                     </fluent:NavigationViewItem>
-                    <fluent:NavigationViewItem Content="Hentai" Tag="SamplePage1">
+                    <fluent:NavigationViewItem Content="Hentai" Tag="Hentai">
                         <fluent:NavigationViewItem.Icon>
                             <fluent:ImageIcon Source="/Assets/Images/book-logo.png" />
                         </fluent:NavigationViewItem.Icon>
