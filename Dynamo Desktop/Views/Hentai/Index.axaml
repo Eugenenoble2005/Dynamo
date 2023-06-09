@@ -8,7 +8,7 @@
     xmlns:loaders="using:AsyncImageLoader.Loaders"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:subviews="using:Dynamo_Desktop.Views.Hentai.SubViews"
-    xmlns:vm="using:Dynamo_Desktop.ViewModels.Anime"
+    xmlns:vm="using:Dynamo_Desktop.ViewModels.Hentai"
     d:DesignHeight="450"
     d:DesignWidth="800"
     x:DataType="vm:IndexViewModel"
@@ -22,17 +22,17 @@
         <!--  Controls  -->
         <Grid Margin="0,40,0,0" ZIndex="1">
             <!--  Sort Selection  -->
-            <fluent:ComboBox
+            <!--<fluent:ComboBox
                 Margin="0,-20,20,0"
                 HorizontalAlignment="Right"
                 Header="Sort"
                 Items="{Binding SortOptions}"
-                SelectedItem="{Binding Sort}" />
+                SelectedItem="{Binding Sort}" />-->
             <!--  SORT TITLE  -->
             <TextBlock
                 Margin="25"
                 FontSize="35"
-                Text="{Binding Sort}" />
+                Text="Recent" />
             <!--  Search  -->
             <Border
                 Width="300"

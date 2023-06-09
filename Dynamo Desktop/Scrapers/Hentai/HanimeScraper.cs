@@ -37,7 +37,7 @@ public class HanimeScraper
             RecentHentai hentai = new RecentHentai();
             hentai.HentaiId = token.SelectToken("slug").ToString();
             hentai.Title = token.SelectToken("name").ToString();
-            hentai.Image = token.SelectToken("cover_url").ToString();
+            hentai.Image = token.SelectToken("poster_url").ToString();
             recent_hentai.Add(hentai);
         }
         return System.Text.Json.JsonSerializer.Serialize(recent_hentai);

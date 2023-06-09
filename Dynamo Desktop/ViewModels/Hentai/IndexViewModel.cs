@@ -15,17 +15,22 @@ public class IndexViewModel : ViewModelBase
 {
     private string _searchTerm = "";
     public HentaiProviders Provider { get; set; }
+    private bool _dataLoading = false;
     private HanimeService _hanimeService = new HanimeService();
     private List<RecentHentai> _recentHentai;
+    private int _page = 1;
     public List<RecentHentai> RecentHentai { get => _recentHentai; set => this.RaiseAndSetIfChanged(ref _recentHentai,value); }
+    public int Page { get => _page; set => this.RaiseAndSetIfChanged(ref _page, value); }
+    public bool DataLoading { get => _dataLoading; set => this.RaiseAndSetIfChanged(ref _dataLoading, value); }
     public string SearchTerm { get => _searchTerm; set => this.RaiseAndSetIfChanged(ref _searchTerm, value); }
     public async void GetRecentHentai()
     {
         switch (Provider)
         {
             case HentaiProviders.Hanime:
+                DataLoading = true;
                 RecentHentai = await _hanimeService.Recent();
-                Debug.WriteLine(JsonSerializer.Serialize(RecentHentai));
+                DataLoading = false;
                 break;
         }
     }

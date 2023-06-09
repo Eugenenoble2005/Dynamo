@@ -6,6 +6,7 @@
     xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
     xmlns:local="using:Dynamo_Desktop"
     xmlns:sty="using:FluentAvalonia.Styling"
+    xmlns:ui="using:FluentAvalonia.UI.Controls"
     xmlns:uip="using:FluentAvalonia.UI.Controls.Primitives">
 
     <Application.DataTemplates>
@@ -13,7 +14,7 @@
     </Application.DataTemplates>
 
     <Application.Resources>
-        <Color x:Key="MicaBackground">Black</Color>
+        <Color x:Key="MicaBackground">White</Color>
         <FluentControls:NavigationViewPaneDisplayMode x:Key="PaneLocation">Left</FluentControls:NavigationViewPaneDisplayMode>
         <WindowTransparencyLevel x:Key="TransparencyEffect">Mica</WindowTransparencyLevel>
     </Application.Resources>
@@ -21,8 +22,8 @@
 
     <Application.Styles>
 
-        <FluentTheme Mode="Dark" />
-        <sty:FluentAvaloniaTheme PreferSystemTheme="False" RequestedTheme="Dark" />
+        <!--<FluentTheme Mode="Dark" />-->
+        <sty:FluentAvaloniaTheme PreferSystemTheme="True" PreferUserAccentColor="True" />
         <StyleInclude Source="avares://AsyncImageLoader.Avalonia/AdvancedImage.axaml" />
 
 
@@ -47,13 +48,11 @@
         <Style Selector="asyncImageLoader|AdvancedImage.DataImage">
             <Setter Property="Height" Value="200" />
         </Style>
-
-
         <Style Selector="FluentControls|NavigationView">
             <Setter Property="IsPaneToggleButtonVisible" Value="False" />
             <Setter Property="OpenPaneLength" Value="72" />
         </Style>
-        <Style Selector="FluentControls|NavigationView[IsBackButtonVisible=False] SplitView /template/ ContentControl#PART_PanePresenter">
+        <Style Selector="FluentControls|NavigationView[IsBackButtonVisible=False] SplitView /template/ ContentPresenter#PART_PanePresenter">
             <Setter Property="Margin" Value="0 40 0 0" />
         </Style>
 
@@ -85,8 +84,8 @@
 
 
                             <DockPanel>
-                                <ContentControl
-                                    Name="ContentControl"
+                                <ContentPresenter
+                                    Name="ContentPresenter"
                                     Grid.Row="1"
                                     Margin="0,-15,0,3"
                                     Padding="0,4"
@@ -95,20 +94,20 @@
                                     Content="{TemplateBinding Content}"
                                     ContentTemplate="{TemplateBinding ContentTemplate}"
                                     DockPanel.Dock="Bottom"
-                                    TextBlock.FontSize="10">
-                                    <ContentControl.Styles>
+                                    FontSize="10">
+                                    <ContentPresenter.Styles>
                                         <Style Selector="TextBlock">
                                             <Setter Property="TextWrapping" Value="Wrap" />
                                         </Style>
-                                    </ContentControl.Styles>
-                                </ContentControl>
+                                    </ContentPresenter.Styles>
+                                </ContentPresenter>
 
                                 <Viewbox
                                     Name="IconBox"
                                     Height="28"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center">
-                                    <ContentControl Name="Icon" Content="{TemplateBinding Icon}" />
+                                    <ContentPresenter Name="Icon" Content="{Binding TemplateSettings.Icon, RelativeSource={RelativeSource TemplatedParent}}" />
                                 </Viewbox>
 
                             </DockPanel>
@@ -117,26 +116,27 @@
                 </ControlTemplate>
             </Setter>
         </Style>
-        <Style Selector="FluentControls|NavigationViewItem uip|NavigationViewItemPresenter:pointerover /template/ ContentControl#ContentControl">
+        <Style Selector="FluentControls|NavigationViewItem uip|NavigationViewItemPresenter:pointerover /template/ ContentPresenter#ContentPresenter">
             <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
         </Style>
-        <Style Selector="FluentControls|NavigationViewItem uip|NavigationViewItemPresenter:pointerover /template/ ContentControl#Icon">
+        <Style Selector="FluentControls|NavigationViewItem uip|NavigationViewItemPresenter:pointerover /template/ ContentPresenter#Icon">
             <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
         </Style>
 
-        <Style Selector="FluentControls|NavigationViewItem uip|NavigationViewItemPresenter:pressed /template/ ContentControl#ContentControl">
+        <Style Selector="FluentControls|NavigationViewItem uip|NavigationViewItemPresenter:pressed /template/ ContentPresenter#ContentPresenter">
             <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
         </Style>
-        <Style Selector="FluentControls|NavigationViewItem uip|NavigationViewItemPresenter:pressed /template/ ContentControl#Icon">
+        <Style Selector="FluentControls|NavigationViewItem uip|NavigationViewItemPresenter:pressed /template/ ContentPresenter#Icon">
             <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
         </Style>
 
-        <Style Selector="FluentControls|NavigationViewItem uip|NavigationViewItemPresenter:selected /template/ ContentControl#ContentControl">
+        <Style Selector="FluentControls|NavigationViewItem uip|NavigationViewItemPresenter:selected /template/ ContentPresenter#ContentPresenter">
             <Setter Property="IsVisible" Value="False" />
         </Style>
-        <Style Selector="FluentControls|NavigationViewItem uip|NavigationViewItemPresenter:selected /template/ ContentControl#Icon">
+        <Style Selector="FluentControls|NavigationViewItem uip|NavigationViewItemPresenter:selected /template/ ContentPresenter#Icon">
             <Setter Property="Foreground" Value="{DynamicResource AccentFillColorDefaultBrush}" />
         </Style>
+
 
     </Application.Styles>
 </Application>

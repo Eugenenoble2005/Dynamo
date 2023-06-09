@@ -1,7 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using Avalonia.Themes.Fluent.Controls;
 using Avalonia.VisualTree;
 using FluentAvalonia.UI.Controls;
 using System.Diagnostics;

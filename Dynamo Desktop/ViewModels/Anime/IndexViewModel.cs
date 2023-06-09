@@ -67,15 +67,15 @@ public class IndexViewModel : ViewModelBase
         var gogoAnimePopularEpisodesTask =  GogoAnimeService.PopularEpisodes(Page:Page);
         var animePaheRecentEpisodesTask =  AnimePaheService.RecentEpisodes(Page: Page);
         var zoroAnimeRecentEpisodesTask = ZoroAnimeService.RecentEpisodes(Page: Page);
-        var kayoAnimeRecentEpisodesTask = KayoAnimeService.RecentEpisodes();
+        //var kayoAnimeRecentEpisodesTask = KayoAnimeService.RecentEpisodes();
         var zoroPopularAnimeTask = ZoroAnimeService.PopularAnime(Page: Page);
-        await Task.WhenAll(gogoAnimeRecentEpisodesTask, gogoAnimePopularEpisodesTask, animePaheRecentEpisodesTask,zoroAnimeRecentEpisodesTask,zoroPopularAnimeTask,kayoAnimeRecentEpisodesTask);
+        await Task.WhenAll(gogoAnimeRecentEpisodesTask, gogoAnimePopularEpisodesTask, animePaheRecentEpisodesTask,zoroAnimeRecentEpisodesTask,zoroPopularAnimeTask);
         GogoAnimeRecentEpisodes = await gogoAnimeRecentEpisodesTask;
         GogoAnimePopularAnime = await gogoAnimePopularEpisodesTask;
         AnimePaheRecentEpisodes = await animePaheRecentEpisodesTask;
         ZoroRecentEpisodes = await zoroAnimeRecentEpisodesTask;
         ZoroPopularAnime = await zoroPopularAnimeTask;
-        KayoAnimeRecentEpisodes = await kayoAnimeRecentEpisodesTask;
+     
         //    if(GogoAnimeRecentEpisodes == null)
         //{
         //    var cd = new ContentDialog

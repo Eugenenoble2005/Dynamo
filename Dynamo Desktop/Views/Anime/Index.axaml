@@ -31,11 +31,10 @@
         <!--  Controls  -->
         <Grid Margin="0,40,0,0" ZIndex="1">
             <!--  Sort Selection  -->
-            <fluent:ComboBox
+            <ComboBox
                 Margin="0,-20,20,0"
                 HorizontalAlignment="Right"
-                Header="Sort"
-                Items="{Binding SortOptions}"
+                ItemsSource="{Binding SortOptions}"
                 SelectedItem="{Binding Sort}" />
             <!--  SORT TITLE  -->
             <TextBlock

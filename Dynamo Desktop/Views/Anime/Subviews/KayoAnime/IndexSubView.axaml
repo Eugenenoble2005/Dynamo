@@ -26,7 +26,7 @@
             <!--  For sort displays. Must not show if search term has a value or user is searching  -->
             <Grid>
                 <ScrollViewer Margin="0,120,0,0" IsVisible="{Binding Sort, Converter={StaticResource EqualityConverter}, ConverterParameter='Newest'}">
-                    <ItemsRepeater Items="{Binding KayoAnimeRecentEpisodes}">
+                    <ItemsRepeater ItemsSource="{Binding KayoAnimeRecentEpisodes}">
                         <ItemsRepeater.Layout>
                             <UniformGridLayout ItemsStretch="Fill" MaximumRowsOrColumns="4" />
                         </ItemsRepeater.Layout>
@@ -82,7 +82,7 @@
                 </TextBlock.Text>
             </TextBlock>
             <ScrollViewer Margin="0,120,0,0">
-                <ItemsRepeater Items="{Binding KayoAnimeSearch}">
+                <ItemsRepeater ItemsSource="{Binding KayoAnimeSearch}">
                     <ItemsRepeater.Layout>
                         <UniformGridLayout ItemsStretch="Fill" MaximumRowsOrColumns="4" />
                     </ItemsRepeater.Layout>

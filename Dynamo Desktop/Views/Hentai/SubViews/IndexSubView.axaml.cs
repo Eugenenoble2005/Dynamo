@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Dynamo_Desktop.ViewModels.Hentai;
@@ -15,7 +16,7 @@ public partial class IndexSubView : UserControl
         DataContext = new IndexViewModel();
 
     }
-    public void NavigateToDetails(object sender, RoutedEventArgs e)
+    public void NavigateToDetails(object sender, TappedEventArgs e)
     {
      
     }

@@ -17,7 +17,7 @@ public partial class IndexSubView : UserControl
     {
         InitializeComponent();
     }
-    public void NavigateToDetails(object sender, RoutedEventArgs e)
+    public void NavigateToDetails(object sender, TappedEventArgs e)
     {
         var grid = sender as Grid;
         ContentControl episode = grid.Children.OfType<ContentControl>().FirstOrDefault();

@@ -97,7 +97,7 @@ namespace Dynamo_Desktop.Video
 
         private void InitializeNativeOverlay()
         {
-            if (!((IVisual)this).IsAttachedToVisualTree) return;
+            if (!((Visual)this).IsAttachedToVisualTree()) return;
 
             if (_floatingContent == null && Content != null)
             {
@@ -108,7 +108,7 @@ namespace Dynamo_Desktop.Video
                 {
                     SystemDecorations = SystemDecorations.None,
 
-                    TransparencyLevelHint = WindowTransparencyLevel.Transparent,
+                   // TransparencyLevelHint = WindowTransparencyLevel.Transparent,
                     Background = Brushes.Transparent,
 
                     SizeToContent = SizeToContent.WidthAndHeight,
@@ -124,9 +124,9 @@ namespace Dynamo_Desktop.Video
                     };
                    
                 
-                _floatingContent.PointerEnter += Controls_PointerEnter;
-                _floatingContent.PointerLeave += Controls_PointerLeave;
-
+                _floatingContent.PointerEntered += Controls_PointerEnter;
+                _floatingContent.PointerExited += Controls_PointerLeave;
+               
 
                 _disposables = new CompositeDisposable()
                 {
@@ -263,7 +263,7 @@ namespace Dynamo_Desktop.Video
 
             InitializeNativeOverlay();
 
-            _isEffectivelyVisible = this.GetVisualAncestors().OfType<IControl>()
+            _isEffectivelyVisible = this.GetVisualAncestors().OfType<Control>()
                     .Select(v => v.GetObservable(IsVisibleProperty))
                     .CombineLatest(v => !v.Any(o => !o))
                     .DistinctUntilChanged()

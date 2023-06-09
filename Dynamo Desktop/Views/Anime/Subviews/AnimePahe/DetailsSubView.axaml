@@ -54,7 +54,7 @@
                         <RowDefinition Height="5*" />
                     </Grid.RowDefinitions>
                     <Panel Grid.Row="0">
-                        <ItemsRepeater Items="{Binding AnimePaheStreamingLinks}">
+                        <ItemsRepeater ItemsSource="{Binding AnimePaheStreamingLinks}">
                             <ItemsRepeater.Layout>
                                 <UniformGridLayout />
                             </ItemsRepeater.Layout>
@@ -120,7 +120,7 @@
                                 x:Name="EpisodeList"
                                 Margin="0,35,0,0"
                                 AttachedToVisualTree="EpisodesListAttached"
-                                Items="{Binding AnimePaheEpisodes}"
+                                ItemsSource="{Binding AnimePaheEpisodes}"
                                 UseLayoutRounding="False">
 
                                 <ItemsRepeater.ItemTemplate>

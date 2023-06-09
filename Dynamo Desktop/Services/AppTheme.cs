@@ -1,5 +1,4 @@
 ﻿using Avalonia;
-using Avalonia.Themes.Fluent;
 using FluentAvalonia.Styling;
 using System;
 using System.Collections.Generic;
@@ -16,16 +15,17 @@ public class AppTheme
     {
         if (requested_theme == "Light")
         {
-            Application.Current.Styles.OfType<FluentTheme>().FirstOrDefault().Mode = FluentThemeMode.Light;
-            Application.Current.Styles.OfType<FluentAvaloniaTheme>().FirstOrDefault().RequestedTheme = FluentAvaloniaTheme.LightModeString;
-            Debug.WriteLine(Application.Current.Resources["MicaBackground"]);
-            Application.Current.Resources["MicaBackground"] = Avalonia.Media.Color.Parse("white");
+            //updates avalonia to v11. This is no longer needed.
+            //Application.Current.Styles.OfType<FluentTheme>().FirstOrDefault().Mode = FluentThemeMode.Light;
+            //Application.Current.Styles.OfType<FluentAvaloniaTheme>().FirstOrDefault().RequestedTheme = FluentAvaloniaTheme.LightModeString;
+            //Debug.WriteLine(Application.Current.Resources["MicaBackground"]);
+            //Application.Current.Resources["MicaBackground"] = Avalonia.Media.Color.Parse("white");
         }
         else
         {
-            Application.Current.Styles.OfType<FluentTheme>().FirstOrDefault().Mode = FluentThemeMode.Dark;
-            Application.Current.Styles.OfType<FluentAvaloniaTheme>().FirstOrDefault().RequestedTheme = FluentAvaloniaTheme.DarkModeString;
-            Application.Current.Resources["MicaBackground"] = Avalonia.Media.Color.Parse("black");
+            //Application.Current.Styles.OfType<FluentTheme>().FirstOrDefault().Mode = FluentThemeMode.Dark;
+            //Application.Current.Styles.OfType<FluentAvaloniaTheme>().FirstOrDefault().RequestedTheme = FluentAvaloniaTheme.DarkModeString;
+            //Application.Current.Resources["MicaBackground"] = Avalonia.Media.Color.Parse("black");
         }
     }
 }

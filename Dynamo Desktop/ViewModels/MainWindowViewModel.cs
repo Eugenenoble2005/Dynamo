@@ -1,5 +1,4 @@
 ﻿using Avalonia;
-using Avalonia.Themes.Fluent;
 using FluentAvalonia.Styling;
 using FluentAvalonia.UI.Controls;
 using LibVLCSharp.Shared;
