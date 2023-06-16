@@ -7,7 +7,8 @@
     xmlns:local="using:Dynamo_Desktop"
     xmlns:sty="using:FluentAvalonia.Styling"
     xmlns:ui="using:FluentAvalonia.UI.Controls"
-    xmlns:uip="using:FluentAvalonia.UI.Controls.Primitives">
+    xmlns:uip="using:FluentAvalonia.UI.Controls.Primitives"
+    RequestedThemeVariant="Dark">
 
     <Application.DataTemplates>
         <local:ViewLocator />
@@ -16,14 +17,14 @@
     <Application.Resources>
         <Color x:Key="MicaBackground">White</Color>
         <FluentControls:NavigationViewPaneDisplayMode x:Key="PaneLocation">Left</FluentControls:NavigationViewPaneDisplayMode>
-        <WindowTransparencyLevel x:Key="TransparencyEffect">Mica</WindowTransparencyLevel>
+
     </Application.Resources>
 
 
     <Application.Styles>
 
         <!--<FluentTheme Mode="Dark" />-->
-        <sty:FluentAvaloniaTheme PreferSystemTheme="True" PreferUserAccentColor="True" />
+        <sty:FluentAvaloniaTheme PreferSystemTheme="false" PreferUserAccentColor="True" />
         <StyleInclude Source="avares://AsyncImageLoader.Avalonia/AdvancedImage.axaml" />
 
 

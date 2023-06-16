@@ -23,6 +23,7 @@
     </UserControl.Resources>
     <!--  Controls  -->
     <Grid>
+
         <ProgressBar
             Width="1000"
             VerticalAlignment="Top"

@@ -28,7 +28,7 @@ namespace Dynamo_Desktop.Video
     /// </summary>
     public class VideoView : NativeControlHost
     {
-
+         
         public static readonly DirectProperty<VideoView, Maybe<MediaPlayer>> MediaPlayerProperty =
             AvaloniaProperty.RegisterDirect<VideoView, Maybe<MediaPlayer>>(
                 nameof(MediaPlayer),

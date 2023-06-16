@@ -6,10 +6,20 @@ using System.Threading.Tasks;
 
 namespace Dynamo_Desktop.Models.Hentai
 {
+    //using this for search results to.
    public class RecentHentai
     {
         public string HentaiId { get; set; }
         public string Image { get; set; }
         public string Title { get; set; }
     }
+
+   public class Hentai
+   {
+       public string Title { get; set; }
+       public string Description { get; set; }
+       public int Views { get; set; }
+       public string poster { get; set; }
+       public List<string> Tags { get; set; }
+   }
 }

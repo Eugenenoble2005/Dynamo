@@ -30,7 +30,7 @@
         <ExperimentalAcrylicBorder IsHitTestVisible="False">
             <ExperimentalAcrylicBorder.Material>
                 <ExperimentalAcrylicMaterial
-                    MaterialOpacity="0.7"
+                    MaterialOpacity="0.85"
                     TintColor="{DynamicResource SolidBackgroundFillColorBase}"
                     TintOpacity="1" />
             </ExperimentalAcrylicBorder.Material>

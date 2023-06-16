@@ -1,7 +1,10 @@
 <UserControl
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d"
     x:Class="Dynamo_Desktop.Views.Anime.Subviews.AnimePahe.DetailsSubView"
+    x:DataType="vm:DetailsViewModel"
     xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:AnimePaheSubView="using:Dynamo_Desktop.Views.Anime.Subviews.AnimePahe"
     xmlns:AsyncImageLoader="using:AsyncImageLoader"
     xmlns:anime="using:Dynamo_Desktop.Models.Anime"
@@ -10,12 +13,8 @@
     xmlns:ext="using:Dynamo_Desktop.Converters"
     xmlns:fluent="using:FluentAvalonia.UI.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vlc="using:LibVLCSharp.Avalonia"
     xmlns:vm="using:Dynamo_Desktop.ViewModels.Anime"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
-    x:DataType="vm:DetailsViewModel"
-    mc:Ignorable="d">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <UserControl.Resources>
         <ext:IntToListConverter x:Key="IntToList" />
         <ext:IntToStringConverter x:Key="IntToString" />
@@ -110,18 +109,18 @@
                             </Panel>
                         </Grid>
                     </Panel>
-                    <Panel x:Name="EpisodeListPanel" Grid.Row="2">
+                    <Panel Grid.Row="2" x:Name="EpisodeListPanel">
                         <TextBlock
                             FontSize="25"
                             Foreground="{DynamicResource SystemAccentColorDark1}"
                             Text="{Binding AnimePaheEpisodes.Count, StringFormat='Released Episodes ({0})'}" />
                         <ScrollViewer>
                             <ItemsRepeater
-                                x:Name="EpisodeList"
-                                Margin="0,35,0,0"
                                 AttachedToVisualTree="EpisodesListAttached"
                                 ItemsSource="{Binding AnimePaheEpisodes}"
-                                UseLayoutRounding="False">
+                                Margin="0,35,0,0"
+                                UseLayoutRounding="False"
+                                x:Name="EpisodeList">
 
                                 <ItemsRepeater.ItemTemplate>
                                     <DataTemplate x:DataType="anime:PaheResult">
