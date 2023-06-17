@@ -122,11 +122,10 @@ public class IndexViewModel : ViewModelBase
         var gogoAnimeSearchTask = GogoAnimeService.Search(Query: SearchTerm, Page: Page);
         var animePaheSearchTask =  AnimePaheService.Search(Query: SearchTerm, Page: Page);
         var zoroAnimeSearchTask = ZoroAnimeService.Search(Query: SearchTerm, Page: Page);
-        var kayoAnimeSearchTask = KayoAnimeService.Search(Query: SearchTerm);
+       
         await Task.WhenAll(gogoAnimeSearchTask, animePaheSearchTask,zoroAnimeSearchTask);
         GogoAnimeSearch = await gogoAnimeSearchTask;
         AnimePaheSearch = await animePaheSearchTask;
-        KayoAnimeSearch = await kayoAnimeSearchTask;
         ZoroAnimeSearch = await zoroAnimeSearchTask;
         DataLoading = false;
     }

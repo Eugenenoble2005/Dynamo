@@ -13,7 +13,7 @@ public partial class IndexSubView : UserControl
     public IndexSubView()
     {
         InitializeComponent();
-        DataContext = new IndexViewModel();
+
 
     }
     public void NavigateToDetails(object sender, TappedEventArgs e)

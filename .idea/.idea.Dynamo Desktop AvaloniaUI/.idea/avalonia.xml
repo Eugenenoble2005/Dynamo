@@ -9,8 +9,10 @@
         <entry key="Dynamo Desktop/Views/Anime/Subviews/AnimePahe/DetailsSubView.axaml" value="Dynamo Desktop/Dynamo Desktop.csproj" />
         <entry key="Dynamo Desktop/Views/Anime/Subviews/AnimePahe/IndexSubView.axaml" value="Dynamo Desktop/Dynamo Desktop.csproj" />
         <entry key="Dynamo Desktop/Views/Anime/Subviews/Gogo/DetailsSubView.axaml" value="Dynamo Desktop/Dynamo Desktop.csproj" />
+        <entry key="Dynamo Desktop/Views/Anime/Subviews/Gogo/IndexSubView.axaml" value="Dynamo Desktop/Dynamo Desktop.csproj" />
         <entry key="Dynamo Desktop/Views/Anime/Subviews/ZoroAnime/DetailsSubView.axaml" value="Dynamo Desktop/Dynamo Desktop.csproj" />
         <entry key="Dynamo Desktop/Views/Hentai/Index.axaml" value="Dynamo Desktop/Dynamo Desktop.csproj" />
+        <entry key="Dynamo Desktop/Views/Hentai/SubViews/IndexSubView.axaml" value="Dynamo Desktop/Dynamo Desktop.csproj" />
       </map>
     </option>
   </component>

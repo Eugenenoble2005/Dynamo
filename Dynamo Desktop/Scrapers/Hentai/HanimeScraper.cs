@@ -67,8 +67,6 @@ public class HanimeScraper
             Views = int.Parse(video.SelectToken("views").ToString()),
             poster = video.SelectToken("poster_url").ToString(),
             Tags = new List<string>()
-
-
         };
         var hentai_tags = video.SelectToken("hentai_tags");
         foreach (var hentai_tag in hentai_tags.ToList())
@@ -79,7 +77,7 @@ public class HanimeScraper
         return JsonSerializer.Serialize(hentai);
     }
 
-    public async void Search(string Query)
+    public async Task<string> Search(string Query)
     {
         using (var httpClient = new HttpClient())
         {
@@ -107,18 +105,18 @@ public class HanimeScraper
                 string json_response = await response.Content.ReadAsStringAsync();
                 List<RecentHentai> hentai_search = new List<RecentHentai>();
                 JObject result = JObject.Parse(json_response);
-                JToken hits = result.SelectToken("hits");
-
-                // foreach (var hit in hits.ToList())
-                // {
-                //     
-                //     RecentHentai hentai = new RecentHentai();
-                //     hentai.HentaiId = hit.SelectToken("slug").ToString();
-                //     hentai.Image = hit.SelectToken("poster_url").ToString();
-                //     hentai.Title = hit.SelectToken("name").ToString();
-                //     hentai_search.Add(hentai);
-                // }
-             
+                var hits = result.SelectToken("hits");
+                JArray hits_array = JArray.Parse((hits.ToString()));
+                foreach (var hit in hits_array.ToList())
+                {
+                    
+                    RecentHentai hentai = new RecentHentai();
+                    hentai.HentaiId = hit.SelectToken("slug").ToString();
+                    hentai.Image = hit.SelectToken("cover_url").ToString();
+                    hentai.Title = hit.SelectToken("name").ToString();
+                    hentai_search.Add(hentai);
+                }
+             return JsonSerializer.Serialize(hentai_search);
             }
         }
     }

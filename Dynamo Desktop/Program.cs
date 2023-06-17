@@ -17,9 +17,6 @@ namespace Dynamo_Desktop
         [STAThread]
         public  static void Main(string[] args)
         {
-
-            var scrape_test = new HanimeScraper();
-            scrape_test.Search("mesu");
             BuildAvaloniaApp()
             .StartWithClassicDesktopLifetime(args);
            

@@ -30,9 +30,17 @@ namespace Dynamo_Desktop.Services.Hentai
             }
         }
 
-        public override Task Search()
+        public async override Task<List<RecentHentai>> Search(string Query)
         {
-            throw new NotImplementedException();
+            try
+            {
+                string json = await _hanimeScraper.Search(Query);
+                return JsonSerializer.Deserialize<List<RecentHentai>>(json);
+            }
+            catch
+            {
+                return default;
+            }
         }
     }
 }
