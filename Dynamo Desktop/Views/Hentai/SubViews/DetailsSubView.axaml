@@ -1,8 +1,150 @@
-<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Dynamo_Desktop.Views.Hentai.SubViews.DetailsSubView">
-  Welcome to Avalonia!
+<UserControl
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d"
+    x:Class="Dynamo_Desktop.Views.Hentai.SubViews.DetailsSubView"
+    x:DataType="vm:DetailsViewModel"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:AsyncImageLoader="using:AsyncImageLoader"
+    xmlns:anime="using:Dynamo_Desktop.Models.Anime"
+    xmlns:anime_views="using:Dynamo_Desktop.Views.Anime"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:ext="using:Dynamo_Desktop.Converters"
+    xmlns:hentai="using:Dynamo_Desktop.Views.Hentai.SubViews"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:Dynamo_Desktop.ViewModels.Hentai"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <UserControl.Resources>
+        <ext:IntToListConverter x:Key="IntToList" />
+        <ext:IntToStringConverter x:Key="IntToString" />
+        <ext:EqualityConverter x:Key="EqualityConverter" />
+    </UserControl.Resources>
+    <Design.DataContext>
+        <vm:DetailsViewModel>
+            <vm:DetailsViewModel.RouteParams>
+                <hentai:HentaiIndexToDetailsRouteParams HentaiId="nightmare-x-deathscythe-1" Provider="Hanime" />
+            </vm:DetailsViewModel.RouteParams>
+        </vm:DetailsViewModel>
+    </Design.DataContext>
+    <UserControl.Styles>
+        <Style Selector="Panel">
+            <Setter Property="Margin" Value="5" />
+        </Style>
+    </UserControl.Styles>
+    <Grid>
+        <ProgressBar
+            IsIndeterminate="True"
+            IsVisible="{Binding DataLoading}"
+            VerticalAlignment="Top"
+            Width="1000" />
+        <Grid IsVisible="{Binding !DataLoading}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <Panel Grid.Column="0">
+                <AsyncImageLoader:AdvancedImage Source="{Binding HentaiDetails.poster}" />
+            </Panel>
+            <Panel Grid.Column="1">
+                <ScrollViewer>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="5*" />
+                            <RowDefinition Height="5*" />
+                        </Grid.RowDefinitions>
+                        <!-- <Panel Grid.Row="0"> -->
+                        <!--     <ItemsRepeater ItemsSource="{Binding AnimePaheStreamingLinks}"> -->
+                        <!--         <ItemsRepeater.Layout> -->
+                        <!--             <UniformGridLayout /> -->
+                        <!--         </ItemsRepeater.Layout> -->
+                        <!--         <ItemsRepeater.ItemTemplate> -->
+                        <!--             <DataTemplate x:DataType="anime:AnimePaheStreamingLinks"> -->
+                        <!--  <Button  -->
+                        <!--  Classes="accent"  -->
+                        <!--  Click="PlayVideo"  -->
+                        <!--  Tag="{Binding M3u8_link}"  -->
+                        <!--  ToolTip.Tip="{Binding Audio}">  -->
+                        <!--                     <Button.Content> -->
+                        <!--                         <MultiBinding StringFormat="{}{0} ({1}p)"> -->
+                        <!--                             <Binding Path="Fansub" /> -->
+                        <!--                             <Binding Path="Resolution" /> -->
+                        <!--                         </MultiBinding> -->
+                        <!--                     </Button.Content> -->
+                        <!--                 </Button> -->
+                        <!--             </DataTemplate> -->
+                        <!--         </ItemsRepeater.ItemTemplate> -->
+                        <!--     </ItemsRepeater> -->
+                        <!-- </Panel> -->
+                        <Panel Grid.Row="1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock
+                                    FontSize="35"
+                                    Foreground="{DynamicResource SystemAccentColorDark1}"
+                                    Text="{Binding HentaiDetails.Title}"
+                                    TextTrimming="CharacterEllipsis" />
+
+                                <Panel Grid.Column="0" Margin="0,50,0,0">
+                                    <TextBlock Text="{Binding HentaiDetails.Description}" TextWrapping="Wrap" />
+                                </Panel>
+                                <Panel Grid.Column="1">
+                                    <StackPanel>
+
+                                        <!-- <TextBlock Text="{Binding AnimePaheAnimeInfo.JapaneseName, StringFormat='Japanese Name: {0}'}" /> -->
+                                        <TextBlock Text="{Binding HentaiDetails.Views, StringFormat='Views: {0}'}" />
+                                        <Panel>
+                                            <ItemsRepeater ItemsSource="{Binding HentaiDetails.Tags}" x:Name="TagsList">
+                                                <Button
+                                                    Classes="accent"
+                                                    Content="{Binding}"
+                                                    IsEnabled="False" />
+                                            </ItemsRepeater>
+                                        </Panel>
+                                    </StackPanel>
+                                </Panel>
+                            </Grid>
+                        </Panel>
+                        <!-- <Panel Grid.Row="2" x:Name="EpisodeListPanel"> -->
+                        <!--  <TextBlock  -->
+                        <!--  FontSize="25"  -->
+                        <!--  Foreground="{DynamicResource SystemAccentColorDark1}"  -->
+                        <!--  Text="{Binding AnimePaheEpisodes.Count, StringFormat='Released Episodes ({0})'}" />  -->
+                        <!--     <ScrollViewer> -->
+                        <!--  <ItemsRepeater  -->
+                        <!--  AttachedToVisualTree="EpisodesListAttached"  -->
+                        <!--  ItemsSource="{Binding AnimePaheEpisodes}"  -->
+                        <!--  Margin="0,35,0,0"  -->
+                        <!--  UseLayoutRounding="False"  -->
+                        <!--  x:Name="EpisodeList">  -->
+                        <!--    -->
+                        <!--             <ItemsRepeater.ItemTemplate> -->
+                        <!--                 <DataTemplate x:DataType="anime:PaheResult"> -->
+                        <!--  <Button  -->
+                        <!--  Classes="accent"  -->
+                        <!--  Click="ChangeEpisode"  -->
+                        <!--  Content="{Binding episode}">  -->
+                        <!--    -->
+                        <!--                         <Button.Tag> -->
+                        <!--                             <MultiBinding StringFormat="{}{0}|{1}"> -->
+                        <!--                                 <Binding Path="episode" /> -->
+                        <!--                                 <Binding Path="session" /> -->
+                        <!--                             </MultiBinding> -->
+                        <!--                         </Button.Tag> -->
+                        <!--                     </Button> -->
+                        <!--                 </DataTemplate> -->
+                        <!--             </ItemsRepeater.ItemTemplate> -->
+                        <!--         </ItemsRepeater> -->
+                        <!--     </ScrollViewer> -->
+                        <!--    -->
+                        <!-- </Panel> -->
+                    </Grid>
+                </ScrollViewer>
+            </Panel>
+        </Grid>
+    </Grid>
+
 </UserControl>

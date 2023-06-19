@@ -14,7 +14,7 @@ namespace Dynamo_Desktop.Models.Hentai
         public string Title { get; set; }
     }
 
-   public class Hentai
+   public class HentaiDetails
    {
        public string Title { get; set; }
        public string Description { get; set; }

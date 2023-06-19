@@ -8,7 +8,7 @@
     xmlns:sty="using:FluentAvalonia.Styling"
     xmlns:ui="using:FluentAvalonia.UI.Controls"
     xmlns:uip="using:FluentAvalonia.UI.Controls.Primitives"
-    RequestedThemeVariant="Default">
+    RequestedThemeVariant="Dark">
 
     <Application.DataTemplates>
         <local:ViewLocator />

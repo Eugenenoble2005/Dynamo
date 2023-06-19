@@ -18,7 +18,6 @@
         <ext:EqualityConverter x:Key="EqualityConverter" />
     </UserControl.Resources>
     <Grid>
-
         <ProgressBar
             Width="1000"
             VerticalAlignment="Top"

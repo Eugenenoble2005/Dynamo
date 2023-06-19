@@ -42,5 +42,18 @@ namespace Dynamo_Desktop.Services.Hentai
                 return default;
             }
         }
+
+        public async override Task<HentaiDetails> Info(string Query = "")
+        {
+            try
+            {
+                string json = await _hanimeScraper.Info(Query);
+                return JsonSerializer.Deserialize<HentaiDetails>(json);
+            }
+            catch
+            {
+                return default;
+            }
+        }
     }
 }

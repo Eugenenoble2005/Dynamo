@@ -60,21 +60,23 @@ public class HanimeScraper
         string nuxt_json = long_scripts[0].Split("window.__NUXT__=")[1].TrimEnd(";".ToCharArray());
         var json_object = JObject.Parse(nuxt_json);
         var video = json_object.SelectToken("state.data.video.hentai_video");
-        Models.Hentai.Hentai hentai = new Models.Hentai.Hentai
+        Models.Hentai.HentaiDetails hentaiDetails = new Models.Hentai.HentaiDetails
         {
             Title = video.SelectToken("name").ToString(),
-            Description = video.SelectToken("description").ToString(),
             Views = int.Parse(video.SelectToken("views").ToString()),
-            poster = video.SelectToken("poster_url").ToString(),
+            poster = video.SelectToken("cover_url").ToString(),
             Tags = new List<string>()
         };
         var hentai_tags = video.SelectToken("hentai_tags");
+        var temp_html = new HtmlDocument();
+        temp_html.LoadHtml(video.SelectToken("description").ToString());
+        hentaiDetails.Description = temp_html.DocumentNode.InnerText;
         foreach (var hentai_tag in hentai_tags.ToList())
         {
-            hentai.Tags.Add(hentai_tag.SelectToken("text").ToString());
+            hentaiDetails.Tags.Add(hentai_tag.SelectToken("text").ToString());
         }
 
-        return JsonSerializer.Serialize(hentai);
+        return JsonSerializer.Serialize(hentaiDetails);
     }
 
     public async Task<string> Search(string Query)

@@ -36,6 +36,7 @@
             <!--  Search  -->
             <Border
                 Width="300"
+				 
                 Height="10"
                 Margin="0,47,20,0"
                 HorizontalAlignment="Right"

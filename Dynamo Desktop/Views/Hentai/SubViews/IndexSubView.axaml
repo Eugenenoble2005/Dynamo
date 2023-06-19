@@ -24,7 +24,6 @@
         <Grid IsVisible="{Binding SearchTerm, Converter={x:Static StringConverters.IsNullOrEmpty}}">
             <!--  For sort displays. Must not show if search term has a value or user is searching  -->
             <Grid>
-            
                 <ScrollViewer Margin="0,120,0,0" IsVisible="{Binding Sort, Converter={StaticResource EqualityConverter}, ConverterParameter='Newest'}">
                     <ItemsRepeater ItemsSource="{Binding RecentHentai}">
                         <ItemsRepeater.Layout>

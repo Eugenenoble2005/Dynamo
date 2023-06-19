@@ -17,8 +17,7 @@ namespace Dynamo_Desktop.ViewModels.Anime;
 
 public class DetailsViewModel : ViewModelBase
 {
-
-
+    
     private AnimeIndexToDetailsRouteParams _routeParams;
     private AnimePaheAnimeInfo _animePaheAnimeInfo;
     private ObservableCollection<PaheResult> _animePaheEpisodes;
