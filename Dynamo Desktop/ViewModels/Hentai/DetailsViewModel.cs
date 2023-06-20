@@ -4,6 +4,7 @@ using Dynamo_Desktop.Models.Hentai;
 using Dynamo_Desktop.Services.Hentai;
 using Dynamo_Desktop.Views.Hentai.SubViews;
 using ReactiveUI;
+using JsonSerializer = Newtonsoft.Json.JsonSerializer;
 
 namespace Dynamo_Desktop.ViewModels.Hentai;
 
@@ -38,6 +39,7 @@ public class DetailsViewModel : ViewModelBase
         {
             case HentaiProviders.Hanime:
                 HentaiDetails = await _hanimeService.Info(RouteParams.HentaiId);
+               Debug.WriteLine(System.Text.Json.JsonSerializer.Serialize(HentaiDetails));
                 DataLoading = false;
                 break;
         }

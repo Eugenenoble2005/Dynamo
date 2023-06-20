@@ -29,7 +29,6 @@ namespace Dynamo_Desktop.Services.Hentai
                 return default;
             }
         }
-
         public async override Task<List<RecentHentai>> Search(string Query)
         {
             try
@@ -55,5 +54,7 @@ namespace Dynamo_Desktop.Services.Hentai
                 return default;
             }
         }
+
+     
     }
 }

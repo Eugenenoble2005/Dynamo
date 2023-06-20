@@ -21,5 +21,12 @@ namespace Dynamo_Desktop.Models.Hentai
        public int Views { get; set; }
        public string poster { get; set; }
        public List<string> Tags { get; set; }
+       public List<HentaiStreamLinks> StreamLinks { get; set; }
+   }
+
+   public class HentaiStreamLinks
+   {
+       public string Quality { get; set; }
+       public string Link { get; set; }
    }
 }

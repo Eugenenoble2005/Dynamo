@@ -1,23 +1,23 @@
 <Window
+    Background="Transparent"
+    ExtendClientAreaToDecorationsHint="True"
+    Icon="/Assets/avalonia-logo.ico"
+    MinHeight="450"
+    MinWidth="1000"
+    Title="Dynamo_Desktop"
+    TransparencyLevelHint="AcrylicBlur"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d"
     x:Class="Dynamo_Desktop.Views.MainWindow"
+    x:DataType="vm:MainWindowViewModel"
     xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:ext="using:Dynamo_Desktop.Converters"
     xmlns:fluent="using:FluentAvalonia.UI.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Dynamo_Desktop.ViewModels"
-    Title="Dynamo_Desktop"
-    MinWidth="1000"
-    MinHeight="450"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
-    x:DataType="vm:MainWindowViewModel"
-    Background="Transparent"
-    ExtendClientAreaToDecorationsHint="True"
-    Icon="/Assets/avalonia-logo.ico"
-    TransparencyLevelHint="Mica"
-    mc:Ignorable="d">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Window.Resources />
     <Design.DataContext>
         <!--
@@ -30,17 +30,13 @@
         <ExperimentalAcrylicBorder IsHitTestVisible="False">
             <ExperimentalAcrylicBorder.Material>
                 <ExperimentalAcrylicMaterial
-                    MaterialOpacity="0.85"
+                    MaterialOpacity="0.6"
                     TintColor="{DynamicResource SolidBackgroundFillColorBase}"
                     TintOpacity="1" />
             </ExperimentalAcrylicBorder.Material>
         </ExperimentalAcrylicBorder>
         <!--  Search Bar  -->
         <Grid>
-
-
-
-
             <!--<TextBlock
                 Margin="60,20,0,0"
                 HorizontalAlignment="Left"
@@ -49,17 +45,16 @@
         </Grid>
         <!--  -App title  -->
         <Grid
-            Width="500"
             Height="30"
-            Margin="0,8"
             HorizontalAlignment="Center"
-            VerticalAlignment="Top">
+            Margin="0,8"
+            VerticalAlignment="Top"
+            Width="500">
             <TextBox Watermark="Search Everywhere..." />
         </Grid>
         <!--  Main Content  -->
         <Grid Margin="0,40,0,0">
             <fluent:NavigationView
-                x:Name="nvSample"
                 BackRequested="BackRequested"
                 IsBackButtonVisible="True"
                 IsBackEnabled="True"
@@ -68,12 +63,13 @@
                 IsSettingsVisible="True"
                 OpenPaneLength="72"
                 PaneDisplayMode="Left"
-                PropertyChanged="NavigationItemChanged">
+                PropertyChanged="NavigationItemChanged"
+                x:Name="nvSample">
                 <fluent:NavigationView.MenuItems>
                     <fluent:NavigationViewItem
-                        x:Name="AnimePage"
                         Content="Anime"
-                        Tag="Anime">
+                        Tag="Anime"
+                        x:Name="AnimePage">
                         <fluent:NavigationViewItem.IconSource>
                             <fluent:ImageIconSource Source="/Assets/Images/anime-logo.png" />
                         </fluent:NavigationViewItem.IconSource>
@@ -91,7 +87,7 @@
                     </fluent:NavigationViewItem>
                 </fluent:NavigationView.MenuItems>
 
-                <fluent:Frame x:Name="ContentFrame" Navigating="Frame_Navigating" />
+                <fluent:Frame Navigating="Frame_Navigating" x:Name="ContentFrame" />
             </fluent:NavigationView>
         </Grid>
     </Panel>

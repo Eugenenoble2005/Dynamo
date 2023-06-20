@@ -14,6 +14,7 @@
         <entry key="Dynamo Desktop/Views/Hentai/Index.axaml" value="Dynamo Desktop/Dynamo Desktop.csproj" />
         <entry key="Dynamo Desktop/Views/Hentai/SubViews/DetailsSubView.axaml" value="Dynamo Desktop/Dynamo Desktop.csproj" />
         <entry key="Dynamo Desktop/Views/Hentai/SubViews/IndexSubView.axaml" value="Dynamo Desktop/Dynamo Desktop.csproj" />
+        <entry key="Dynamo Desktop/Views/MainWindow.axaml" value="Dynamo Desktop/Dynamo Desktop.csproj" />
       </map>
     </option>
   </component>

@@ -14,5 +14,6 @@ namespace Dynamo_Desktop.Services.Hentai
         public  abstract Task<List<RecentHentai>> Search(string Query="");
 
         public abstract Task<HentaiDetails> Info(string Query = "");
+
     }
 }

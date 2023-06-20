@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -65,20 +66,37 @@ public class HanimeScraper
             Title = video.SelectToken("name").ToString(),
             Views = int.Parse(video.SelectToken("views").ToString()),
             poster = video.SelectToken("cover_url").ToString(),
-            Tags = new List<string>()
+            Tags = new List<string>(), 
+            StreamLinks =  new List<HentaiStreamLinks>()
         };
         var hentai_tags = video.SelectToken("hentai_tags");
         var temp_html = new HtmlDocument();
         temp_html.LoadHtml(video.SelectToken("description").ToString());
         hentaiDetails.Description = temp_html.DocumentNode.InnerText;
+        //tags
         foreach (var hentai_tag in hentai_tags.ToList())
         {
             hentaiDetails.Tags.Add(hentai_tag.SelectToken("text").ToString());
         }
-
-        return JsonSerializer.Serialize(hentaiDetails);
+    //streaming links
+    HentaiStreamLinks streamLinks = new HentaiStreamLinks();
+    JToken servers = json_object.SelectToken("state.data.video.videos_manifest.servers");
+    JArray servers_array = JArray.Parse(servers.ToString());
+    var server1 = servers_array[0];
+    JArray streams = JArray.Parse(server1.SelectToken("streams").ToString());
+    foreach (var stream in streams.ToList())
+    {
+        streamLinks = new HentaiStreamLinks
+        {
+            Quality = stream.SelectToken("height").ToString(),
+            Link =  stream.SelectToken("url").ToString(),
+        };
+        
+        hentaiDetails.StreamLinks.Add(streamLinks);
     }
-
+        return JsonSerializer.Serialize(hentaiDetails);
+        
+    }
     public async Task<string> Search(string Query)
     {
         using (var httpClient = new HttpClient())

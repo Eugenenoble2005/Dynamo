@@ -19,9 +19,11 @@ public partial class DetailsSubView : UserControl
         {
             TagsList.Layout = new WrapLayout();
         };
-
+        ServerList.AttachedToVisualTree += (sender, args) =>
+        {
+          //  ServerList.Layout = new WrapLayout();
+        };
     }
-
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
@@ -34,10 +36,10 @@ public partial class DetailsSubView : UserControl
     }
     public void PlayVideo(object sender, RoutedEventArgs e)
     {
-        // string link = (sender as Button).Tag.ToString();
-        // string Title = (this.FindAncestorOfType<Details>().DataContext as DetailsViewModel).GogoAnimeInfo.title;
-        // Video.Video videoWindow = new Video.Video(link, Title, Referrer:null,Subtitle:null);
-        // videoWindow.Show();
+        string link = (sender as Button).Tag.ToString();
+        string Title = (DataContext as DetailsViewModel).HentaiDetails.Title;
+        Video.Video videoWindow = new Video.Video(link, Title, Referrer:null,Subtitle:null);
+        videoWindow.Show();
 
     }
 }
