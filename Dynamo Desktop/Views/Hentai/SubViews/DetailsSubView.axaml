@@ -56,9 +56,7 @@
                         </Grid.RowDefinitions>
                         <Panel Grid.Row="0">
                             <ItemsRepeater ItemsSource="{Binding HentaiDetails.StreamLinks}" x:Name="ServerList">
-                                <ItemsRepeater.Layout>
-                                    <UniformGridLayout />
-                                </ItemsRepeater.Layout>
+                                <ItemsRepeater.Layout />
                                 <ItemsRepeater.ItemTemplate>
                                     <DataTemplate x:DataType="hentai:HentaiStreamLinks">
                                         <Button

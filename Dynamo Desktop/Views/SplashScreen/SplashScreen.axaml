@@ -1,0 +1,28 @@
+<UserControl
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d"
+    x:Class="Dynamo_Desktop.Views.SplashScreen.SplashScreen"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel
+        Background="Black"
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch">
+        <Image
+            Height="400"
+            HorizontalAlignment="Center"
+            Source="/Assets/Images/Dynamo.png"
+            VerticalAlignment="Center"
+            Width="400" />
+        <TextBlock
+            FontSize="20"
+            HorizontalAlignment="Center"
+            Margin="0,-100,0,0">
+            Loading Resources....
+        </TextBlock>
+    </StackPanel>
+
+</UserControl>

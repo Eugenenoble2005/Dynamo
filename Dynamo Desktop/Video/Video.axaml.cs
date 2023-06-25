@@ -51,9 +51,7 @@ public partial class Video : Window
         }
    
     }
- 
- 
-    public Video()
+  public Video()
     {
         InitializeComponent();  
     }

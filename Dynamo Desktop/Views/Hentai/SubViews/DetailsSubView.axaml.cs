@@ -15,6 +15,7 @@ public partial class DetailsSubView : UserControl
     public DetailsSubView()
     {
         InitializeComponent();
+        DataContext = new DetailsViewModel();
         TagsList.AttachedToVisualTree += (sender, args) =>
         {
             TagsList.Layout = new WrapLayout();
@@ -31,7 +32,7 @@ public partial class DetailsSubView : UserControl
         if(frame != null)
         {
             HentaiIndexToDetailsRouteParams routeParams = frame.Tag as HentaiIndexToDetailsRouteParams;
-            DataContext = new DetailsViewModel {RouteParams = routeParams};
+            (DataContext as DetailsViewModel).RouteParams = routeParams;
         }
     }
     public void PlayVideo(object sender, RoutedEventArgs e)

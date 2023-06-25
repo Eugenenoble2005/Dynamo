@@ -14,6 +14,11 @@ using FluentAvalonia.UI.Windowing;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
+using System.Threading;
+using System.Threading.Tasks;
+using Avalonia.Media;
+using LibVLCSharp.Shared;
+
 namespace Dynamo_Desktop.Views
 {
     public partial class MainWindow : AppWindow
@@ -23,6 +28,7 @@ namespace Dynamo_Desktop.Views
        
 			InitializeComponent();
             ContentFrame.Navigate(typeof(Anime.Index));
+            SplashScreen = new ApplicationSplashScreen();
 			DataContext = new MainWindowViewModel();
             nvSample.AttachedToVisualTree += (sender, args) =>
             {
@@ -63,5 +69,28 @@ namespace Dynamo_Desktop.Views
           
         }
         
+    }
+    public class ApplicationSplashScreen : IApplicationSplashScreen
+    {
+        public Task RunTasks(CancellationToken cancellationToken)
+        {
+            return Task.Run(() =>
+            {
+                //try load vlc now to prevent slow loads later on;
+                try
+                {
+                    LibVLC _libVlc = new LibVLC(enableDebugLogs: true);
+                }
+                catch
+                {
+                    //exception may be thrown on linux if vlc is not installed. Prompy user to run:
+                    //sudo apt install vlc
+                }
+            });
+        }
+        public string AppName { get; }
+        public IImage AppIcon { get; }
+        public object SplashScreenContent => new SplashScreen.SplashScreen();
+        public int MinimumShowTime => 5000;
     }
 }
