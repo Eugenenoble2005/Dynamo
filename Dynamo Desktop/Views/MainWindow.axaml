@@ -1,11 +1,11 @@
 <Window
-    Background="Transparent"
     ExtendClientAreaToDecorationsHint="True"
     Icon="/Assets/Images/Dynamo.png"
+	Background="Transparent"
     MinHeight="450"
     MinWidth="1000"
     Title="Dynamo_Desktop"
-    TransparencyLevelHint="AcrylicBlur"
+    TransparencyLevelHint="Mica"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d"
@@ -27,14 +27,14 @@
         <vm:MainWindowViewModel />
     </Design.DataContext>
     <Panel>
-        <ExperimentalAcrylicBorder IsHitTestVisible="False">
-            <ExperimentalAcrylicBorder.Material>
-                <ExperimentalAcrylicMaterial
-                    MaterialOpacity="0.6"
-                    TintColor="{DynamicResource SolidBackgroundFillColorBase}"
-                    TintOpacity="1" />
-            </ExperimentalAcrylicBorder.Material>
-        </ExperimentalAcrylicBorder>
+         <ExperimentalAcrylicBorder IsHitTestVisible="False">
+               <ExperimentalAcrylicBorder.Material>
+                   <ExperimentalAcrylicMaterial
+                       TintColor="{DynamicResource ApplicationPageBackgroundThemeBrush}"
+					   TintOpacity="1"
+                       MaterialOpacity="0.9" />
+               </ExperimentalAcrylicBorder.Material>
+           </ExperimentalAcrylicBorder>
 		
         <!--  Search Bar  -->
         <Grid>

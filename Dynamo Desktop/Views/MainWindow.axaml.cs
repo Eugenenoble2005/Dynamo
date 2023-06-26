@@ -18,6 +18,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Avalonia.Media;
 using LibVLCSharp.Shared;
+using Dynamo_Desktop.Views.SplashScreen;
 
 namespace Dynamo_Desktop.Views
 {
@@ -68,8 +69,10 @@ namespace Dynamo_Desktop.Views
         {
           
         }
-        
+     
     }
+
+}
     public class ApplicationSplashScreen : IApplicationSplashScreen
     {
         public Task RunTasks(CancellationToken cancellationToken)
@@ -90,7 +93,6 @@ namespace Dynamo_Desktop.Views
         }
         public string AppName { get; }
         public IImage AppIcon { get; }
-        public object SplashScreenContent => new SplashScreen.SplashScreen();
+    public object SplashScreenContent => new SplashScreen();
         public int MinimumShowTime => 10000;
     }
-}
