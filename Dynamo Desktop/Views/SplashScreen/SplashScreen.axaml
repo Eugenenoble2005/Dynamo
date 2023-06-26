@@ -7,22 +7,22 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <StackPanel
+    <Panel
         Background="Black"
         HorizontalAlignment="Stretch"
         VerticalAlignment="Stretch">
         <Image
-            Height="400"
-            HorizontalAlignment="Center"
+            Height="300"
             Source="/Assets/Images/Dynamo.png"
-            VerticalAlignment="Center"
-            Width="400" />
+            Width="300" />
         <TextBlock
             FontSize="20"
+            Foreground="Wheat"
             HorizontalAlignment="Center"
-            Margin="0,-100,0,0">
+            Margin="0,170,0,0"
+            VerticalAlignment="Center">
             Loading Resources....
         </TextBlock>
-    </StackPanel>
+    </Panel>
 
 </UserControl>

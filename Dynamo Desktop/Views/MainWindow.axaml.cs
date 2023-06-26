@@ -91,6 +91,6 @@ namespace Dynamo_Desktop.Views
         public string AppName { get; }
         public IImage AppIcon { get; }
         public object SplashScreenContent => new SplashScreen.SplashScreen();
-        public int MinimumShowTime => 5000;
+        public int MinimumShowTime => 10000;
     }
 }

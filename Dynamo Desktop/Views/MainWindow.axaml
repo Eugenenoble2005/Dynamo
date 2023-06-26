@@ -1,7 +1,7 @@
 <Window
     Background="Transparent"
     ExtendClientAreaToDecorationsHint="True"
-    Icon="/Assets/avalonia-logo.ico"
+    Icon="/Assets/Images/Dynamo.png"
     MinHeight="450"
     MinWidth="1000"
     Title="Dynamo_Desktop"
@@ -35,6 +35,7 @@
                     TintOpacity="1" />
             </ExperimentalAcrylicBorder.Material>
         </ExperimentalAcrylicBorder>
+		
         <!--  Search Bar  -->
         <Grid>
             <!--<TextBlock
@@ -86,8 +87,10 @@
                         </fluent:NavigationViewItem.IconSource>
                     </fluent:NavigationViewItem>
                 </fluent:NavigationView.MenuItems>
-
-                <fluent:Frame Navigating="Frame_Navigating" x:Name="ContentFrame" />
+				<Panel>
+					      <fluent:Frame Navigating="Frame_Navigating" x:Name="ContentFrame" />
+				</Panel>
+        
             </fluent:NavigationView>
         </Grid>
     </Panel>
