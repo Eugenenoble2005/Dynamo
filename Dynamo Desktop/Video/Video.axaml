@@ -39,7 +39,7 @@
                     <Panel.Styles>
                         <Style Selector="Panel.ControlPanel">
                             <Setter Property="Background">
-                                <SolidColorBrush Opacity="0.5" Color="{DynamicResource SystemAccentColor}" />
+                                <SolidColorBrush Opacity="0.8" Color="{DynamicResource SolidBackgroundFillColorBase}" />
                             </Setter>
 
                         </Style>
@@ -57,7 +57,7 @@
                         </Button>
                         <TextBlock
                             Margin="20"
-                            Foreground="White"
+                           
                             Text="{Binding #MainPanel.DataContext.CurrentTimeStamp}" />
                         <Slider
                             Width="700"
@@ -67,8 +67,9 @@
 
                         <TextBlock
                             Margin="20"
-                            Foreground="White"
+                           
                             Text="{Binding #MainPanel.DataContext.VideoTimeStamp}" />
+					
                         <Button
                             Margin="1,0,0,0"
                             Padding="20"
@@ -86,7 +87,6 @@
                 </Panel>
             </vlc:VideoView>
         </Panel>
-
     </Panel>
 
 </Window>

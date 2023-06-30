@@ -8,7 +8,7 @@
     xmlns:sty="using:FluentAvalonia.Styling"
     xmlns:ui="using:FluentAvalonia.UI.Controls"
     xmlns:uip="using:FluentAvalonia.UI.Controls.Primitives"
-    RequestedThemeVariant="Dark">
+    RequestedThemeVariant="Default">
 
     <Application.DataTemplates>
         <local:ViewLocator />
@@ -137,7 +137,8 @@
         <Style Selector="FluentControls|NavigationViewItem uip|NavigationViewItemPresenter:selected /template/ ContentPresenter#Icon">
             <Setter Property="Foreground" Value="{DynamicResource AccentFillColorDefaultBrush}" />
         </Style>
-
-
+		<Style Selector="Button.MaxRestoreButton">
+			<Setter Property="IsVisible" Value="False"/>
+		</Style>
     </Application.Styles>
 </Application>

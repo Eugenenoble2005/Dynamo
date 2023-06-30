@@ -40,7 +40,12 @@ public partial class DetailsSubView : UserControl
         string link = (sender as Button).Tag.ToString();
         string Title = (DataContext as DetailsViewModel).HentaiDetails.Title;
         Video.Video videoWindow = new Video.Video(link, Title, Referrer:null,Subtitle:null);
-        videoWindow.Show();
-
+        videoWindow.ShowDialog(this.FindAncestorOfType<Window>());
+        AcrylicPanel acrylicPanel = this.FindAncestorOfType<AcrylicPanel>();
+        acrylicPanel.ToggleBlur();
+        videoWindow.Closing += (sender, args) =>
+        {
+            acrylicPanel.ToggleBlur();
+        };
     }
 }

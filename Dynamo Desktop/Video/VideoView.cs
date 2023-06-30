@@ -116,7 +116,7 @@ namespace Dynamo_Desktop.Video
 
                     ShowInTaskbar = false,
 
-                    //Topmost=true,
+                    Topmost=true,
                     ZIndex = Int32.MaxValue,
 
                     Opacity = 1,
@@ -182,10 +182,11 @@ namespace Dynamo_Desktop.Video
                 return;
 
             if (show && _isAttached)
+                //ok
                 _floatingContent.Show(VisualRoot as Window);
             else
                 _floatingContent.Hide();
-        }
+        } 
 
         private void UpdateOverlayPosition()
         {

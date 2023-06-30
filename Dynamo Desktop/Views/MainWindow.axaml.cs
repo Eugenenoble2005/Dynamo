@@ -24,18 +24,24 @@ namespace Dynamo_Desktop.Views
 {
     public partial class MainWindow : AppWindow
     {
+        public bool IsWindows = true;
         public MainWindow()
         {
-       
+           
 			InitializeComponent();
             ContentFrame.Navigate(typeof(Anime.Index));
             SplashScreen = new ApplicationSplashScreen();
 			DataContext = new MainWindowViewModel();
-            nvSample.AttachedToVisualTree += (sender, args) =>
+            nvSample.AttachedToVisualTree += (sender,args) =>
             {
                 nvSample.SelectedItem = nvSample.MenuItems.ElementAt(0);
             };
+            TitleBar.TitleBarHitTestType = TitleBarHitTestType.Complex;
             TitleBar.ExtendsContentIntoTitleBar = true;
+
+            TitleBar.ButtonHoverBackgroundColor = Color.FromArgb(50, 255, 255, 255);
+            TitleBar.ButtonInactiveForegroundColor = Color.Parse("white");
+
             nvSample.PropertyChanged += (sender, args) =>
             {
                 if(args.Property.ToString() == "SelectedItem")

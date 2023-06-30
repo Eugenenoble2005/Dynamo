@@ -33,7 +33,7 @@
         <Grid Margin="0,40,0,0" ZIndex="1">
             <!--  Sort Selection  -->
             <ComboBox
-                Margin="0,-20,20,0"
+                Margin="0,-39,150,0"
                 HorizontalAlignment="Right"
                 ItemsSource="{Binding SortOptions}"
                 SelectedItem="{Binding Sort}" />

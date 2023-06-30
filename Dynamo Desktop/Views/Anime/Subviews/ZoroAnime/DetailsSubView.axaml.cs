@@ -34,9 +34,15 @@ public partial class DetailsSubView : UserControl
 			}
 		}
 		Video.Video videoWindow = new Video.Video(link, Title, "",english_subtitle);
-		videoWindow.Show();
+        videoWindow.ShowDialog(this.FindAncestorOfType<Window>());
+        AcrylicPanel acrylicPanel = this.FindAncestorOfType<AcrylicPanel>();
+        acrylicPanel.ToggleBlur();
+        videoWindow.Closing += (sender, args) =>
+        {
+            acrylicPanel.ToggleBlur();
+        };
 
-	}
+    }
 	public void ChangeEpisode(object sender, RoutedEventArgs e)
 	{
 

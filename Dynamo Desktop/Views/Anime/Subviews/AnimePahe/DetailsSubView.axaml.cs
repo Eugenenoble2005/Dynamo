@@ -24,8 +24,14 @@ public partial class DetailsSubView : UserControl
         string link = (sender as Button).Tag.ToString();
         string Title = (this.FindAncestorOfType<Details>().DataContext as DetailsViewModel).AnimePaheAnimeInfo.Title;
         Video.Video videoWindow = new Video.Video(link,Title, Referrer:"https://kwik.cx",Subtitle:null);
-        videoWindow.Show();
-       
+        videoWindow.ShowDialog(this.FindAncestorOfType<Window>());
+        AcrylicPanel acrylicPanel = this.FindAncestorOfType<AcrylicPanel>();
+        acrylicPanel.ToggleBlur();
+        videoWindow.Closing += (sender, args) =>
+        {
+            acrylicPanel.ToggleBlur();
+        };
+
     }
     public void ChangeEpisode(object sender, RoutedEventArgs e)
     {
