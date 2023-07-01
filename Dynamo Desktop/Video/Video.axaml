@@ -32,10 +32,16 @@
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 IsHitTestVisible="False">
+				
                 <Panel
                     Height="60"
                     VerticalAlignment="Bottom"
                     Classes="ControlPanel">
+					<Panel.ContextMenu>
+						<ContextMenu>
+							<MenuItem Header="Play"></MenuItem>
+						</ContextMenu>
+					</Panel.ContextMenu>
                     <Panel.Styles>
                         <Style Selector="Panel.ControlPanel">
                             <Setter Property="Background">
@@ -55,21 +61,15 @@
                                 <fluent:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="{Binding #MainPanel.DataContext.PlayButtonIcon}" />
                             </Button.Content>
                         </Button>
-                        <TextBlock
-                            Margin="20"
-                           
-                            Text="{Binding #MainPanel.DataContext.CurrentTimeStamp}" />
+                        <TextBlock Margin="20" Text="{Binding #MainPanel.DataContext.CurrentTimeStamp}" />
                         <Slider
                             Width="700"
                             Margin="10,4,0,0"
                             Maximum="{Binding #MainPanel.DataContext.VideoMillSecs}"
                             Value="{Binding #MainPanel.DataContext.CurrentMillSecs}" />
 
-                        <TextBlock
-                            Margin="20"
-                           
-                            Text="{Binding #MainPanel.DataContext.VideoTimeStamp}" />
-					
+                        <TextBlock Margin="20" Text="{Binding #MainPanel.DataContext.VideoTimeStamp}" />
+
                         <Button
                             Margin="1,0,0,0"
                             Padding="20"

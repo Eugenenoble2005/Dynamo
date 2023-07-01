@@ -58,7 +58,7 @@
                 IsBackEnabled="True"
                 IsPaneOpen="False"
                 IsPaneToggleButtonVisible="False"
-                IsSettingsVisible="True"
+                IsSettingsVisible="False"
                 OpenPaneLength="72"
                 PaneDisplayMode="Left"
                 PropertyChanged="NavigationItemChanged">
