@@ -1,20 +1,23 @@
 <UserControl
-    d:DesignHeight="450"
-    d:DesignWidth="800"
-    mc:Ignorable="d"
     x:Class="Dynamo_Desktop.Views.SplashScreen.SplashScreen"
     xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:gif="using:Avalonia.Gif"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
     <Panel
-        Background="Black"
         HorizontalAlignment="Stretch"
-        VerticalAlignment="Stretch">
-        <Image
+        VerticalAlignment="Stretch"
+        Background="Black">
+        <!--<Image
+            Width="300"
             Height="300"
-            Source="/Assets/Images/Dynamo.png"
-            Width="300" />
+            Source="/Assets/Images/Dynamo.png" />-->
+        <gif:GifImage
+            SourceUri="avares://Dynamo Desktop/Assets/Images/Dynamo.gif" Stretch="Uniform" Height="300" />
         <!--<TextBlock
             FontSize="20"
             Foreground="Wheat"
