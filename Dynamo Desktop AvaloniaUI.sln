@@ -5,7 +5,7 @@ VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dynamo Desktop", "Dynamo Desktop\Dynamo Desktop.csproj", "{B4FC3A3B-21E5-4DD1-B6CE-D48873639CEA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avalonia.Gif", "..\Avalonia.GIF\Avalonia.Gif\Avalonia.Gif.csproj", "{DFBE3717-AADB-4C11-AEE9-7D6283F1DC52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvaloniaGif", "Avalonia.GIF\AvaloniaGif\AvaloniaGif.csproj", "{D1F13819-B54B-41FF-ABC8-7796B4A7F5DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{B4FC3A3B-21E5-4DD1-B6CE-D48873639CEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4FC3A3B-21E5-4DD1-B6CE-D48873639CEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4FC3A3B-21E5-4DD1-B6CE-D48873639CEA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DFBE3717-AADB-4C11-AEE9-7D6283F1DC52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DFBE3717-AADB-4C11-AEE9-7D6283F1DC52}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DFBE3717-AADB-4C11-AEE9-7D6283F1DC52}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DFBE3717-AADB-4C11-AEE9-7D6283F1DC52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1F13819-B54B-41FF-ABC8-7796B4A7F5DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1F13819-B54B-41FF-ABC8-7796B4A7F5DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1F13819-B54B-41FF-ABC8-7796B4A7F5DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1F13819-B54B-41FF-ABC8-7796B4A7F5DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
