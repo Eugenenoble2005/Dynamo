@@ -28,15 +28,7 @@
         <vm:MainWindowViewModel />
     </Design.DataContext>
     <local:AcrylicPanel>
-        <ExperimentalAcrylicBorder IsHitTestVisible="False">
-            <ExperimentalAcrylicBorder.Material>
-                <ExperimentalAcrylicMaterial
-                    MaterialOpacity="0.8"
-                    TintColor="{DynamicResource SolidBackgroundFillColorBase}"
-                    TintOpacity="1" />
-            </ExperimentalAcrylicBorder.Material>
-
-        </ExperimentalAcrylicBorder>
+      
 
         <!--  Search Bar  -->
         <Grid>
@@ -78,7 +70,7 @@
                     </fluent:NavigationViewItem>
                 </fluent:NavigationView.MenuItems>
                 <Panel>
-                    <fluent:Frame x:Name="ContentFrame" Navigating="Frame_Navigating" />
+												<fluent:Frame x:Name="ContentFrame" Navigating="Frame_Navigating"  />
                 </Panel>
 
             </fluent:NavigationView>

@@ -17,7 +17,6 @@ public  class AnimePaheScraper
     private HttpClient _http = new HttpClient();
     public async Task<string> AnimeInfo(String Id)
     {
-        /**Pray this doesn't  break randomly*/
         var AnimeDetails = new AnimePaheAnimeInfo();
         string url = $"https://animepahe.com/anime/{Id}";
         string response = await _http.GetStringAsync(url);

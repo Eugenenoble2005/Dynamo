@@ -13,6 +13,7 @@
     xmlns:fluent="using:FluentAvalonia.UI.Controls"
     xmlns:loaders="using:AsyncImageLoader.Loaders"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:subview="using:Dynamo_Desktop.Views.Anime.Subviews"
     xmlns:vm="using:Dynamo_Desktop.ViewModels.Anime"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -65,20 +66,20 @@
 
         <TabControl>
             <!--  GOGOANIME  -->
+
             <TabItem Header="GogoAnime">
-                <GogoSubview:IndexSubView />
+                <subview:IndexSubView Provider="GogoAnime" />
             </TabItem>
 
-            <!--  ZoroAnime  -->
             <TabItem Header="ZoroAnime">
                 <ZoroSubView:IndexSubView />
             </TabItem>
 
             <!--  AnimePahe  -->
+
             <TabItem Header="AnimePahe">
                 <AnimePaheSubview:IndexSubView />
             </TabItem>
-
 
 
         </TabControl>

@@ -1,8 +1,10 @@
 ﻿using Avalonia;
 using Avalonia.ReactiveUI;
 using Avalonia.Threading;
+using Dynamo_Desktop.Models;
 using Dynamo_Desktop.Scrapers.Anime;
 using Dynamo_Desktop.Scrapers.Hentai;
+using Dynamo_Desktop.Services;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -17,14 +19,12 @@ namespace Dynamo_Desktop
         [STAThread]
         public  static void Main(string[] args)
         {
-            // var scrape_test = new HanimeScraper();
-            // scrape_test.InfoX("boy-meets-harem");
+            var test = new GogoAnimeScraper();
+            test.Popular();
             BuildAvaloniaApp()
             .StartWithClassicDesktopLifetime(args);
            
         }
-
-
         // Avalonia configuration, don't remove; also used by visual designer.
         public static AppBuilder BuildAvaloniaApp()
             => AppBuilder.Configure<App>()

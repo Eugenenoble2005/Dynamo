@@ -30,6 +30,7 @@
     <PackageReference Include="LibVLCSharp.GTK" Version="3.8.4" />
     <PackageReference Include="MessageBox.Avalonia" Version="3.1.5.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="ReactiveUI.Fody" Version="19.5.41" />
     <PackageReference Include="VideoLAN.LibVLC.Windows" Version="3.0.20" />
     <!--<PackageReference Include="XamlNameReferenceGenerator" Version="1.6.1" />-->
   </ItemGroup>
@@ -69,9 +70,11 @@
   <ItemGroup>
     <UpToDateCheckInput Remove="Views\Hentai\SubViews\DetailsSubView.axaml" />
   </ItemGroup>
-
+    
   <ItemGroup>
     <ProjectReference Include="..\Avalonia.GIF\AvaloniaGif\AvaloniaGif.csproj" />
   </ItemGroup>
-	
+	<ItemGroup>
+		<Content Include="settings.json" CopyToOutputDirectory="PreserveNewest"/>
+	</ItemGroup>
 </Project>

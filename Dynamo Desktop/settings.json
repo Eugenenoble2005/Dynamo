@@ -1,0 +1,10 @@
+{
+	"Providers":{
+		"gogoanime": {
+			"host": "https://www.gogoanime.co.in"
+		},
+		"animepahe": {
+			"host": "https://www.animepahe.ru"
+		}
+	}
+}

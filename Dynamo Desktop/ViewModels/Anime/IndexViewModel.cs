@@ -56,7 +56,7 @@ public class IndexViewModel : ViewModelBase
 
     public IndexViewModel()
     {
-        GetEpisodes();
+      //  GetEpisodes();
        
     }   
     public async void GetEpisodes()

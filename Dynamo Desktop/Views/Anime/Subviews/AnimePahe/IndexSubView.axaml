@@ -20,7 +20,7 @@
         <ext:EqualityConverter x:Key="EqualityConverter" />
         <ext:EmptyObject x:Key="EmptyObject" />
     </UserControl.Resources>
-    <Grid>
+		  <Grid>
 
         <Grid IsVisible="{Binding SearchTerm, Converter={x:Static StringConverters.IsNullOrEmpty}}">
             <!--  For sort displays. Must not show if search term has a value or user is searching  -->
