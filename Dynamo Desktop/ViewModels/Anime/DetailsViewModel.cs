@@ -31,7 +31,7 @@ public class DetailsViewModel : ViewModelBase
     private ZoroAnimeInfo _zoroAnimeInfo;
     private bool _dataLoading = true;
     public AnimePaheAnimeInfo AnimePaheAnimeInfo { get => _animePaheAnimeInfo; set => this.RaiseAndSetIfChanged(ref _animePaheAnimeInfo, value); }
-    public AnimeIndexToDetailsRouteParams RouteParams { get => _routeParams; set { this.RaiseAndSetIfChanged(ref _routeParams, value);GetAnimeDetails(); } }
+    public AnimeIndexToDetailsRouteParams RouteParams { get => _routeParams; set { this.RaiseAndSetIfChanged(ref _routeParams, value); } }
     public ObservableCollection<PaheResult> AnimePaheEpisodes { get => _animePaheEpisodes;set { this.RaiseAndSetIfChanged(ref _animePaheEpisodes, value); } }
     public GogoAnimeStreamingLinks GogoStreamingLinks { get => _gogoStreamingLinks; set => this.RaiseAndSetIfChanged(ref _gogoStreamingLinks, value); }
     public GogoAnimeInfo GogoAnimeInfo { get => _gogoAnimeInfo; set => this.RaiseAndSetIfChanged(ref _gogoAnimeInfo, value); }
@@ -50,44 +50,44 @@ public class DetailsViewModel : ViewModelBase
     {
 
     }
-    public async void GetAnimeDetails()
-    {
-        DataLoading = true;
-        switch (RouteParams.Provider)
-        {
-            case "AnimePahe":
-                var AnimePaheAnimeInfoTask =  _animePaheService.Info(RouteParams?.AnimeId);
-                var AnimePaheEpisodesTask =  _animePaheService.AllEpisodes(RouteParams.AnimeId);
-                var AnimePaheStreamingLinksTask =
-                     _animePaheService.StreamingLinks(RouteParams.AnimeId, RouteParams?.EpisodeId);
-                await Task.WhenAll(AnimePaheStreamingLinksTask, AnimePaheEpisodesTask, AnimePaheAnimeInfoTask);
-                //test
+    //public async void GetAnimeDetails()
+    //{
+    //    DataLoading = true;
+    //    switch (RouteParams.Provider)
+    //    {
+    //        case "AnimePahe":
+    //            var AnimePaheAnimeInfoTask =  _animePaheService.Info(RouteParams?.AnimeId);
+    //            var AnimePaheEpisodesTask =  _animePaheService.AllEpisodes(RouteParams.AnimeId);
+    //            var AnimePaheStreamingLinksTask =
+    //                 _animePaheService.StreamingLinks(RouteParams.AnimeId, RouteParams?.EpisodeId);
+    //            await Task.WhenAll(AnimePaheStreamingLinksTask, AnimePaheEpisodesTask, AnimePaheAnimeInfoTask);
+    //            //test
                
-                AnimePaheAnimeInfo = await AnimePaheAnimeInfoTask;
-                AnimePaheEpisodes = await AnimePaheEpisodesTask;
-                AnimePaheStreamingLinks = await AnimePaheStreamingLinksTask;
-                DataLoading = false;
-                break;
-            case "GogoAnime":
-                //var GogoAnimeInfoTask = _gogoAnimeService.Info(RouteParams?.AnimeId);
-                //var GogoStreamingLinksTask = _gogoAnimeService.StreamingLinks(EpisodeId: RouteParams.EpisodeId,AnimeId:null);
-                //await Task.WhenAll(GogoAnimeInfoTask, GogoStreamingLinksTask);
-                //GogoAnimeInfo = await GogoAnimeInfoTask;
-                //GogoStreamingLinks = await GogoStreamingLinksTask;
-                //DataLoading = false;
-                break;
-            case "ZoroAnime":
-                var ZoroAnimeInfoTask = _zoroAnimeService.Info(RouteParams?.AnimeId);
-                var zoroStreamingLinksTask = _zoroAnimeService.StreamingLinks(RouteParams.EpisodeId);
-                await Task.WhenAll(ZoroAnimeInfoTask, zoroStreamingLinksTask);
-                ZoroAnimeInfo = await ZoroAnimeInfoTask;
-                ZoroStreamingLinks = await zoroStreamingLinksTask;
-                DataLoading = false;
-                break;
-            default:
-                break;
-        }
+    //            AnimePaheAnimeInfo = await AnimePaheAnimeInfoTask;
+    //            AnimePaheEpisodes = await AnimePaheEpisodesTask;
+    //            AnimePaheStreamingLinks = await AnimePaheStreamingLinksTask;
+    //            DataLoading = false;
+    //            break;
+    //        case "GogoAnime":
+    //            //var GogoAnimeInfoTask = _gogoAnimeService.Info(RouteParams?.AnimeId);
+    //            //var GogoStreamingLinksTask = _gogoAnimeService.StreamingLinks(EpisodeId: RouteParams.EpisodeId,AnimeId:null);
+    //            //await Task.WhenAll(GogoAnimeInfoTask, GogoStreamingLinksTask);
+    //            //GogoAnimeInfo = await GogoAnimeInfoTask;
+    //            //GogoStreamingLinks = await GogoStreamingLinksTask;
+    //            //DataLoading = false;
+    //            break;
+    //        case "ZoroAnime":
+    //            var ZoroAnimeInfoTask = _zoroAnimeService.Info(RouteParams?.AnimeId);
+    //            var zoroStreamingLinksTask = _zoroAnimeService.StreamingLinks(RouteParams.EpisodeId);
+    //            await Task.WhenAll(ZoroAnimeInfoTask, zoroStreamingLinksTask);
+    //            ZoroAnimeInfo = await ZoroAnimeInfoTask;
+    //            ZoroStreamingLinks = await zoroStreamingLinksTask;
+    //            DataLoading = false;
+    //            break;
+    //        default:
+    //            break;
+    //    }
     
-    }
+    //}
 
 }

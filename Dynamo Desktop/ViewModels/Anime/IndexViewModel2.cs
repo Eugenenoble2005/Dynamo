@@ -77,9 +77,3 @@ public class IndexViewModel2 : ViewModelBase
     }
 }
 
-public enum AnimeProviders
-{
-    GogoAnime,  
-    AnimePahe,
-    ZoroAnime
-}

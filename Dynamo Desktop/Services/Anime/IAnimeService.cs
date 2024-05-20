@@ -12,4 +12,5 @@ public interface IAnimeService
     public Task<List<PopularAnime>> PopularAnime(int Page = 1);
     public Task<List<PopularAnime>> RecentAnime(int Page=1);
     public Task<List<PopularAnime>> Search(string Query, int Page=1);
+    public Task<AnimeInfo> Info(string Query);
 }

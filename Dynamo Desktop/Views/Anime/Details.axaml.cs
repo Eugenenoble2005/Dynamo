@@ -7,6 +7,7 @@ using System.Diagnostics;
 using Dynamo_Desktop.ViewModels.Anime;
 using System.Text.Json;
 using Dynamo_Desktop.Views.Anime.Subviews.AnimePahe;
+using Dynamo_Desktop.Models.Anime;
 
 namespace Dynamo_Desktop.Views.Anime;
 

@@ -67,4 +67,24 @@ internal partial class GogoAnimeScraper
         }
         return JsonSerializer.Serialize(SearchResults);
     }
+
+    public async Task<string> Info(string Query)
+    {
+        AnimeInfo Info = new();
+        using (var httpClient = new HttpClient())
+        {
+            using (var request = new HttpRequestMessage(new HttpMethod("GET"), $"https://v2.gogoanimehome.com/anime/details?video={Query}"))
+            {
+                var response = await httpClient.SendAsync(request);
+                if(response.IsSuccessStatusCode)
+                {
+                    var responseBody = JsonSerializer.Deserialize<GogoAnimeInfoJsonResponse>(await response.Content.ReadAsStringAsync());
+                    Info.Title = responseBody.data.animeData.episodeName;
+                    Info.Description = null;
+                    Info.EpisodeCount = responseBody.data.animeData.episodeNumber.Length; 
+                }
+            }
+        }
+        return JsonSerializer.Serialize(Info);
+    }
 }

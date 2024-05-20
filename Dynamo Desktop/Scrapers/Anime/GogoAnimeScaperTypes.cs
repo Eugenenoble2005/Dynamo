@@ -50,5 +50,28 @@ internal partial class GogoAnimeScraper
         public string episodeTime { get; set; }
         public string animeName { get; set; }
     }
+    //info
+
+    public class GogoAnimeInfoJsonResponse
+    {
+        public bool status { get; set; }
+        public GogoAnimeInfoJsonResponseData data { get; set; }
+    }
+
+    public class GogoAnimeInfoJsonResponseData
+    {
+        public GogoAnimeInfoJsonResponseAnimedata animeData { get; set; }
+    }
+
+    public class GogoAnimeInfoJsonResponseAnimedata
+    {
+        public string[] episodeURL { get; set; }
+        public int[] episodeNumber { get; set; }
+        public string episodeName { get; set; }
+        public string videoDetailName { get; set; }
+        public string videoSummary { get; set; }
+        public string videoIframe { get; set; }
+        public string downloadUrl { get; set; }
+    }
 
 }

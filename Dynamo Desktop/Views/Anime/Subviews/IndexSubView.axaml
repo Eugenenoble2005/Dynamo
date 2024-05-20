@@ -19,7 +19,7 @@
         <ext:EqualityConverter x:Key="EqualityConverter" />
         <ext:EqualityConverter x:Key="EmptyObject" />
     </UserControl.Resources>
-    <Grid>
+    <Grid x:Name="Parent">
         <Grid IsVisible="{Binding SearchTerm, Converter={x:Static StringConverters.IsNullOrEmpty}}">
             <!--  For sort displays. Must not show if search term has a value or user is searching  -->
             <Grid>
@@ -34,8 +34,9 @@
                                 <Grid
                                     Margin="10"
                                     Classes="DataBox"
-                                    Tag="{Binding AnimeId}"
                                     Tapped="NavigateToDetails">
+                                    <ContentControl Content="{Binding AnimeId}" IsVisible="False" />
+                                    <ContentControl Content="{Binding Episode}" IsVisible="False" />
                                     <Grid Height="295" Margin="10">
                                         <asyncImageLoader:AdvancedImage Classes="DataImage" Source="{Binding Image}" />
                                         <Border
@@ -61,28 +62,28 @@
                 </ScrollViewer>
                 <!--  Popular Anime  -->
                 <ScrollViewer Margin="0,120,0,0" IsVisible="{Binding Sort, Converter={StaticResource EqualityConverter}, ConverterParameter='Popular'}">
-                    <ItemsRepeater ItemsSource="{Binding GogoAnimePopularAnime.results}">
+                    <ItemsRepeater ItemsSource="{Binding PopularAnime}">
                         <ItemsRepeater.Layout>
                             <UniformGridLayout ItemsStretch="Fill" MaximumRowsOrColumns="4" />
                         </ItemsRepeater.Layout>
                         <ItemsRepeater.ItemTemplate>
 
-                            <DataTemplate x:DataType="anime:GogoPopularResult">
+                            <DataTemplate x:DataType="anime:PopularAnime">
                                 <Grid
                                     Margin="10"
                                     Classes="DataBox"
-                                    Tag="{Binding id}"
+                                    Tag="{Binding AnimeId}"
                                     Tapped="NavigateToDetails">
-                                    <ContentControl Content="1" IsVisible="False" />
-                                    <ContentControl Content="null" IsVisible="False" />
+                                    <ContentControl Content="{Binding AnimeId}" IsVisible="False" />
+                                    <ContentControl Content="{Binding Episode}" IsVisible="False" />
                                     <Grid Height="295" Margin="10">
-                                        <asyncImageLoader:AdvancedImage Classes="DataImage" Source="{Binding image}" />
+                                        <asyncImageLoader:AdvancedImage Classes="DataImage" Source="{Binding Image}" />
 
 
                                         <TextBlock
                                             HorizontalAlignment="Center"
                                             VerticalAlignment="Bottom"
-                                            Text="{Binding title}"
+                                            Text="{Binding Title}"
                                             TextTrimming="WordEllipsis" />
                                     </Grid>
                                 </Grid>
@@ -120,8 +121,8 @@
                                 Classes="DataBox"
                                 Tag="{Binding AnimeId}"
                                 Tapped="NavigateToDetails">
-                                <ContentControl Content="1" IsVisible="False" />
-                                <ContentControl Content="null" IsVisible="False" />
+                                <ContentControl Content="{Binding AnimeId}" IsVisible="False" />
+                                <ContentControl Content="{Binding Episode}" IsVisible="False" />
                                 <Grid Height="295" Margin="10">
                                     <asyncImageLoader:AdvancedImage Classes="DataImage" Source="{Binding Image}" />
                                     <Border

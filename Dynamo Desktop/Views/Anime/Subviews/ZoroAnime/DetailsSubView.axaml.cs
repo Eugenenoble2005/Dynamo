@@ -5,6 +5,7 @@ using Avalonia.Layout;
 using Avalonia.LogicalTree;
 using Avalonia.Markup.Xaml;
 using Avalonia.VisualTree;
+using Dynamo_Desktop.Models.Anime;
 using Dynamo_Desktop.ViewModels.Anime;
 using Dynamo_Desktop.Views.Anime.Subviews.AnimePahe;
 using System;
@@ -54,7 +55,7 @@ public partial class DetailsSubView : UserControl
 
 			Provider = (DataContext as DetailsViewModel).RouteParams.Provider,
 			EpisodeNumber = parameters[0],
-			EpisodeId = parameters[1],
+			//EpisodeId = parameters[1],
 			AnimeId = (DataContext as DetailsViewModel).RouteParams.AnimeId
 		};
 		//(DataContext as DetailsViewModel).GetAnimeDetails();

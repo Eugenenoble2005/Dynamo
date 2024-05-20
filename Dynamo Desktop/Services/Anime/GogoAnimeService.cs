@@ -22,4 +22,9 @@ public class GogoAnimeService : IAnimeService
     {
         return JsonSerializer.Deserialize<List<PopularAnime>>(await new GogoAnimeScraper().Search(Query: Query,Page:Page));
     }
+    public async Task<AnimeInfo> Info(string Query)
+    {
+        return JsonSerializer.Deserialize<AnimeInfo>(await new GogoAnimeScraper().Info(Query: Query));
+    }
+
 }
