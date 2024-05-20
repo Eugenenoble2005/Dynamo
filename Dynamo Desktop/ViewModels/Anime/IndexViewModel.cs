@@ -59,56 +59,56 @@ public class IndexViewModel : ViewModelBase
       //  GetEpisodes();
        
     }   
-    public async void GetEpisodes()
-    {
-            DataLoading = true;
-            //Get Episodes for index pages
-        var gogoAnimeRecentEpisodesTask =  GogoAnimeService.RecentEpisodes(Page:Page);
-        var gogoAnimePopularEpisodesTask =  GogoAnimeService.PopularEpisodes(Page:Page);
-        var animePaheRecentEpisodesTask =  AnimePaheService.RecentEpisodes(Page: Page);
-        var zoroAnimeRecentEpisodesTask = ZoroAnimeService.RecentEpisodes(Page: Page);
-        //var kayoAnimeRecentEpisodesTask = KayoAnimeService.RecentEpisodes();
-        var zoroPopularAnimeTask = ZoroAnimeService.PopularAnime(Page: Page);
-        await Task.WhenAll(gogoAnimeRecentEpisodesTask, gogoAnimePopularEpisodesTask, animePaheRecentEpisodesTask,zoroAnimeRecentEpisodesTask,zoroPopularAnimeTask);
-        GogoAnimeRecentEpisodes = await gogoAnimeRecentEpisodesTask;
-        GogoAnimePopularAnime = await gogoAnimePopularEpisodesTask;
-        AnimePaheRecentEpisodes = await animePaheRecentEpisodesTask;
-        ZoroRecentEpisodes = await zoroAnimeRecentEpisodesTask;
-        ZoroPopularAnime = await zoroPopularAnimeTask;
+    //public async void GetEpisodes()
+    //{
+    //        DataLoading = true;
+    //        //Get Episodes for index pages
+    //    //var gogoAnimeRecentEpisodesTask =  GogoAnimeService.RecentEpisodes(Page:Page);
+    //    //var gogoAnimePopularEpisodesTask =  GogoAnimeService.PopularEpisodes(Page:Page);
+    //    var animePaheRecentEpisodesTask =  AnimePaheService.RecentEpisodes(Page: Page);
+    //    var zoroAnimeRecentEpisodesTask = ZoroAnimeService.RecentEpisodes(Page: Page);
+    //    //var kayoAnimeRecentEpisodesTask = KayoAnimeService.RecentEpisodes();
+    //    var zoroPopularAnimeTask = ZoroAnimeService.PopularAnime(Page: Page);
+    //    await Task.WhenAll(gogoAnimeRecentEpisodesTask, gogoAnimePopularEpisodesTask, animePaheRecentEpisodesTask,zoroAnimeRecentEpisodesTask,zoroPopularAnimeTask);
+    //    GogoAnimeRecentEpisodes = await gogoAnimeRecentEpisodesTask;
+    //    GogoAnimePopularAnime = await gogoAnimePopularEpisodesTask;
+    //    AnimePaheRecentEpisodes = await animePaheRecentEpisodesTask;
+    //    ZoroRecentEpisodes = await zoroAnimeRecentEpisodesTask;
+    //    ZoroPopularAnime = await zoroPopularAnimeTask;
      
-        //    if(GogoAnimeRecentEpisodes == null)
-        //{
-        //    var cd = new ContentDialog
-        //    {
-        //        Title="Error",
-        //        Content="Could not fetch data. Please check your internet connection",
-        //        CloseButtonText="Close",
-        //        PrimaryButtonText="Retry",
-        //        DefaultButton=ContentDialogButton.Primary
+    //    //    if(GogoAnimeRecentEpisodes == null)
+    //    //{
+    //    //    var cd = new ContentDialog
+    //    //    {
+    //    //        Title="Error",
+    //    //        Content="Could not fetch data. Please check your internet connection",
+    //    //        CloseButtonText="Close",
+    //    //        PrimaryButtonText="Retry",
+    //    //        DefaultButton=ContentDialogButton.Primary
                 
-        //    };
-        //    ContentDialogResult result = await cd.ShowAsync();
-        //    if (result == ContentDialogResult.Primary)
-        //    {
-        //        GetEpisodes();
-        //    }
-        //}
-        DataLoading = false;
+    //    //    };
+    //    //    ContentDialogResult result = await cd.ShowAsync();
+    //    //    if (result == ContentDialogResult.Primary)
+    //    //    {
+    //    //        GetEpisodes();
+    //    //    }
+    //    //}
+    //    DataLoading = false;
 
-    }
+    //}
     public void PrevPage()
     {
         if (Page > 1)
         {
             Page--;
-            GetEpisodes();
+            //GetEpisodes();
             GeneralSearch();
         }    
     }
     public void NextPage()
     {
         Page++;
-        GetEpisodes();
+        //GetEpisodes();
         GeneralSearch();
     }
   
@@ -124,7 +124,7 @@ public class IndexViewModel : ViewModelBase
         var zoroAnimeSearchTask = ZoroAnimeService.Search(Query: SearchTerm, Page: Page);
        
         await Task.WhenAll(gogoAnimeSearchTask, animePaheSearchTask,zoroAnimeSearchTask);
-        GogoAnimeSearch = await gogoAnimeSearchTask;
+        //GogoAnimeSearch = await gogoAnimeSearchTask;
         AnimePaheSearch = await animePaheSearchTask;
         ZoroAnimeSearch = await zoroAnimeSearchTask;
         DataLoading = false;

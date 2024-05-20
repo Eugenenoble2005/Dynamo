@@ -14,7 +14,7 @@ public partial class Index : UserControl
     public Index()
     {
         InitializeComponent();
-        DataContext = new IndexViewModel();
+        DataContext = new IndexViewModel2();
     }
     public void SortComboChanged()
     {

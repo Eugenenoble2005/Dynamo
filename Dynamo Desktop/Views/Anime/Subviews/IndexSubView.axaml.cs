@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using Avalonia.Input;
 
 namespace Dynamo_Desktop.Views.Anime.Subviews
 {
@@ -8,6 +9,10 @@ namespace Dynamo_Desktop.Views.Anime.Subviews
         public IndexSubView()
         {
             InitializeComponent();
+        }
+        public void NavigateToDetails(object sender, TappedEventArgs e)
+        {
+          
         }
     }
 }

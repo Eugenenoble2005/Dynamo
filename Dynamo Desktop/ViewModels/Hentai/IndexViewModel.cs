@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Dynamo_Desktop.ViewModels.Hentai;
 
-public class IndexViewModel : ViewModelBase
+public class IndexViewModel : ReactiveObject
 {
   
     public HentaiProviders Provider { get; set; }

@@ -20,7 +20,7 @@ namespace Dynamo_Desktop
         public  static void Main(string[] args)
         {
             var test = new GogoAnimeScraper();
-            test.Popular();
+            test.Search(Query: "Fullmetal Alchemist");
             BuildAvaloniaApp()
             .StartWithClassicDesktopLifetime(args);
            

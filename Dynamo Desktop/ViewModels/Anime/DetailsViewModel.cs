@@ -69,12 +69,12 @@ public class DetailsViewModel : ViewModelBase
                 DataLoading = false;
                 break;
             case "GogoAnime":
-                var GogoAnimeInfoTask = _gogoAnimeService.Info(RouteParams?.AnimeId);
-                var GogoStreamingLinksTask = _gogoAnimeService.StreamingLinks(EpisodeId: RouteParams.EpisodeId,AnimeId:null);
-                await Task.WhenAll(GogoAnimeInfoTask, GogoStreamingLinksTask);
-                GogoAnimeInfo = await GogoAnimeInfoTask;
-                GogoStreamingLinks = await GogoStreamingLinksTask;
-                DataLoading = false;
+                //var GogoAnimeInfoTask = _gogoAnimeService.Info(RouteParams?.AnimeId);
+                //var GogoStreamingLinksTask = _gogoAnimeService.StreamingLinks(EpisodeId: RouteParams.EpisodeId,AnimeId:null);
+                //await Task.WhenAll(GogoAnimeInfoTask, GogoStreamingLinksTask);
+                //GogoAnimeInfo = await GogoAnimeInfoTask;
+                //GogoStreamingLinks = await GogoStreamingLinksTask;
+                //DataLoading = false;
                 break;
             case "ZoroAnime":
                 var ZoroAnimeInfoTask = _zoroAnimeService.Info(RouteParams?.AnimeId);
