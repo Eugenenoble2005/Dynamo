@@ -103,27 +103,27 @@
                 <TextBlock.Text>
                     <MultiBinding StringFormat="Search for &quot;{0}&quot;. {1} Result(s)">
                         <Binding Path="SearchTerm" />
-                        <Binding FallbackValue="0 " Path="GogoAnimeSearch.ResultLength" />
+                        <Binding FallbackValue="0 " Path="SearchResults.Count" />
                     </MultiBinding>
                 </TextBlock.Text>
             </TextBlock>
             <ScrollViewer Margin="0,120,0,0">
-                <ItemsRepeater ItemsSource="{Binding GogoAnimeSearch.results}">
+                <ItemsRepeater ItemsSource="{Binding SearchResults}">
                     <ItemsRepeater.Layout>
                         <UniformGridLayout ItemsStretch="Fill" MaximumRowsOrColumns="4" />
                     </ItemsRepeater.Layout>
                     <ItemsRepeater.ItemTemplate>
 
-                        <DataTemplate x:DataType="anime:GogoSearchResult">
+                        <DataTemplate x:DataType="anime:PopularAnime">
                             <Grid
                                 Margin="10"
                                 Classes="DataBox"
-                                Tag="{Binding id}"
+                                Tag="{Binding AnimeId}"
                                 Tapped="NavigateToDetails">
                                 <ContentControl Content="1" IsVisible="False" />
                                 <ContentControl Content="null" IsVisible="False" />
                                 <Grid Height="295" Margin="10">
-                                    <asyncImageLoader:AdvancedImage Classes="DataImage" Source="{Binding image}" />
+                                    <asyncImageLoader:AdvancedImage Classes="DataImage" Source="{Binding Image}" />
                                     <Border
                                         Margin="35"
                                         Padding="15,5"
@@ -133,11 +133,10 @@
                                         CornerRadius="50">
                                         <TextBlock Text="{Binding subOrDub}" />
                                     </Border>
-
                                     <TextBlock
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Bottom"
-                                        Text="{Binding title}"
+                                        Text="{Binding Title}"
                                         TextTrimming="WordEllipsis" />
                                 </Grid>
                             </Grid>
@@ -149,7 +148,7 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 FontSize="20"
-                IsVisible="{Binding GogoAnimeSearch.ResultLength, Converter={StaticResource EqualityConverter}, ConverterParameter=0}"
+                IsVisible="{Binding SearchResults.Count, Converter={StaticResource EqualityConverter}, ConverterParameter=0}"
                 Text="{Binding SearchTerm, StringFormat='No data available for &quot;{0}&quot; search'}" />
         </Grid>
     </Grid>

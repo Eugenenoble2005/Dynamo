@@ -1,5 +1,6 @@
 ﻿using Dynamo_Desktop.Models.Anime;
 using Dynamo_Desktop.Services.Anime;
+using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System.Collections.Generic;
 
@@ -25,6 +26,16 @@ public class IndexViewModel2 : ViewModelBase
 
     [Reactive]
     public string Sort { get; set; }
+
+    private string _searchTerm = "";
+    public string SearchTerm
+    {
+        get => _searchTerm; set
+        {
+            this.RaiseAndSetIfChanged(ref _searchTerm, value);
+            SearchTermChanged();
+        }
+    }
 
     public List<string> SortOptions => new List<string>() { "Newest", "Popular" };
     public IndexViewModel2()
@@ -54,7 +65,18 @@ public class IndexViewModel2 : ViewModelBase
         Page++;
         GetEpisodes();
     }
+    public void SearchTermChanged()
+    {
+        GeneralSearch();
+    }
+    public async void GeneralSearch()
+    {
+        DataLoading = true;
+        SearchResults = await AnimeService.Search(SearchTerm, Page);
+        DataLoading = false;
+    }
 }
+
 public enum AnimeProviders
 {
     GogoAnime,  

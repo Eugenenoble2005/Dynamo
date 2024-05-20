@@ -5,8 +5,7 @@ namespace Dynamo_Desktop.ViewModels
 {
     public class ViewModelBase : ReactiveObject
     {
-        [Reactive]
-        public string SearchTerm { get; set; }
+       
 
         [Reactive]
         public int Page { get; set; }
