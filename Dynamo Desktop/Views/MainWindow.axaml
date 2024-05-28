@@ -20,7 +20,7 @@
     TransparencyLevelHint="Mica"
     mc:Ignorable="d">
     <Window.Resources />
-    <Design.DataContext>
+    <Design.DataContext>2
         <!--
             This only sets the DataContext for the previewer in an IDE,
             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs)
@@ -28,8 +28,17 @@
         <vm:MainWindowViewModel />
     </Design.DataContext>
     <local:AcrylicPanel>
-      
-
+        
+        <!--Dont need this on windows-->
+        <ExperimentalAcrylicBorder IsHitTestVisible="False" IsVisible="{Binding IsLinux}">
+            <ExperimentalAcrylicBorder.Material>
+                <ExperimentalAcrylicMaterial
+                    BackgroundSource="Digger"
+                    TintColor="Black"
+                    TintOpacity="0.65"
+                    MaterialOpacity="0.65" />
+            </ExperimentalAcrylicBorder.Material>
+        </ExperimentalAcrylicBorder>
         <!--  Search Bar  -->
         <Grid>
             <!--<TextBlock

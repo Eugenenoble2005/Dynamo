@@ -25,17 +25,17 @@
             <Setter Property="Margin" Value="5" />
         </Style>
     </UserControl.Styles>
-    <Design.DataContext>
-        <vm:DetailsViewModel DataLoading="False">
-            <vm:DetailsViewModel.RouteParams>
-                <AnimePaheSubView:AnimeIndexToDetailsRouteParams
-                    AnimeId="spy-x-family-17977"
-                    EpisodeId="spy-x-family-episode-1"
-                    EpisodeNumber="1"
-                    Provider="ZoroAnime" />
-            </vm:DetailsViewModel.RouteParams>
-        </vm:DetailsViewModel>
-    </Design.DataContext>
+    <!-- <Design.DataContext> -->
+    <!--     <vm:DetailsViewModel DataLoading="False"> -->
+    <!--         <vm:DetailsViewModel.RouteParams> -->
+    <!--             <AnimePaheSubView:AnimeIndexToDetailsRouteParams -->
+    <!--                 AnimeId="spy-x-family-17977" -->
+    <!--                 EpisodeId="spy-x-family-episode-1" -->
+    <!--                 EpisodeNumber="1" -->
+    <!--                 Provider="ZoroAnime" /> -->
+    <!--         </vm:DetailsViewModel.RouteParams> -->
+    <!--     </vm:DetailsViewModel> -->
+    <!-- </Design.DataContext> -->
     <Grid IsVisible="{Binding !DataLoading}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />

@@ -25,17 +25,17 @@
             <Setter Property="Margin" Value="5" />
         </Style>
     </UserControl.Styles>
-    <Design.DataContext>
-        <vm:DetailsViewModel DataLoading="False">
-            <vm:DetailsViewModel.RouteParams>
-                <AnimePaheSubView:AnimeIndexToDetailsRouteParams
-                    AnimeId="1d97fa54-3740-5648-69aa-7d39575bfe1c"
-                    EpisodeId="b2e3ab2f92541b15c7d8c37be07c66526ae0ddf9b82737205d60302a1d0bff5c"
-                    EpisodeNumber="21"
-                    Provider="AnimePahe" />
-            </vm:DetailsViewModel.RouteParams>
-        </vm:DetailsViewModel>
-    </Design.DataContext>
+    <!-- <Design.DataContext> -->
+    <!--     <vm:DetailsViewModel DataLoading="False"> -->
+    <!--         <vm:DetailsViewModel.RouteParams> -->
+    <!--             <AnimePaheSubView:AnimeIndexToDetailsRouteParams -->
+    <!--                 AnimeId="1d97fa54-3740-5648-69aa-7d39575bfe1c" -->
+    <!--                 EpisodeId="b2e3ab2f92541b15c7d8c37be07c66526ae0ddf9b82737205d60302a1d0bff5c" -->
+    <!--                 EpisodeNumber="21" -->
+    <!--                 Provider="AnimePahe" /> -->
+    <!--         </vm:DetailsViewModel.RouteParams> -->
+    <!--     </vm:DetailsViewModel> -->
+    <!-- </Design.DataContext> -->
     <Grid IsVisible="{Binding !DataLoading}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
