@@ -67,7 +67,6 @@ internal partial class GogoAnimeScraper
         }
         return JsonSerializer.Serialize(SearchResults);
     }
-
     public async Task<string> Info(string Query)
     {
         AnimeInfo Info = new();

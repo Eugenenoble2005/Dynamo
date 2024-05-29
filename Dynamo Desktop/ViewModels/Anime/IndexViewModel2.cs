@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace Dynamo_Desktop.ViewModels.Anime;
 
 //not partial, added for refactoring
-public class IndexViewModel2 : ViewModelBase
+public class IndexViewModel2 : ViewModelBase    
 {
     public AnimeProviders Provider { get; set; }
 
@@ -67,6 +67,7 @@ public class IndexViewModel2 : ViewModelBase
     }
     public void SearchTermChanged()
     {
+        
         GeneralSearch();
     }
     public async void GeneralSearch()

@@ -8,6 +8,8 @@ public class PopularAnime
 {
     public string AnimeId { get; set; }
     public string Title { get; set; }
+
+    //default to episode 1
     public int Episode { get; set; } = 1;
     public string Status { get; set; }
     public string Description { get; set; }

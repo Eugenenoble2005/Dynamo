@@ -14,19 +14,20 @@ namespace Dynamo_Desktop.Views.Anime.Subviews
     {
         public DetailsSubView()
         {
-            DataContext = new DetailsViewModel2();
             InitializeComponent();
+            DataContext = new DetailsViewModel2();
         }
 
         protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
         {
+            base.OnAttachedToVisualTree(e);
             Frame frame = this.FindAncestorOfType<Frame>();
             if (frame != null)
             {
                 AnimeIndexToDetailsRouteParams routeParams = frame.Tag as AnimeIndexToDetailsRouteParams;
                 (DataContext as DetailsViewModel2).RouteParams = routeParams;
             }
-            base.OnAttachedToVisualTree(e);
+           
         }
     }   
    

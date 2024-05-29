@@ -8,7 +8,7 @@
     xmlns:local="using:Dynamo_Desktop"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Dynamo_Desktop.ViewModels"
-    Title="Dynamo_Desktop"
+    Title="Dynamo Desktop"
     MinWidth="1000"
     MinHeight="450"
     d:DesignHeight="450"

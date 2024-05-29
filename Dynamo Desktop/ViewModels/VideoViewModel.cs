@@ -4,9 +4,6 @@ using System;
 using System.Net;
 using ReactiveUI;
 using System.Diagnostics;
-using FluentAvalonia.UI.Controls;
-using LibVLCSharp.Shared.Structures;
-
 namespace Dynamo_Desktop.ViewModels
 {
     public class VideoViewModel : ViewModelBase

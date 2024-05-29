@@ -115,8 +115,8 @@ public class VideoView : NativeControlHost
                 CanResize = false,
 
                 ShowInTaskbar = false,
-
-                Topmost=false,
+                //window only displays if topmost on linux. Will explore better fixes
+                Topmost=RuntimeInformation.IsOSPlatform(OSPlatform.Linux),
                 ZIndex = Int32.MaxValue,
 
                 Opacity = 1,
