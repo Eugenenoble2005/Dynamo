@@ -30,7 +30,7 @@ internal partial class GogoAnimeScraper
                     {
                         PopularAnime.Add(new()
                         {
-                            AnimeId = string.Join("-", item.url.Split("/").Last().Split("-")[..^2]),
+                            AnimeId = item.url.Split("/").Last(),
                             Title = item.name,
                             Image = item.img,
                             Episode = int.Parse(item.url.Split("-").Last())
@@ -57,7 +57,7 @@ internal partial class GogoAnimeScraper
                     {
                         SearchResults.Add(new()
                         {
-                            AnimeId = string.Join("-", item.episodeURL.Split("/").Last().Split("-")[..^2]),
+                            AnimeId =  item.episodeURL.Split("/").Last(),
                             Image = item.episodeImage,
                             Title = item.episodeName
                         }) ;
@@ -79,7 +79,7 @@ internal partial class GogoAnimeScraper
                 {
                     var responseBody = JsonSerializer.Deserialize<GogoAnimeInfoJsonResponse>(await response.Content.ReadAsStringAsync());
                     Info.Title = responseBody.data.animeData.episodeName;
-                    Info.Description = null;
+                    Info.Description = responseBody.data.animeData.videoSummary;
                     Info.EpisodeCount = responseBody.data.animeData.episodeNumber.Length; 
                 }
             }

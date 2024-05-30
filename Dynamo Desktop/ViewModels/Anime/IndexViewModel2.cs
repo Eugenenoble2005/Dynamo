@@ -48,8 +48,8 @@ public class IndexViewModel2 : ViewModelBase
     public async void GetEpisodes()
     {
         DataLoading = true;
-        RecentAnime = await AnimeService.RecentAnime(Page);
-        PopularAnime = await AnimeService.PopularAnime(Page);
+       RecentAnime = await AnimeService.RecentAnime(Page);
+       PopularAnime = await AnimeService.PopularAnime(Page);
         DataLoading = false;
     }
     public void PrevPage()
