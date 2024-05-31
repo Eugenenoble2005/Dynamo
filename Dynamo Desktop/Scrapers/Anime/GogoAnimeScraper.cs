@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Text.Json;
 using Dynamo_Desktop.Models.Anime;
+using HtmlAgilityPack;
 
 namespace Dynamo_Desktop.Scrapers.Anime;
 internal partial class GogoAnimeScraper
@@ -30,7 +31,7 @@ internal partial class GogoAnimeScraper
                     {
                         PopularAnime.Add(new()
                         {
-                            AnimeId = item.url.Split("/").Last(),
+                            AnimeId = string.Join("-",item.url.Split("/").Last().Split("-")[..^2]),
                             Title = item.name,
                             Image = item.img,
                             Episode = int.Parse(item.url.Split("-").Last())
@@ -57,7 +58,7 @@ internal partial class GogoAnimeScraper
                     {
                         SearchResults.Add(new()
                         {
-                            AnimeId =  item.episodeURL.Split("/").Last(),
+                            AnimeId =  string.Join("-",item.episodeURL.Split("/").Last().Split("-")[..^2]),
                             Image = item.episodeImage,
                             Title = item.episodeName
                         }) ;
@@ -70,19 +71,28 @@ internal partial class GogoAnimeScraper
     public async Task<string> Info(string Query)
     {
         AnimeInfo Info = new();
+        string url = $"{Host}/category/{Query}";
         using (var httpClient = new HttpClient())
         {
-            using (var request = new HttpRequestMessage(new HttpMethod("GET"), $"https://v2.gogoanimehome.com/anime/details?video={Query}"))
+            var response = await httpClient.GetStringAsync(url);
+            HtmlDocument htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(response);
+            HtmlNode anime_info_body = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='anime_info_body']");
+            string anime_poster = anime_info_body.SelectSingleNode(".//img").GetAttributeValue("src", "");
+            string anime_title = anime_info_body.SelectSingleNode(".//h1").InnerText;
+            string description = anime_info_body.SelectSingleNode(".//div[@class='description']").InnerText;
+
+
+            using (var httpCLient2 = new HttpClient())
             {
-                var response = await httpClient.SendAsync(request);
-                if(response.IsSuccessStatusCode)
-                {
-                    var responseBody = JsonSerializer.Deserialize<GogoAnimeInfoJsonResponse>(await response.Content.ReadAsStringAsync());
-                    Info.Title = responseBody.data.animeData.episodeName;
-                    Info.Description = responseBody.data.animeData.videoSummary;
-                    Info.EpisodeCount = responseBody.data.animeData.episodeNumber.Length; 
-                }
+                //should work for 99.999 percent of all cases
+                GogoAnimeInfoJsonResponse infoResponse = JsonSerializer.Deserialize<GogoAnimeInfoJsonResponse>(await httpCLient2.GetStringAsync($"https://v2.gogoanimehome.com/anime/details?video={Query}-episode-1")) ;0
+                Info.EpisodeCount = infoResponse.data.animeData.episodeNumber.Length;
+                Info.Title = anime_title;
+                Info.Description = description;
+                Info.Image = anime_poster;
             }
+            
         }
         return JsonSerializer.Serialize(Info);
     }

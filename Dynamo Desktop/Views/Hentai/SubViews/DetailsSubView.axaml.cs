@@ -37,15 +37,29 @@ public partial class DetailsSubView : UserControl
     }
     public void PlayVideo(object sender, RoutedEventArgs e)
     {
-        string link = (sender as Button).Tag.ToString();
-        string Title = (DataContext as DetailsViewModel).HentaiDetails.Title;
-        Video.Video videoWindow = new Video.Video(link, Title, Referrer:null,Subtitle:null);
-        videoWindow.ShowDialog(this.FindAncestorOfType<Window>());
-        AcrylicPanel acrylicPanel = this.FindAncestorOfType<AcrylicPanel>();
-        acrylicPanel.ToggleBlur();
-        videoWindow.Closing += (sender, args) =>
+         string link = (sender as Button).Tag.ToString();
+        // string Title = (DataContext as DetailsViewModel).HentaiDetails.Title;
+        // Video.Video videoWindow = new Video.Video(link, Title, Referrer:null,Subtitle:null);
+        // videoWindow.ShowDialog(this.FindAncestorOfType<Window>());
+        // AcrylicPanel acrylicPanel = this.FindAncestorOfType<AcrylicPanel>();
+        // acrylicPanel.ToggleBlur();
+        // videoWindow.Closing += (sender, args) =>
+        // {
+        //     acrylicPanel.ToggleBlur();
+        // };
+        //attempt mpv
+        var proc = new Process
         {
-            acrylicPanel.ToggleBlur();
+            StartInfo = new ProcessStartInfo
+            {
+                FileName = @"mpv",
+                Arguments = $"{link}",
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                CreateNoWindow = true,
+               // WorkingDirectory = "/mpv"
+            }
         };
+        proc.Start();
     }
 }

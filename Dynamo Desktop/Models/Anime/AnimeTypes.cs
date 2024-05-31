@@ -20,6 +20,7 @@ public class AnimeInfo
     public string Title { get; set; }
     public string Description { get; set; }
     public int EpisodeCount { get; set; }
+    public string Image { get; set; }
 }
 public class AnimeIndexToDetailsRouteParams
 {

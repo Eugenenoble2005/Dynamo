@@ -32,7 +32,6 @@ namespace Dynamo_Desktop.ViewModels.Anime
         private IAnimeService AnimeService { get; set; }
         public async void GetInfo()
         {
-            Debug.WriteLine(RouteParams.AnimeId);
             switch (RouteParams.Provider)
             {
                 case AnimeProviders.GogoAnime:

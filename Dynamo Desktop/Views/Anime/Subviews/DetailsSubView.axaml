@@ -5,10 +5,25 @@
     x:Class="Dynamo_Desktop.Views.Anime.Subviews.DetailsSubView"
     x:DataType="vm:DetailsViewModel2"
     xmlns="https://github.com/avaloniaui"
+    xmlns:anime="using:Dynamo_Desktop.Models.Anime"
+    xmlns:asyncImageLoader="using:AsyncImageLoader"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Dynamo_Desktop.ViewModels.Anime"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    Welcome to Avalonia!
-    
+    <Design.DataContext>
+        <vm:DetailsViewModel2>
+            <vm:DetailsViewModel2.RouteParams>
+                <anime:AnimeIndexToDetailsRouteParams AnimeId="death-note-episode-1" Provider="GogoAnime" />
+            </vm:DetailsViewModel2.RouteParams>
+        </vm:DetailsViewModel2>
+    </Design.DataContext>
+    <Grid RowDefinitions="1,*">
+        <Border
+            Background="Black"
+            Height="200"
+            HorizontalAlignment="Stretch">
+            <asyncImageLoader:AdvancedImage Source="{Binding Info}" />
+        </Border>
+    </Grid>
 </UserControl>
