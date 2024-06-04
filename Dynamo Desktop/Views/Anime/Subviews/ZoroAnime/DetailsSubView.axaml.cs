@@ -47,17 +47,17 @@ public partial class DetailsSubView : UserControl
 	public void ChangeEpisode(object sender, RoutedEventArgs e)
 	{
 
-		Button button = (sender as Button);
-		List<string> parameters = button.Tag.ToString().Split("|").ToList();
-		Details DetailsParent = this.FindAncestorOfType<Details>();
-		(DataContext as DetailsViewModel).RouteParams = new AnimeIndexToDetailsRouteParams
-		{
-
-			Provider = (DataContext as DetailsViewModel).RouteParams.Provider,
-			EpisodeNumber = parameters[0],
-			//EpisodeId = parameters[1],
-			AnimeId = (DataContext as DetailsViewModel).RouteParams.AnimeId
-		};
+		// Button button = (sender as Button);
+		// List<string> parameters = button.Tag.ToString().Split("|").ToList();
+		// Details DetailsParent = this.FindAncestorOfType<Details>();
+		// (DataContext as DetailsViewModel).RouteParams = new AnimeIndexToDetailsRouteParams
+		// {
+		//
+		// 	Provider = (DataContext as DetailsViewModel).RouteParams.Provider,
+		// 	EpisodeNumber = parameters[0],
+		// 	//EpisodeId = parameters[1],
+		// 	AnimeId = (DataContext as DetailsViewModel).RouteParams.AnimeId
+		// };
 		//(DataContext as DetailsViewModel).GetAnimeDetails();
 	}
 	public void EpisodesListAttached(object sender, VisualTreeAttachmentEventArgs e)

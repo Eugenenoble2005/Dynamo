@@ -19,8 +19,8 @@ namespace Dynamo_Desktop
         [STAThread]
         public  static void Main(string[] args)
         {
-            var test = new GogoAnimeScraper();
-            test.Info(Query: "fullmetal-alchemist");
+            var test = new AnimePaheScraper();
+            test.RecentAnime(Page:1);
             BuildAvaloniaApp()
             .StartWithClassicDesktopLifetime(args);
            

@@ -1,7 +1,9 @@
 <UserControl
+    d:DesignHeight="450"
+    d:DesignWidth="800"
     x:Class="Dynamo_Desktop.Views.Anime.Subviews.IndexSubView"
+    x:DataType="vm:IndexViewModel2"
     xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:anime="using:Dynamo_Desktop.Models.Anime"
     xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,9 +11,7 @@
     xmlns:fluent="using:FluentAvalonia.UI.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Dynamo_Desktop.ViewModels.Anime"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
-    x:DataType="vm:IndexViewModel2">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Design.DataContext>
         <vm:IndexViewModel SearchTerm="" />
     </Design.DataContext>
@@ -23,7 +23,7 @@
         <Grid IsVisible="{Binding SearchTerm, Converter={x:Static StringConverters.IsNullOrEmpty}}">
             <!--  For sort displays. Must not show if search term has a value or user is searching  -->
             <Grid>
-                <ScrollViewer Margin="0,120,0,0" IsVisible="{Binding Sort, Converter={StaticResource EqualityConverter}, ConverterParameter='Newest'}">
+                <ScrollViewer IsVisible="{Binding Sort, Converter={StaticResource EqualityConverter}, ConverterParameter='Newest'}" Margin="0,120,0,0">
                     <ItemsRepeater ItemsSource="{Binding RecentAnime}">
                         <ItemsRepeater.Layout>
                             <UniformGridLayout ItemsStretch="Fill" MaximumRowsOrColumns="4" />
@@ -32,28 +32,28 @@
 
                             <DataTemplate x:DataType="anime:PopularAnime">
                                 <Grid
-                                    Margin="10"
                                     Classes="DataBox"
+                                    Margin="10"
                                     Tapped="NavigateToDetails">
                                     <ContentControl Content="{Binding AnimeId}" IsVisible="False" />
                                     <ContentControl Content="{Binding Episode}" IsVisible="False" />
                                     <Grid Height="295" Margin="10">
                                         <asyncImageLoader:AdvancedImage Classes="DataImage" Source="{Binding Image}" />
                                         <Border
+                                            Background="{DynamicResource SystemAccentColor}"
+                                            CornerRadius="50"
+                                            HorizontalAlignment="Right"
                                             Margin="35"
                                             Padding="15,5"
-                                            HorizontalAlignment="Right"
-                                            VerticalAlignment="Bottom"
-                                            Background="{DynamicResource SystemAccentColor}"
-                                            CornerRadius="50">
+                                            VerticalAlignment="Bottom">
                                             <TextBlock Text="{Binding Episode}" />
                                         </Border>
 
                                         <TextBlock
                                             HorizontalAlignment="Center"
-                                            VerticalAlignment="Bottom"
                                             Text="{Binding Title}"
-                                            TextTrimming="WordEllipsis" />
+                                            TextTrimming="CharacterEllipsis"
+                                            VerticalAlignment="Bottom" />
                                     </Grid>
                                 </Grid>
                             </DataTemplate>
@@ -61,7 +61,7 @@
                     </ItemsRepeater>
                 </ScrollViewer>
                 <!--  Popular Anime  -->
-                <ScrollViewer Margin="0,120,0,0" IsVisible="{Binding Sort, Converter={StaticResource EqualityConverter}, ConverterParameter='Popular'}">
+                <ScrollViewer IsVisible="{Binding Sort, Converter={StaticResource EqualityConverter}, ConverterParameter='Popular'}" Margin="0,120,0,0">
                     <ItemsRepeater ItemsSource="{Binding PopularAnime}">
                         <ItemsRepeater.Layout>
                             <UniformGridLayout ItemsStretch="Fill" MaximumRowsOrColumns="4" />
@@ -70,8 +70,8 @@
 
                             <DataTemplate x:DataType="anime:PopularAnime">
                                 <Grid
-                                    Margin="10"
                                     Classes="DataBox"
+                                    Margin="10"
                                     Tag="{Binding AnimeId}"
                                     Tapped="NavigateToDetails">
                                     <ContentControl Content="{Binding AnimeId}" IsVisible="False" />
@@ -82,9 +82,9 @@
 
                                         <TextBlock
                                             HorizontalAlignment="Center"
-                                            VerticalAlignment="Bottom"
                                             Text="{Binding Title}"
-                                            TextTrimming="WordEllipsis" />
+                                            TextTrimming="CharacterEllipsis"
+                                            VerticalAlignment="Bottom" />
                                     </Grid>
                                 </Grid>
                             </DataTemplate>
@@ -98,9 +98,9 @@
         <!--  For search Displays  -->
         <Grid IsVisible="{Binding SearchTerm, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
             <TextBlock
-                Margin="10"
+                FontSize="20"
                 HorizontalAlignment="Center"
-                FontSize="20">
+                Margin="10">
                 <TextBlock.Text>
                     <MultiBinding StringFormat="Search for &quot;{0}&quot;. {1} Result(s)">
                         <Binding Path="SearchTerm" />
@@ -117,8 +117,8 @@
 
                         <DataTemplate x:DataType="anime:PopularAnime">
                             <Grid
-                                Margin="10"
                                 Classes="DataBox"
+                                Margin="10"
                                 Tag="{Binding AnimeId}"
                                 Tapped="NavigateToDetails">
                                 <ContentControl Content="{Binding AnimeId}" IsVisible="False" />
@@ -126,19 +126,19 @@
                                 <Grid Height="295" Margin="10">
                                     <asyncImageLoader:AdvancedImage Classes="DataImage" Source="{Binding Image}" />
                                     <Border
+                                        Background="{DynamicResource SystemAccentColor}"
+                                        CornerRadius="50"
+                                        HorizontalAlignment="Right"
                                         Margin="35"
                                         Padding="15,5"
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Bottom"
-                                        Background="{DynamicResource SystemAccentColor}"
-                                        CornerRadius="50">
+                                        VerticalAlignment="Bottom">
                                         <TextBlock Text="{Binding subOrDub}" />
                                     </Border>
                                     <TextBlock
                                         HorizontalAlignment="Center"
-                                        VerticalAlignment="Bottom"
                                         Text="{Binding Title}"
-                                        TextTrimming="WordEllipsis" />
+                                        TextTrimming="CharacterEllipsis"
+                                        VerticalAlignment="Bottom" />
                                 </Grid>
                             </Grid>
                         </DataTemplate>
@@ -146,11 +146,11 @@
                 </ItemsRepeater>
             </ScrollViewer>
             <TextBlock
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
                 FontSize="20"
+                HorizontalAlignment="Center"
                 IsVisible="{Binding SearchResults.Count, Converter={StaticResource EqualityConverter}, ConverterParameter=0}"
-                Text="{Binding SearchTerm, StringFormat='No data available for &quot;{0}&quot; search'}" />
+                Text="{Binding SearchTerm, StringFormat='No data available for &quot;{0}&quot; search'}"
+                VerticalAlignment="Center" />
         </Grid>
     </Grid>
 </UserControl>

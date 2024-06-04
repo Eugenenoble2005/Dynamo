@@ -1,7 +1,10 @@
 <UserControl
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d"
     x:Class="Dynamo_Desktop.Views.Anime.Index"
+    x:DataType="vm:IndexViewModel2"
     xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:AnimePaheSubview="using:Dynamo_Desktop.Views.Anime.Subviews.AnimePahe"
     xmlns:GogoSubview="using:Dynamo_Desktop.Views.Anime.Subviews.Gogo"
     xmlns:KayoSubView="using:Dynamo_Desktop.Views.Anime.Subviews.KayoAnime"
@@ -15,72 +18,67 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:subview="using:Dynamo_Desktop.Views.Anime.Subviews"
     xmlns:vm="using:Dynamo_Desktop.ViewModels.Anime"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
-    x:DataType="vm:IndexViewModel"
-    mc:Ignorable="d">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <UserControl.Resources>
         <ext:EqualityConverter x:Key="EqualityConverter" />
     </UserControl.Resources>
     <!--  Controls  -->
     <Grid>
         <ProgressBar
-            Width="1000"
-            VerticalAlignment="Top"
             IsIndeterminate="True"
-            IsVisible="{Binding DataLoading}" />
+            IsVisible="{Binding DataLoading}"
+            VerticalAlignment="Top"
+            Width="1000" />
         <!--  Controls  -->
         <Grid Margin="0,40,0,0" ZIndex="1">
             <!--  Sort Selection  -->
             <ComboBox
-                Margin="0,-39,150,0"
                 HorizontalAlignment="Right"
                 ItemsSource="{Binding SortOptions}"
+                Margin="0,-39,150,0"
                 SelectedItem="{Binding Sort}" />
             <!--  SORT TITLE  -->
             <TextBlock
-                Margin="25"
                 FontSize="35"
+                Margin="25"
                 Text="{Binding Sort}" />
             <!--  Search  -->
             <Border
-                Width="300"
                 Height="10"
-                Margin="0,47,20,0"
                 HorizontalAlignment="Right"
-                VerticalAlignment="Top">
+                Margin="0,47,20,0"
+                VerticalAlignment="Top"
+                Width="300">
                 <TextBox Text="{Binding SearchTerm}" Watermark="Search Providers" />
             </Border>
             <!--  Pagination  -->
 
             <StackPanel
                 Margin="30,85,0,0"
-                VerticalAlignment="Top"
-                Orientation="Horizontal">
+                Orientation="Horizontal"
+                VerticalAlignment="Top">
                 <Button Command="{Binding PrevPage}" Content="Prev" />
                 <Button Content="{Binding Page}" IsEnabled="False" />
                 <Button Command="{Binding NextPage}" Content="Next" />
             </StackPanel>
         </Grid>
 
-        <TabControl>
+        <TabControl x:Name="Tab">
             <!--  GOGOANIME  -->
 
             <TabItem Header="GogoAnime">
                 <subview:IndexSubView Provider="GogoAnime" />
             </TabItem>
+            <!--  AnimePahe  -->
+
+            <TabItem Header="AnimePahe">
+                <subview:IndexSubView Provider="AnimePahe" />
+            </TabItem>
+
 
             <TabItem Header="ZoroAnime">
                 <ZoroSubView:IndexSubView />
             </TabItem>
-
-            <!--  AnimePahe  -->
-
-            <TabItem Header="AnimePahe">
-                <AnimePaheSubview:IndexSubView />
-            </TabItem>
-
-
         </TabControl>
 
     </Grid>

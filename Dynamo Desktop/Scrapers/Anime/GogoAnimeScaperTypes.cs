@@ -8,20 +8,20 @@ namespace Dynamo_Desktop.Scrapers.Anime;
 
 internal partial class GogoAnimeScraper
 {
-    public class GogoAnimePopularJsonResponse
+    private class GogoAnimePopularJsonResponse
     {
         public bool status { get; set; }
         public GogoAnimePopularJsonResponseData data { get; set; }
     }
 
-    public class GogoAnimePopularJsonResponseData
+    private class GogoAnimePopularJsonResponseData
     {
         public GogoAnimePopularJsonResponseAnimedata[] animeData { get; set; }
         public int entryCount { get; set; }
         public string[] pagination { get; set; }
     }
 
-    public class GogoAnimePopularJsonResponseAnimedata
+    private class GogoAnimePopularJsonResponseAnimedata
     {
         public string name { get; set; }
         public string img { get; set; }
@@ -30,19 +30,19 @@ internal partial class GogoAnimeScraper
     }
     //search
 
-    public class GogoAnimeSearchJsonResponse
+    private class GogoAnimeSearchJsonResponse
     {
         public bool status { get; set; }
         public GogoAnimeSearchJsonResponseData data { get; set; }
     }
 
-    public class GogoAnimeSearchJsonResponseData
+    private class GogoAnimeSearchJsonResponseData
     {
         public GogoAnimeSearchJsonResponseAnimedata[] animeData { get; set; }
         public object[] pagination { get; set; }
     }
 
-    public class GogoAnimeSearchJsonResponseAnimedata
+    private class GogoAnimeSearchJsonResponseAnimedata
     {
         public string episodeURL { get; set; }
         public string episodeName { get; set; }
@@ -52,18 +52,18 @@ internal partial class GogoAnimeScraper
     }
     //info
 
-    public class GogoAnimeInfoJsonResponse
+    private class GogoAnimeInfoJsonResponse
     {
         public bool status { get; set; }
         public GogoAnimeInfoJsonResponseData data { get; set; }
     }
 
-    public class GogoAnimeInfoJsonResponseData
+    private class GogoAnimeInfoJsonResponseData
     {
         public GogoAnimeInfoJsonResponseAnimedata animeData { get; set; }
     }
 
-    public class GogoAnimeInfoJsonResponseAnimedata
+    private class GogoAnimeInfoJsonResponseAnimedata
     {
         public string[] episodeURL { get; set; }
         public int[] episodeNumber { get; set; }
@@ -73,5 +73,23 @@ internal partial class GogoAnimeScraper
         public string videoIframe { get; set; }
         public string downloadUrl { get; set; }
     }
+        private class GogoAnimeStreamingLinksJsonResponse
+    {
+        public bool status { get; set; }
+        public GogoAnimeStreamingLinksJsonResponseData data { get; set; }
+    }
+
+    private class GogoAnimeStreamingLinksJsonResponseData
+    {
+        public GogoAnimeStreamingLinksJsonResponseSources[] sources { get; set; }
+    }
+
+    private class GogoAnimeStreamingLinksJsonResponseSources
+    {
+        public string url { get; set; }
+        public bool isM3U8 { get; set; }
+        public string quality { get; set; }
+    }
+
 
 }

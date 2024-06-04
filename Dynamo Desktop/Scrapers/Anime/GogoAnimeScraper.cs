@@ -82,18 +82,68 @@ internal partial class GogoAnimeScraper
             string anime_title = anime_info_body.SelectSingleNode(".//h1").InnerText;
             string description = anime_info_body.SelectSingleNode(".//div[@class='description']").InnerText;
 
-
             using (var httpCLient2 = new HttpClient())
             {
                 //should work for 99.999 percent of all cases
-                GogoAnimeInfoJsonResponse infoResponse = JsonSerializer.Deserialize<GogoAnimeInfoJsonResponse>(await httpCLient2.GetStringAsync($"https://v2.gogoanimehome.com/anime/details?video={Query}-episode-1")) ;0
+                GogoAnimeInfoJsonResponse infoResponse = JsonSerializer.Deserialize<GogoAnimeInfoJsonResponse>(await httpCLient2.GetStringAsync($"https://v2.gogoanimehome.com/anime/details?video={Query}-episode-1")) ;
                 Info.EpisodeCount = infoResponse.data.animeData.episodeNumber.Length;
                 Info.Title = anime_title;
                 Info.Description = description;
                 Info.Image = anime_poster;
+                List<AnimeEpisodes> episodes = new();
+                for (int i = 1; i <= Info.EpisodeCount; i++)
+                {
+                    episodes.Add(new()
+                    {
+                        EpisodeNumber = i,
+                        //for gogoanime, the episode id is just the anime id. The info method of the scraper will attach the episode number and get the id for it's episode. e.g death-note-episode-1
+                        EpisodeId = Query
+                    });
+                }
+
+                Info.Episodes = episodes;
             }
             
         }
         return JsonSerializer.Serialize(Info);
+    }
+
+    public async Task<string> StreamingLinks(string Query, int Episode)
+    {
+        List<AnimeStreamingLinks> result = new();
+        string url = $"https://api.gogoanimehome.com/anime/video-ex/{Query}-episode-{Episode}";
+        using (var httpClient = new HttpClient())
+        {
+            using (var request = new HttpRequestMessage(new HttpMethod("GET"), url))
+            {
+                //request will fail without appropriate headers
+                request.Headers.TryAddWithoutValidation("User-Agent", "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0");
+                request.Headers.TryAddWithoutValidation("Accept", "application/json, text/plain, */*");
+                request.Headers.TryAddWithoutValidation("Accept-Language", "en-US,en;q=0.5");
+                request.Headers.TryAddWithoutValidation("Accept-Encoding", "gzip, deflate, br");
+                request.Headers.TryAddWithoutValidation("Origin", "https://gogoanime.co.in");
+                request.Headers.TryAddWithoutValidation("Connection", "keep-alive");
+                request.Headers.TryAddWithoutValidation("Referer", "https://gogoanime.co.in/");
+                request.Headers.TryAddWithoutValidation("Sec-Fetch-Dest", "empty");
+                request.Headers.TryAddWithoutValidation("Sec-Fetch-Mode", "cors");
+                request.Headers.TryAddWithoutValidation("Sec-Fetch-Site", "cross-site"); 
+                bool resultIsFull = false;
+                var response = await httpClient.SendAsync(request);
+             //   Debug.WriteLine(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseData = JsonSerializer.Deserialize<GogoAnimeStreamingLinksJsonResponse>(await response.Content.ReadAsStringAsync());
+                    foreach (var source in responseData.data.sources)
+                    {
+                        result.Add(new()
+                        {
+                            Quality = source.quality,
+                            Source =source.url
+                        });
+                    }
+                }
+            }
+        }
+        return JsonSerializer.Serialize(result);
     }
 }

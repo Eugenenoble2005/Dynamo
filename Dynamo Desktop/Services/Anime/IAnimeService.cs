@@ -13,4 +13,6 @@ public interface IAnimeService
     public Task<List<PopularAnime>> RecentAnime(int Page=1);
     public Task<List<PopularAnime>> Search(string Query, int Page=1);
     public Task<AnimeInfo> Info(string Query);
+    public Task<List<AnimeStreamingLinks>> StreamingLinks(string Query, int Episode = 1);
+
 }

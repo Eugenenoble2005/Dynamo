@@ -10,6 +10,7 @@ namespace Dynamo_Desktop.Models
     public class Settings
     {
         public Providers Providers { get; set; }
+        public string media_player { get; set; } = "mpv";
     }
 
     public class Providers

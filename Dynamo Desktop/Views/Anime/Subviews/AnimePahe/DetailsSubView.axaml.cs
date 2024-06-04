@@ -44,7 +44,7 @@ public partial class DetailsSubView : UserControl
         {
             
             Provider = (DataContext as DetailsViewModel).RouteParams.Provider,
-            EpisodeNumber = parameters[0],
+            EpisodeNumber = int.Parse(parameters[0]),
            // EpisodeId = parameters[1],
             AnimeId = (DataContext as DetailsViewModel).RouteParams.AnimeId
         };

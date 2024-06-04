@@ -17,6 +17,7 @@ namespace Dynamo_Desktop.Views.Anime.Subviews
         public IndexSubView()
         {
             InitializeComponent();
+           
         }
         public void NavigateToDetails(object sender, TappedEventArgs e)
         {
@@ -26,7 +27,7 @@ namespace Dynamo_Desktop.Views.Anime.Subviews
             AnimeIndexToDetailsRouteParams routeParams = new()
             {
                 AnimeId = content_children[0].Content.ToString(),
-                EpisodeNumber = content_children[1].Content.ToString(),
+                EpisodeNumber = int.Parse(content_children[1].Content.ToString()),
                 Provider = (DataContext as IndexViewModel2).Provider
             };
             this.FindAncestorOfType<Frame>().Navigate(typeof(DetailsSubView),routeParams);

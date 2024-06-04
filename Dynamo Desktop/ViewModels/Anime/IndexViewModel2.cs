@@ -3,14 +3,27 @@ using Dynamo_Desktop.Services.Anime;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Text.Json;
 
 
 namespace Dynamo_Desktop.ViewModels.Anime;
 
 //not partial, added for refactoring
-public class IndexViewModel2 : ViewModelBase    
+public class IndexViewModel2 : ViewModelBase
 {
-    public AnimeProviders Provider { get; set; }
+
+    private AnimeProviders _providers;
+
+    public AnimeProviders Provider
+    {
+        get => _providers;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _providers, value); InitService(); GetEpisodes();
+        }
+    }
+
 
     [Reactive]
     public List<PopularAnime> PopularAnime { get; set; }
@@ -40,15 +53,32 @@ public class IndexViewModel2 : ViewModelBase
     public List<string> SortOptions => new List<string>() { "Newest", "Popular" };
     public IndexViewModel2()
     {
+        InitService();
         Sort = "Newest";
         Page = 1;
-        AnimeService = new GogoAnimeService();
         GetEpisodes();
+    }
+
+    public void InitService()
+    {
+        switch (Provider)
+        {
+            case AnimeProviders.GogoAnime:
+                AnimeService = new GogoAnimeService();
+                break;
+            case AnimeProviders.AnimePahe:
+                AnimeService = new AnimePaheService();
+                break;
+            default:
+                break;
+        }
     }
     public async void GetEpisodes()
     {
+       
         DataLoading = true;
        RecentAnime = await AnimeService.RecentAnime(Page);
+       Debug.WriteLine(JsonSerializer.Serialize(RecentAnime));
        PopularAnime = await AnimeService.PopularAnime(Page);
         DataLoading = false;
     }

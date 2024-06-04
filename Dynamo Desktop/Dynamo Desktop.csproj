@@ -75,6 +75,9 @@
     <ProjectReference Include="..\Avalonia.GIF\AvaloniaGif\AvaloniaGif.csproj" />
   </ItemGroup>
 	<ItemGroup>
-		<Content Include="settings.json" CopyToOutputDirectory="PreserveNewest" />
+		<Content Include="settings.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
 	</ItemGroup>
+  <ItemGroup>
+    <Content Include="mpv\**" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest"/>
+  </ItemGroup>
 </Project>

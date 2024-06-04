@@ -6,5 +6,6 @@
 		"animepahe": {
 			"host": "https://www.animepahe.ru"
 		}
-	}
+	},
+	"media_player": "mpv"
 }

@@ -125,7 +125,7 @@ public class IndexViewModel : ViewModelBase
        
         await Task.WhenAll(gogoAnimeSearchTask, animePaheSearchTask,zoroAnimeSearchTask);
         //GogoAnimeSearch = await gogoAnimeSearchTask;
-        AnimePaheSearch = await animePaheSearchTask;
+       // AnimePaheSearch = await animePaheSearchTask;
         ZoroAnimeSearch = await zoroAnimeSearchTask;
         DataLoading = false;
     }

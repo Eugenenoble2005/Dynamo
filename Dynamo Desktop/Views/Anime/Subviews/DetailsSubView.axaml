@@ -1,4 +1,5 @@
 <UserControl
+    Background="Black"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d"
@@ -6,7 +7,7 @@
     x:DataType="vm:DetailsViewModel2"
     xmlns="https://github.com/avaloniaui"
     xmlns:anime="using:Dynamo_Desktop.Models.Anime"
-    xmlns:asyncImageLoader="using:AsyncImageLoader"
+    xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Dynamo_Desktop.ViewModels.Anime"
@@ -14,16 +15,118 @@
     <Design.DataContext>
         <vm:DetailsViewModel2>
             <vm:DetailsViewModel2.RouteParams>
-                <anime:AnimeIndexToDetailsRouteParams AnimeId="death-note-episode-1" Provider="GogoAnime" />
+                <anime:AnimeIndexToDetailsRouteParams AnimeId="death-note" Provider="GogoAnime" />
             </vm:DetailsViewModel2.RouteParams>
         </vm:DetailsViewModel2>
     </Design.DataContext>
-    <Grid RowDefinitions="1,*">
-        <Border
-            Background="Black"
-            Height="200"
-            HorizontalAlignment="Stretch">
-            <asyncImageLoader:AdvancedImage Source="{Binding Info}" />
-        </Border>
-    </Grid>
+    <ScrollViewer>
+        <Grid RowDefinitions="Auto,Auto">
+            <ProgressBar
+                IsIndeterminate="True"
+                IsVisible="{Binding DataLoading}"
+                VerticalAlignment="Top"
+                Width="1000" />
+            <Grid
+                Grid.Row="1"
+                IsVisible="{Binding !DataLoading}"
+                RowDefinitions="Auto,Auto">
+                <Border Grid.Row="0" Height="300">
+                    <Grid RowDefinitions="Auto,Auto">
+                        <Panel Height="300">
+                            <!--  Background image with blur effect  -->
+                            <asyncImageLoader:AdvancedImage Source="{Binding Info.Image}" Stretch="Fill">
+                                <asyncImageLoader:AdvancedImage.Effect>
+                                    <BlurEffect Radius="20" />
+                                </asyncImageLoader:AdvancedImage.Effect>
+                            </asyncImageLoader:AdvancedImage>
+                        </Panel>
+                        <!--  Overlay content  -->
+                        <Panel Height="300">
+                            <Panel.Background>
+                                <SolidColorBrush Color="Black" Opacity="0.6" />
+                            </Panel.Background>
+                            <asyncImageLoader:AdvancedImage
+                                Height="300"
+                                HorizontalAlignment="Center"
+                                Source="{Binding Info.Image}" />
+                        </Panel>
+                    </Grid>
+                </Border>
+                <Grid ColumnDefinitions="*,*" Grid.Row="1">
+                    <StackPanel
+                        Grid.Column="0"
+                        Margin="20"
+                        Orientation="Vertical">
+                        <WrapPanel Orientation="Horizontal">
+                            <TextBlock
+                                FontSize="40"
+                                Text="{Binding Info.Title}"
+                                TextTrimming="CharacterEllipsis" />
+                            <Button
+                                Classes="accent"
+                                Command="{Binding GetInfo}"
+                                Content="Refresh" />
+                        </WrapPanel>
+                        <TextBlock Text="{Binding Info.Description, FallbackValue='No description available'}" TextWrapping="Wrap" />
+                    </StackPanel>
+                    <StackPanel
+                        Grid.Column="1"
+                        Margin="20"
+                        Orientation="Vertical">
+                        <TextBlock FontSize="40" Text="{Binding RouteParams.EpisodeNumber, StringFormat='Stream Episode {0}'}" />
+
+                        <ItemsRepeater ItemsSource="{Binding Links}">
+                            <ItemsRepeater.Layout>
+                                <UniformGridLayout />
+                            </ItemsRepeater.Layout>
+                            <ItemsRepeater.ItemTemplate>
+                                <DataTemplate>
+                                    <Border
+                                        Background="{DynamicResource SystemAccentColor}"
+                                        Margin="10"
+                                        Padding="20"
+                                        Tag="{Binding Source}"
+                                        Tapped="PresentVideo">
+                                        <TextBlock Text="{Binding Quality}" />
+                                        <Border.Styles>
+                                            <Styles>
+                                                <Style Selector="Border:pointerover">
+                                                    <Setter Property="Background" Value="{DynamicResource SystemAccentColorDark1}" />
+                                                </Style>
+                                            </Styles>
+                                        </Border.Styles>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsRepeater.ItemTemplate>
+                        </ItemsRepeater>
+                        <TextBlock FontSize="40" Text="{Binding Info.EpisodeCount, StringFormat='All Episodes ({0})'}" />
+                        <ItemsRepeater ItemsSource="{Binding Info.Episodes}">
+                            <ItemsRepeater.Layout>
+                                <WrapLayout />
+                            </ItemsRepeater.Layout>
+                            <ItemsRepeater.ItemTemplate>
+                                <DataTemplate>
+                                    <Border
+                                        Background="{DynamicResource SystemAccentColor}"
+                                        Margin="10"
+                                        Padding="20"
+                                        Tag="{Binding EpisodeId}"
+                                        Tapped="ChangeEpisode">
+                                        <TextBlock Text="{Binding EpisodeNumber}" />
+                                        <Border.Styles>
+                                            <Styles>
+                                                <Style Selector="Border:pointerover">
+                                                    <Setter Property="Background" Value="{DynamicResource SystemAccentColorDark1}" />
+                                                </Style>
+                                            </Styles>
+                                        </Border.Styles>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsRepeater.ItemTemplate>
+                        </ItemsRepeater>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
 </UserControl>

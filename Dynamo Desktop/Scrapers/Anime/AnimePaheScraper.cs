@@ -5,16 +5,63 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Dynamo_Desktop.Services;
 
 namespace Dynamo_Desktop.Scrapers.Anime;
 
-public  class AnimePaheScraper
+public partial class AnimePaheScraper
 {
     private HttpClient _http = new HttpClient();
+    private string Host = SettingsService.Settings().Providers.animepahe.host;
+    public async Task<string> RecentAnime(int Page = 1)
+    {  
+        List<PopularAnime> recent = new();
+        var handler = new HttpClientHandler();
+        handler.UseCookies = false;
+
+        handler.AutomaticDecompression = ~DecompressionMethods.None; 
+        using (var httpClient = new HttpClient(handler))
+        {
+            using (var request = new HttpRequestMessage(new HttpMethod("GET"), $"https://animepahe.ru/api?m=airing&page={Page}"))
+            {
+                request.Headers.TryAddWithoutValidation("User-Agent", "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0");
+                request.Headers.TryAddWithoutValidation("Accept", "application/json, text/javascript, */*; q=0.01");
+                request.Headers.TryAddWithoutValidation("Accept-Language", "en-US,en;q=0.5");
+                request.Headers.TryAddWithoutValidation("Accept-Encoding", "gzip, deflate, br, zstd");
+                request.Headers.TryAddWithoutValidation("Referer", "https://animepahe.ru/");
+                request.Headers.TryAddWithoutValidation("X-Requested-With", "XMLHttpRequest");
+                request.Headers.TryAddWithoutValidation("Connection", "keep-alive");
+                request.Headers.TryAddWithoutValidation("Sec-Fetch-Dest", "empty");
+                request.Headers.TryAddWithoutValidation("Sec-Fetch-Mode", "cors");
+                request.Headers.TryAddWithoutValidation("Sec-Fetch-Site", "same-origin");
+                request.Headers.TryAddWithoutValidation("TE", "trailers");
+                request.Headers.TryAddWithoutValidation("Cookie", "__ddgid_=dvB6IyowCIdclQM3; __ddg2_=Jk4UTRNXo2Ew2InP; __ddg1_=mrU8HTW5YbTLmgllwMVd;"); 
+
+                var response = await httpClient.SendAsync(request);
+                Debug.WriteLine(response.IsSuccessStatusCode);
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseData = JsonSerializer.Deserialize<AnimePaheRecentEpisodesJsonResponse>(await response.Content.ReadAsStringAsync());
+                    foreach (var data in responseData.data)
+                    {
+                        recent.Add(new()
+                        {
+                            Title = data.anime_title,
+                            AnimeId = data.anime_session,
+                            Episode = data.episode,
+                            Image =  data.snapshot
+                        });
+                    }
+                }
+            }
+        }
+        return JsonSerializer.Serialize(recent);
+    }
     public async Task<string> AnimeInfo(String Id)
     {
         var AnimeDetails = new AnimePaheAnimeInfo();
@@ -122,4 +169,5 @@ public  class AnimePaheScraper
         }
         return JsonSerializer.Serialize(Streaming_links);
     }
+    
 }
