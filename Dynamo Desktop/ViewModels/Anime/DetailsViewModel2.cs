@@ -55,7 +55,7 @@ namespace Dynamo_Desktop.ViewModels.Anime
                 };
                 await dialog.ShowAsync();
             }
-           // Links = await AnimeService.StreamingLinks(Query: RouteParams.AnimeId, Episode: RouteParams.EpisodeNumber);
+            Links = await AnimeService.StreamingLinks(Query: RouteParams.AnimeId, Episode: RouteParams.EpisodeNumber);
             Debug.WriteLine(System.Text.Json.JsonSerializer.Serialize(Info));
             DataLoading = false;
         }

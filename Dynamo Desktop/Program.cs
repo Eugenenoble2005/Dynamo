@@ -19,8 +19,8 @@ namespace Dynamo_Desktop
         [STAThread]
         public  static void Main(string[] args)
         {
-            // var test = new AnimePaheScraper();
-            // test.Search("Death Note");
+            var test = new AnimePaheScraper();
+            test.EpisodeStreamLinks("25e68f23-0686-9946-81be-755adce081b3",15);
             BuildAvaloniaApp()
             .StartWithClassicDesktopLifetime(args);
            

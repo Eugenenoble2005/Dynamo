@@ -57,9 +57,17 @@ namespace Dynamo_Desktop.Services.Anime
             }
         }
 
-        public Task<List<AnimeStreamingLinks>> StreamingLinks(string Query, int Episode = 1)
+        public async Task<List<AnimeStreamingLinks>> StreamingLinks(string Query, int Episode = 1)
         {
-            return default;
+            try
+            {
+                return JsonSerializer.Deserialize<List<AnimeStreamingLinks>>(
+                    await new AnimePaheScraper().EpisodeStreamLinks(AnimeId: Query, Episode: Episode));
+            }
+            catch
+            {
+                return default;
+            }
         }
     }
 }
