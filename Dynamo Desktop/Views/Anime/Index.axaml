@@ -3,12 +3,8 @@
     d:DesignWidth="800"
     mc:Ignorable="d"
     x:Class="Dynamo_Desktop.Views.Anime.Index"
-    x:DataType="vm:IndexViewModel2"
+    x:DataType="vm:IndexViewModel"
     xmlns="https://github.com/avaloniaui"
-    xmlns:AnimePaheSubview="using:Dynamo_Desktop.Views.Anime.Subviews.AnimePahe"
-    xmlns:GogoSubview="using:Dynamo_Desktop.Views.Anime.Subviews.Gogo"
-    xmlns:KayoSubView="using:Dynamo_Desktop.Views.Anime.Subviews.KayoAnime"
-    xmlns:ZoroSubView="using:Dynamo_Desktop.Views.Anime.Subviews.ZoroAnime"
     xmlns:anime="using:Dynamo_Desktop.Models.Anime"
     xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -75,10 +71,6 @@
                 <subview:IndexSubView Provider="AnimePahe" />
             </TabItem>
 
-
-            <TabItem Header="ZoroAnime">
-                <ZoroSubView:IndexSubView />
-            </TabItem>
         </TabControl>
 
     </Grid>

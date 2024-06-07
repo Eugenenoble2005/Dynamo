@@ -37,6 +37,10 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Views\Anime\Index.axaml" />
+    <UpToDateCheckInput Remove="Views\Anime\Subviews\AnimePahe\DetailsSubView.axaml" />
+    <UpToDateCheckInput Remove="Views\Anime\Subviews\AnimePahe\IndexSubView.axaml" />
+    <UpToDateCheckInput Remove="Views\Anime\Subviews\KayoAnime\IndexSubView.axaml" />
+    <UpToDateCheckInput Remove="Video\Video.axaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -53,10 +57,6 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Views\Anime\Subviews\AnimePahe\DetailsSubView.axaml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Webcomponents\Video\" />
   </ItemGroup>
 
   <ItemGroup>

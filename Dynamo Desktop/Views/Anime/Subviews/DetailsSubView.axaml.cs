@@ -17,7 +17,7 @@ namespace Dynamo_Desktop.Views.Anime.Subviews
         public DetailsSubView()
         {
             InitializeComponent();
-            DataContext = new DetailsViewModel2();
+            DataContext = new DetailsViewModel();
         }
 
         protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
@@ -27,7 +27,7 @@ namespace Dynamo_Desktop.Views.Anime.Subviews
             if (frame != null)
             {
                 AnimeIndexToDetailsRouteParams routeParams = frame.Tag as AnimeIndexToDetailsRouteParams;
-                (DataContext as DetailsViewModel2).RouteParams = routeParams;
+                (DataContext as DetailsViewModel).RouteParams = routeParams;
             }
            
         }
@@ -46,7 +46,7 @@ namespace Dynamo_Desktop.Views.Anime.Subviews
         private void ChangeEpisode(object sender, TappedEventArgs e)
         {
             var border = sender as Border;
-            var dataContext = (DataContext as DetailsViewModel2);
+            var dataContext = (DataContext as DetailsViewModel);
             var innerText = border.Child as TextBlock; 
             AnimeIndexToDetailsRouteParams routeParams = new()
             {

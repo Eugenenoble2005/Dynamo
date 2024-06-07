@@ -15,13 +15,13 @@ public partial class Index : UserControl
     public Index()
     {
         InitializeComponent();
-        DataContext = new IndexViewModel2();
+        DataContext = new IndexViewModel();
         Tab.SelectionChanged += (sender, args) =>
         {
             if (DataContext != null)
             {
                 var provider = (Tab.SelectedContent as IndexSubView).Provider;
-                (DataContext as IndexViewModel2).Provider = provider;
+                (DataContext as IndexViewModel).Provider = provider;
                 
             }
         };

@@ -2,7 +2,7 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     x:Class="Dynamo_Desktop.Views.Anime.Subviews.IndexSubView"
-    x:DataType="vm:IndexViewModel2"
+    x:DataType="vm:IndexViewModel"
     xmlns="https://github.com/avaloniaui"
     xmlns:anime="using:Dynamo_Desktop.Models.Anime"
     xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"

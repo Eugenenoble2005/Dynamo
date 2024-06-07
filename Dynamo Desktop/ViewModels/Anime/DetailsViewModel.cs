@@ -1,93 +1,66 @@
-﻿using Dynamo_Desktop.Models.Anime;
-using Dynamo_Desktop.Services.Anime;
-using Dynamo_Desktop.Views.Anime.Subviews.AnimePahe;
-using ReactiveUI;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
+using Dynamo_Desktop.Models.Anime;
+using Dynamo_Desktop.Services.Anime;
+using FluentAvalonia.UI.Controls;
+using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 
 
-
-namespace Dynamo_Desktop.ViewModels.Anime;
-
-public class DetailsViewModel : ViewModelBase
+namespace Dynamo_Desktop.ViewModels.Anime
 {
-    
-    private AnimeIndexToDetailsRouteParams _routeParams;
-    private AnimePaheAnimeInfo _animePaheAnimeInfo;
-    private ObservableCollection<PaheResult> _animePaheEpisodes;
-    private List<AnimePaheStreamingLinks> _animePaheStreamingLinks;
-    private AnimePaheService _animePaheService = new AnimePaheService();
-    private ZoroAnimeStreamingLinks _zoroStreamingLinks;
-    private ZoroAnimeService _zoroAnimeService = new ZoroAnimeService();
-    private GogoAnimeService _gogoAnimeService = new GogoAnimeService();
-    private GogoAnimeStreamingLinks _gogoStreamingLinks;
-    private GogoAnimeInfo _gogoAnimeInfo;
-    private ZoroAnimeInfo _zoroAnimeInfo;
-    private bool _dataLoading = true;
-    public AnimePaheAnimeInfo AnimePaheAnimeInfo { get => _animePaheAnimeInfo; set => this.RaiseAndSetIfChanged(ref _animePaheAnimeInfo, value); }
-    public AnimeIndexToDetailsRouteParams RouteParams { get => _routeParams; set { this.RaiseAndSetIfChanged(ref _routeParams, value); } }
-    public ObservableCollection<PaheResult> AnimePaheEpisodes { get => _animePaheEpisodes;set { this.RaiseAndSetIfChanged(ref _animePaheEpisodes, value); } }
-    public GogoAnimeStreamingLinks GogoStreamingLinks { get => _gogoStreamingLinks; set => this.RaiseAndSetIfChanged(ref _gogoStreamingLinks, value); }
-    public GogoAnimeInfo GogoAnimeInfo { get => _gogoAnimeInfo; set => this.RaiseAndSetIfChanged(ref _gogoAnimeInfo, value); }
-    public ZoroAnimeInfo ZoroAnimeInfo { get => _zoroAnimeInfo; set => this.RaiseAndSetIfChanged(ref _zoroAnimeInfo, value); }
-    public ZoroAnimeStreamingLinks ZoroStreamingLinks { get => _zoroStreamingLinks; set => this.RaiseAndSetIfChanged(ref _zoroStreamingLinks, value); }
-    public List<AnimePaheStreamingLinks> AnimePaheStreamingLinks
+    public class DetailsViewModel : ReactiveObject
     {
-        get => _animePaheStreamingLinks;
-        set => this.RaiseAndSetIfChanged(ref _animePaheStreamingLinks, value);
-    }
-    public bool DataLoading
-    {
-        get => _dataLoading; set => this.RaiseAndSetIfChanged(ref _dataLoading, value);
-    }
-    public  DetailsViewModel()
-    {
+        private AnimeIndexToDetailsRouteParams _routeParams;
+
+        public AnimeIndexToDetailsRouteParams RouteParams
+        {
+            get => _routeParams;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _routeParams, value);
+                GetInfo();
+            }
+        }
+
+        [Reactive]
+        public AnimeInfo Info { get; set; }
+        
+        [Reactive]
+        public List<AnimeStreamingLinks> Links { get; set; }
+        [Reactive]
+        public bool DataLoading { get; set; }
+        private IAnimeService AnimeService { get; set; }
+        public async void GetInfo()
+        {
+            DataLoading = true;
+            switch (RouteParams.Provider)
+            {
+                case AnimeProviders.GogoAnime:
+                    AnimeService = new GogoAnimeService();
+                    break;
+                case AnimeProviders.AnimePahe:
+                    AnimeService = new AnimePaheService();
+                    break;
+            }
+            Info = await AnimeService.Info(RouteParams.AnimeId);
+            if (Info == null || Info == default)
+            {
+                var dialog = new ContentDialog()
+                {  
+                    Content = "Could Not obtain Information. Please check your internet connection or try another provider.",
+                    Title = "Error",
+                    DefaultButton = ContentDialogButton.Close,
+                    CloseButtonText = "OK"
+                };
+                await dialog.ShowAsync();
+            }
+            Links = await AnimeService.StreamingLinks(Query: RouteParams.AnimeId, Episode: RouteParams.EpisodeNumber);
+            Debug.WriteLine(System.Text.Json.JsonSerializer.Serialize(Info));
+            DataLoading = false;
+        }
+        //for ide design
+      
 
     }
-    //public async void GetAnimeDetails()
-    //{
-    //    DataLoading = true;
-    //    switch (RouteParams.Provider)
-    //    {
-    //        case "AnimePahe":
-    //            var AnimePaheAnimeInfoTask =  _animePaheService.Info(RouteParams?.AnimeId);
-    //            var AnimePaheEpisodesTask =  _animePaheService.AllEpisodes(RouteParams.AnimeId);
-    //            var AnimePaheStreamingLinksTask =
-    //                 _animePaheService.StreamingLinks(RouteParams.AnimeId, RouteParams?.EpisodeId);
-    //            await Task.WhenAll(AnimePaheStreamingLinksTask, AnimePaheEpisodesTask, AnimePaheAnimeInfoTask);
-    //            //test
-               
-    //            AnimePaheAnimeInfo = await AnimePaheAnimeInfoTask;
-    //            AnimePaheEpisodes = await AnimePaheEpisodesTask;
-    //            AnimePaheStreamingLinks = await AnimePaheStreamingLinksTask;
-    //            DataLoading = false;
-    //            break;
-    //        case "GogoAnime":
-    //            //var GogoAnimeInfoTask = _gogoAnimeService.Info(RouteParams?.AnimeId);
-    //            //var GogoStreamingLinksTask = _gogoAnimeService.StreamingLinks(EpisodeId: RouteParams.EpisodeId,AnimeId:null);
-    //            //await Task.WhenAll(GogoAnimeInfoTask, GogoStreamingLinksTask);
-    //            //GogoAnimeInfo = await GogoAnimeInfoTask;
-    //            //GogoStreamingLinks = await GogoStreamingLinksTask;
-    //            //DataLoading = false;
-    //            break;
-    //        case "ZoroAnime":
-    //            var ZoroAnimeInfoTask = _zoroAnimeService.Info(RouteParams?.AnimeId);
-    //            var zoroStreamingLinksTask = _zoroAnimeService.StreamingLinks(RouteParams.EpisodeId);
-    //            await Task.WhenAll(ZoroAnimeInfoTask, zoroStreamingLinksTask);
-    //            ZoroAnimeInfo = await ZoroAnimeInfoTask;
-    //            ZoroStreamingLinks = await zoroStreamingLinksTask;
-    //            DataLoading = false;
-    //            break;
-    //        default:
-    //            break;
-    //    }
-    
-    //}
-
 }

@@ -28,7 +28,7 @@ namespace Dynamo_Desktop.Views.Anime.Subviews
             {
                 AnimeId = content_children[0].Content.ToString(),
                 EpisodeNumber = int.Parse(content_children[1].Content.ToString()),
-                Provider = (DataContext as IndexViewModel2).Provider
+                Provider = (DataContext as IndexViewModel).Provider
             };
             this.FindAncestorOfType<Frame>().Navigate(typeof(DetailsSubView),routeParams);
         }

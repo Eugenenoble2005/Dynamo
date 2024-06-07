@@ -49,7 +49,7 @@ public  class VideoService
         };
         proc.Exited += (sender, args) =>
         {
-            ProcessExited.Invoke(this,EventArgs.Empty);
+            ProcessExited?.Invoke(this,EventArgs.Empty);
         };
         proc.Start();
     }

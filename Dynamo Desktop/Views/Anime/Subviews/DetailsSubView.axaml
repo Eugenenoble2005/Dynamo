@@ -1,10 +1,9 @@
 <UserControl
-    Background="Black"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d"
     x:Class="Dynamo_Desktop.Views.Anime.Subviews.DetailsSubView"
-    x:DataType="vm:DetailsViewModel2"
+    x:DataType="vm:DetailsViewModel"
     xmlns="https://github.com/avaloniaui"
     xmlns:anime="using:Dynamo_Desktop.Models.Anime"
     xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
@@ -13,11 +12,11 @@
     xmlns:vm="using:Dynamo_Desktop.ViewModels.Anime"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Design.DataContext>
-        <vm:DetailsViewModel2>
-            <vm:DetailsViewModel2.RouteParams>
+        <vm:DetailsViewModel>
+            <vm:DetailsViewModel.RouteParams>
                 <anime:AnimeIndexToDetailsRouteParams AnimeId="death-note" Provider="GogoAnime" />
-            </vm:DetailsViewModel2.RouteParams>
-        </vm:DetailsViewModel2>
+            </vm:DetailsViewModel.RouteParams>
+        </vm:DetailsViewModel>
     </Design.DataContext>
     <ScrollViewer>
         <Grid RowDefinitions="Auto,Auto">
