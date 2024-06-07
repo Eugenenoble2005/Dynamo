@@ -99,7 +99,7 @@
                                 </DataTemplate>
                             </ItemsRepeater.ItemTemplate>
                         </ItemsRepeater>
-                        <TextBlock FontSize="40" Text="{Binding Info.EpisodeCount, StringFormat='All Episodes ({0})'}" />
+                        <TextBlock FontSize="40" Text="{Binding Info.Episodes.Count, StringFormat='All Episodes ({0})'}" />
                         <ItemsRepeater ItemsSource="{Binding Info.Episodes}">
                             <ItemsRepeater.Layout>
                                 <WrapLayout />

@@ -75,10 +75,8 @@ public class IndexViewModel2 : ViewModelBase
     }
     public async void GetEpisodes()
     {
-       
         DataLoading = true;
        RecentAnime = await AnimeService.RecentAnime(Page);
-       Debug.WriteLine(JsonSerializer.Serialize(RecentAnime));
        PopularAnime = await AnimeService.PopularAnime(Page);
         DataLoading = false;
     }
@@ -104,6 +102,7 @@ public class IndexViewModel2 : ViewModelBase
     {
         DataLoading = true;
         SearchResults = await AnimeService.Search(SearchTerm, Page);
+        Debug.WriteLine(JsonSerializer.Serialize(SearchResults));
         DataLoading = false;
     }
 }

@@ -19,8 +19,8 @@ namespace Dynamo_Desktop
         [STAThread]
         public  static void Main(string[] args)
         {
-            var test = new AnimePaheScraper();
-            test.RecentAnime(Page:1);
+            // var test = new AnimePaheScraper();
+            // test.Search("Death Note");
             BuildAvaloniaApp()
             .StartWithClassicDesktopLifetime(args);
            

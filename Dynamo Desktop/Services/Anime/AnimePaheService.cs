@@ -31,19 +31,35 @@ namespace Dynamo_Desktop.Services.Anime
             }
         }
 
-        public Task<List<PopularAnime>> Search(string Query, int Page = 1)
+        public async Task<List<PopularAnime>> Search(string Query, int Page = 1)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return JsonSerializer.Deserialize<List<PopularAnime>>(
+                    await new AnimePaheScraper().Search(Query: Query));
+            }
+            catch
+            {
+                return default;
+            }
         }
 
-        public Task<AnimeInfo> Info(string Query)
+        public async Task<AnimeInfo> Info(string Query)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return JsonSerializer.Deserialize<AnimeInfo>(
+                    await new AnimePaheScraper().AnimeInfo(Query: Query));
+            }
+            catch
+            {
+                return default;
+            }
         }
 
         public Task<List<AnimeStreamingLinks>> StreamingLinks(string Query, int Episode = 1)
         {
-            throw new NotImplementedException();
+            return default;
         }
     }
 }

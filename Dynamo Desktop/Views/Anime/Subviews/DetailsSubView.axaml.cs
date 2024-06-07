@@ -27,7 +27,6 @@ namespace Dynamo_Desktop.Views.Anime.Subviews
             if (frame != null)
             {
                 AnimeIndexToDetailsRouteParams routeParams = frame.Tag as AnimeIndexToDetailsRouteParams;
-                Debug.WriteLine(JsonSerializer.Serialize(routeParams));
                 (DataContext as DetailsViewModel2).RouteParams = routeParams;
             }
            
@@ -53,7 +52,8 @@ namespace Dynamo_Desktop.Views.Anime.Subviews
             {
                 Provider = dataContext.RouteParams.Provider,
                 AnimeId = border.Tag.ToString(),
-                EpisodeNumber = int.Parse(innerText.Text)
+                EpisodeNumber = int.Parse(innerText.Text),
+                
             };
             Debug.WriteLine(JsonSerializer.Serialize(routeParams));
             dataContext.RouteParams = routeParams;

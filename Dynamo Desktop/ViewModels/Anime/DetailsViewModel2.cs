@@ -20,7 +20,6 @@ namespace Dynamo_Desktop.ViewModels.Anime
             {
                 this.RaiseAndSetIfChanged(ref _routeParams, value);
                 GetInfo();
-              
             }
         }
 
@@ -40,6 +39,9 @@ namespace Dynamo_Desktop.ViewModels.Anime
                 case AnimeProviders.GogoAnime:
                     AnimeService = new GogoAnimeService();
                     break;
+                case AnimeProviders.AnimePahe:
+                    AnimeService = new AnimePaheService();
+                    break;
             }
             Info = await AnimeService.Info(RouteParams.AnimeId);
             if (Info == null || Info == default)
@@ -53,7 +55,7 @@ namespace Dynamo_Desktop.ViewModels.Anime
                 };
                 await dialog.ShowAsync();
             }
-            Links = await AnimeService.StreamingLinks(Query: RouteParams.AnimeId, Episode: RouteParams.EpisodeNumber);
+           // Links = await AnimeService.StreamingLinks(Query: RouteParams.AnimeId, Episode: RouteParams.EpisodeNumber);
             Debug.WriteLine(System.Text.Json.JsonSerializer.Serialize(Info));
             DataLoading = false;
         }

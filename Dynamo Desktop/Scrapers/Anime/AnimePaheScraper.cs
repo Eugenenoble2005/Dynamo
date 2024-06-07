@@ -27,7 +27,7 @@ public partial class AnimePaheScraper
         handler.AutomaticDecompression = ~DecompressionMethods.None; 
         using (var httpClient = new HttpClient(handler))
         {
-            using (var request = new HttpRequestMessage(new HttpMethod("GET"), $"https://animepahe.ru/api?m=airing&page={Page}"))
+            using (var request = new HttpRequestMessage(new HttpMethod("GET"), $"{Host}/api?m=airing&page={Page}"))
             {
                 request.Headers.TryAddWithoutValidation("User-Agent", "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0");
                 request.Headers.TryAddWithoutValidation("Accept", "application/json, text/javascript, */*; q=0.01");
@@ -43,7 +43,6 @@ public partial class AnimePaheScraper
                 request.Headers.TryAddWithoutValidation("Cookie", "__ddgid_=dvB6IyowCIdclQM3; __ddg2_=Jk4UTRNXo2Ew2InP; __ddg1_=mrU8HTW5YbTLmgllwMVd;"); 
 
                 var response = await httpClient.SendAsync(request);
-                Debug.WriteLine(response.IsSuccessStatusCode);
                 if (response.IsSuccessStatusCode)
                 {
                     var responseData = JsonSerializer.Deserialize<AnimePaheRecentEpisodesJsonResponse>(await response.Content.ReadAsStringAsync());
@@ -62,65 +61,123 @@ public partial class AnimePaheScraper
         }
         return JsonSerializer.Serialize(recent);
     }
-    public async Task<string> AnimeInfo(String Id)
+public async Task<string> AnimeInfo(string Query)
+{
+    var animeDetails = new AnimeInfo();
+    var handler = new HttpClientHandler();
+    handler.UseCookies = false;
+    handler.AutomaticDecompression = ~DecompressionMethods.None;
+    string url = $"{Host}/anime/{Query}";
+
+    using (var httpClient = new HttpClient(handler))
     {
-        var AnimeDetails = new AnimePaheAnimeInfo();
-        string url = $"https://animepahe.com/anime/{Id}";
-        string response = await _http.GetStringAsync(url);
-        HtmlDocument htmlDoc = new HtmlDocument();
-        htmlDoc.LoadHtml(response);
-
-        var anime_poster = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='anime-poster']");
-        AnimeDetails.CoverImage = anime_poster.SelectSingleNode(".//a").GetAttributeValue("href", null);
-
-        AnimeDetails.Description = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='anime-synopsis']")
-            .InnerText;
-
-        var anime_info = htmlDoc.DocumentNode.SelectSingleNode("//div[contains(@class,'anime-info')]");
-        AnimeDetails.Title = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='title-wrapper']/h1/span").InnerText;
-        var pElements = anime_info.SelectNodes(".//p");
-        foreach(var pElement in pElements)
+        using (var request = new HttpRequestMessage(new HttpMethod("GET"), url))
         {
-            string title = pElement.InnerText.Split(":")[0];
-            string value = pElement.InnerText.Split(":")[1].Trim();
-            switch (title.Trim().ToLower())
+            request.Headers.TryAddWithoutValidation("User-Agent", "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0");
+            request.Headers.TryAddWithoutValidation("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8");
+            request.Headers.TryAddWithoutValidation("Accept-Language", "en-US,en;q=0.5");
+            request.Headers.TryAddWithoutValidation("Accept-Encoding", "gzip, deflate, br, zstd");
+            request.Headers.TryAddWithoutValidation("Referer", Host);
+            request.Headers.TryAddWithoutValidation("Connection", "keep-alive");
+            request.Headers.TryAddWithoutValidation("Upgrade-Insecure-Requests", "1");
+            request.Headers.TryAddWithoutValidation("Sec-Fetch-Dest", "document");
+            request.Headers.TryAddWithoutValidation("Sec-Fetch-Mode", "navigate");
+            request.Headers.TryAddWithoutValidation("Sec-Fetch-Site", "same-origin");
+            request.Headers.TryAddWithoutValidation("Priority", "u=1");
+            request.Headers.TryAddWithoutValidation("Cookie", "__ddgid_=dvB6IyowCIdclQM3; __ddg2_=Jk4UTRNXo2Ew2InP; __ddg1_=mrU8HTW5YbTLmgllwMVd; res=720; aud=jpn; av1=0;");
+
+            var response = await httpClient.SendAsync(request);
+            if (response.IsSuccessStatusCode)
             {
-                case "japanese":
-                    AnimeDetails.JapaneseName = value;
-                    break;
-                case "type":
-                    AnimeDetails.Type = value;
-                    break;
-                case "episodes":
-                    AnimeDetails.EpisodeCount =  value;
-                    break;
-                case "status":
-                    AnimeDetails.AnimeStatus = value;
-                    break;
-                case "duration":
-                    AnimeDetails.Duration = value;
-                    break;
-                case "aired":
-                    AnimeDetails.AirRange = value;
-                    break;
-                case "season":
-                    AnimeDetails.Season = value;
-                    break;
-                case "studio":
-                    AnimeDetails.Studio = value;
-                    break;
-                case "themes":
-                    AnimeDetails.Themes = value;
-                    break;
-                case "theme":
-                    AnimeDetails.Themes = value;
-                    break;
+                HtmlDocument htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(await response.Content.ReadAsStringAsync());
+
+                var animePoster = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='anime-poster']");
+                animeDetails.Image = animePoster.SelectSingleNode(".//a").GetAttributeValue("href", null);
+
+                animeDetails.Description = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='anime-synopsis']").InnerText;
+
+                var animeInfo = htmlDoc.DocumentNode.SelectSingleNode("//div[contains(@class,'anime-info')]");
+                animeDetails.Title = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='title-wrapper']/h1/span").InnerText;
+                animeDetails.Episodes = new();
+                using (var request2 = new HttpRequestMessage(new HttpMethod("GET"), $"{Host}/api?m=release&id={Query}&sort=episode_asc&page=1"))
+                {
+                    request2.Headers.TryAddWithoutValidation("User-Agent", "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0");
+                    request2.Headers.TryAddWithoutValidation("Accept", "application/json, text/javascript, */*; q=0.01");
+                    request2.Headers.TryAddWithoutValidation("Accept-Language", "en-US,en;q=0.5");
+                    request2.Headers.TryAddWithoutValidation("Accept-Encoding", "gzip, deflate, br, zstd");
+                    request2.Headers.TryAddWithoutValidation("Referer", url);
+                    request2.Headers.TryAddWithoutValidation("X-Requested-With", "XMLHttpRequest");
+                    request2.Headers.TryAddWithoutValidation("Connection", "keep-alive");
+                    request2.Headers.TryAddWithoutValidation("Sec-Fetch-Dest", "empty");
+                    request2.Headers.TryAddWithoutValidation("Sec-Fetch-Mode", "cors");
+                    request2.Headers.TryAddWithoutValidation("Sec-Fetch-Site", "same-origin");
+                    request2.Headers.TryAddWithoutValidation("Cookie", "__ddgid_=dvB6IyowCIdclQM3; __ddg2_=Jk4UTRNXo2Ew2InP; __ddg1_=mrU8HTW5YbTLmgllwMVd; res=720; aud=jpn; av1=0;");
+
+                    var response2 = await httpClient.SendAsync(request2);
+                    if (response2.IsSuccessStatusCode)
+                    {
+                        var response2body = JsonSerializer.Deserialize<AnimePaheEpisodesJsonResponse>(await response2.Content.ReadAsStringAsync());
+                        int totalEpisodes = response2body.total;
+                        for (int i = 1; i <= totalEpisodes; i++)
+                        {
+                            animeDetails.Episodes.Add(new()
+                            {
+                                EpisodeNumber = i,
+                            });
+                        }
+                    }
+                }
             }
         }
-       
-        return JsonSerializer.Serialize(AnimeDetails);
     }
 
+    return JsonSerializer.Serialize(animeDetails);
+}
+
+
+    public async Task<string> Search(String Query = "",int Page = 1)
+    {
+        List<PopularAnime> searchResults = new();
+        var handler = new HttpClientHandler();
+        handler.UseCookies = false;
+        handler.AutomaticDecompression = ~DecompressionMethods.None; 
+        using (var httpClient = new HttpClient(handler))
+        {
+            using (var request = new HttpRequestMessage(new HttpMethod("GET"), $"{Host}/api?m=search&q={Query}"))
+            {
+                request.Headers.TryAddWithoutValidation("User-Agent", "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0");
+                request.Headers.TryAddWithoutValidation("Accept", "application/json, text/javascript, */*; q=0.01");
+                request.Headers.TryAddWithoutValidation("Accept-Language", "en-US,en;q=0.5");
+                request.Headers.TryAddWithoutValidation("Accept-Encoding", "gzip, deflate, br, zstd");
+                request.Headers.TryAddWithoutValidation("Referer", $"{Host}");
+                request.Headers.TryAddWithoutValidation("X-Requested-With", "XMLHttpRequest");
+                request.Headers.TryAddWithoutValidation("Connection", "keep-alive");
+                request.Headers.TryAddWithoutValidation("Sec-Fetch-Dest", "empty");
+                request.Headers.TryAddWithoutValidation("Sec-Fetch-Mode", "cors");
+                request.Headers.TryAddWithoutValidation("Sec-Fetch-Site", "same-origin");
+                request.Headers.TryAddWithoutValidation("TE", "trailers");
+                request.Headers.TryAddWithoutValidation("Cookie", "__ddgid_=dvB6IyowCIdclQM3; __ddg2_=Jk4UTRNXo2Ew2InP; __ddg1_=mrU8HTW5YbTLmgllwMVd; res=720; aud=jpn; av1=0;"); 
+                var response = await httpClient.SendAsync(request);
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseBody =
+                        JsonSerializer.Deserialize<AnimePaheSearchJsonResponse>(
+                            await response.Content.ReadAsStringAsync());
+                    foreach (var data in responseBody.data)
+                    {
+                        searchResults.Add(new()
+                        {
+                            Title = data.title,
+                            Image = data.poster,
+                            AnimeId = data.session,
+                        });
+                    }
+                }
+            }
+        }
+        return JsonSerializer.Serialize(searchResults);
+    }
     public async Task<string> EpisodeStreamLinks(String AnimeId,string EpisodeId)
     {
         string url = $"https://animepahe.com/play/{AnimeId}/{EpisodeId}";
