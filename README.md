@@ -1,27 +1,29 @@
-# Dynamo
+# 🎥 Dynamo
 
 ![Dynamo Logo](./Dynamo%20Desktop/Assets/Images/Dynamo.png)
 
 ## Overview
 
-Dynamo is a cross-platform application for streaming anime from external sources like Gogoanime and Animepahe. It uses media players like MPV and VLC to provide a seamless viewing experience.
+🚀 Dynamo is a cross-platform application for streaming anime from external sources like Gogoanime and Animepahe. It uses media players like MPV and VLC to provide a seamless viewing experience.
 
 ## Features
 
-- Stream anime from various sources
-- Support for multiple media players (MPV, VLC)
-- Cross-platform: Windows, macOS, Linux
-- User-friendly interface
-- Regular updates and improvements
+✨ **Features**:
+- 📺 Stream anime from various sources
+- 🎛️ Support for multiple media players (MPV, VLC)
+- 💻 Cross-platform: Windows, macOS, Linux
+- 🛠️ User-friendly interface
+- 🔄 Regular updates and improvements
 
 ## Screenshots
 
 ![Dynamo Screenshot](./Dynamo%20Desktop/Assets/Images/ScreenShots/Screenshot%20(2).png)
-(1. Browse through hundreads of popular anime)
-![Dynamo Screenshot](./Dynamo%20Desktop/Assets/Images/ScreenShots/Screenshot%20(3).png)
-(2. Stream your favourite anime using extrenal media players like VLC and MPV)
+*1. Browse through hundreds of popular anime*
 
-## Installation
+![Dynamo Screenshot](./Dynamo%20Desktop/Assets/Images/ScreenShots/Screenshot%20(3).png)
+*2. Stream your favorite anime using external media players like VLC and MPV*
+
+## 📥 Installation
 
 ### Prerequisites
 
@@ -39,9 +41,10 @@ Dynamo is a cross-platform application for streaming anime from external sources
 #### Building from Source (For Developers)
 
 1. Clone the repository:
-   ```
+   ```sh
    git clone https://github.com/Eugenenoble2005/Dynamo.git
    cd Dynamo
+
    ```
 
 2. Restore dependencies:
@@ -58,13 +61,13 @@ Dynamo is a cross-platform application for streaming anime from external sources
    ```
    dotnet run --project path/to/Dynamo.csproj
    ```
-### Usage
+### 📖 Usage
 1. Open the application.
 2. Select a source (e.g., Gogoanime, Animepahe).
 3. Browse or search for your favorite anime.
 4. Choose a media player (MPV or VLC) and start streaming.
 
-### Contributing
+### 🤝 Contributing
 We welcome contributions from the community! Here’s how you can get involved:
 
 1. Fork the repository.
