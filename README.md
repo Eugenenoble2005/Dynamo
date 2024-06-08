@@ -1,6 +1,6 @@
 # Dynamo
 
-![Dynamo Logo](../Assets/Images/Dynamo.gif)
+![Dynamo Logo](./Dynamo%20Desktop/Assets/Images/Dynamo.png)
 
 ## Overview
 
