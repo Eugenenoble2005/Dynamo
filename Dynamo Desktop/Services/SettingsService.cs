@@ -14,6 +14,8 @@ public class SettingsService
 {
     public static Settings Settings()
     {
-        return JsonSerializer.Deserialize<Settings>(File.ReadAllText("settings.json"));
+        return JsonSerializer.Deserialize<Settings>(File.ReadAllText(
+            AppDomain.CurrentDomain.BaseDirectory+"/settings.json"
+            ));
     }
 }

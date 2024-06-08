@@ -71,6 +71,11 @@
                 <subview:IndexSubView Provider="AnimePahe" />
             </TabItem>
 
+            <!--  ZoroAnime  -->
+            <TabItem Header="ZoroAnime">
+                <subview:IndexSubView Provider="ZoroAnime" />
+            </TabItem>
+
         </TabControl>
 
     </Grid>

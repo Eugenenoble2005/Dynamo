@@ -69,6 +69,9 @@ public class IndexViewModel : ViewModelBase
             case AnimeProviders.AnimePahe:
                 AnimeService = new AnimePaheService();
                 break;
+            case AnimeProviders.ZoroAnime:
+                AnimeService = new ZoroAnimeService();
+                break;
             default:
                 break;
         }

@@ -30,7 +30,7 @@ namespace Dynamo_Desktop.Views
            
 			InitializeComponent();
             ContentFrame.Navigate(typeof(Anime.Index));
-           SplashScreen = new ApplicationSplashScreen();
+        //   SplashScreen = new ApplicationSplashScreen();
 			DataContext = new MainWindowViewModel();
             nvSample.AttachedToVisualTree += (sender,args) =>
             {

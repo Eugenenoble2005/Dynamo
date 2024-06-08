@@ -124,6 +124,7 @@ public partial class AnimePaheScraper
                                     animeDetails.Episodes.Add(new()
                                     {
                                         EpisodeNumber = i,
+                                        EpisodeId = Query
                                     });
                                 }
                             }

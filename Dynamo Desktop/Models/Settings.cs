@@ -17,6 +17,7 @@ namespace Dynamo_Desktop.Models
     {
         public Provider gogoanime { get; set; }
         public Provider  animepahe { get; set; }
+        public Provider  zoroanime { get; set; }
     }
 
     public class Provider
