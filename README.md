@@ -59,7 +59,8 @@
 
 4. Run the application:
    ```
-   dotnet run --project path/to/Dynamo.csproj
+   cd "Dynamo Desktop"
+   dotnet run
    ```
 ### 📖 Usage
 1. Open the application.
