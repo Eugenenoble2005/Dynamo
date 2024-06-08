@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Dynamo Desktop
+Comment=Watch ad-less anime natively from different providers.
+Icon=Dynamo
+Exec=/usr/bin/dynamo_desktop
+StartupWMClass=Dynamo
+Terminal=false
+Type=Application
+Categories=Development
+GenericName=MyProgram
+Keywords=anime;hentai

@@ -1,7 +1,6 @@
 ﻿using Avalonia;
 using FluentAvalonia.Styling;
 using FluentAvalonia.UI.Controls;
-using LibVLCSharp.Shared;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;

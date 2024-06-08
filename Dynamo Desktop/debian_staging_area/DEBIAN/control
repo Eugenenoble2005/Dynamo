@@ -1,0 +1,9 @@
+Package:dynamo-desktop
+Version: 1.0
+Section: prod
+Priority: optional
+Architecture: amd64
+Depends: mpv
+Maintainer: Noble Eugene
+Homepage: https://github.com/Eugenenoble2005/Dynamo
+Description: Watch ad-less anime natively from various providers
