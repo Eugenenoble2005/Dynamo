@@ -16,8 +16,8 @@ Dynamo is a cross-platform application for streaming anime from external sources
 
 ## Screenshots
 
-![Dynamo Screenshot](../Assets/Images/ScreenShots/Screenshot%20(2).png)
-![Dynamo Screenshot](../Assets/Images/ScreenShots/Screenshot%20(3).png)
+![Dynamo Screenshot](./Dynamo%20Desktop/Assets/Images/ScreenShots/Screenshot%20(2).png)
+![Dynamo Screenshot](./Dynamo%20Desktop/Assets/Images/ScreenShots/Screenshot%20(3).png)
 
 ## Installation
 
