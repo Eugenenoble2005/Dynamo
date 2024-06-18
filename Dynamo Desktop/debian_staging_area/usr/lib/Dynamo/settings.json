@@ -5,7 +5,10 @@
 		},
 		"animepahe": {
 			"host": "https://www.animepahe.ru"
+		},
+		"zoroanime": {
+			"host": "https://zoroxtv.to"
 		}
 	},
-	"media_player": "mpv"
+	"media_player": "vlc"
 }

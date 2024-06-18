@@ -42,6 +42,9 @@ namespace Dynamo_Desktop.ViewModels.Anime
                 case AnimeProviders.AnimePahe:
                     AnimeService = new AnimePaheService();
                     break;
+                case AnimeProviders.ZoroAnime:
+                    AnimeService = new ZoroAnimeService();
+                    break;
             }
             Info = await AnimeService.Info(RouteParams.AnimeId);
             if (Info == null || Info == default)
@@ -56,7 +59,6 @@ namespace Dynamo_Desktop.ViewModels.Anime
                 await dialog.ShowAsync();
             }
             Links = await AnimeService.StreamingLinks(Query: RouteParams.AnimeId, Episode: RouteParams.EpisodeNumber);
-            Debug.WriteLine(System.Text.Json.JsonSerializer.Serialize(Info));
             DataLoading = false;
         }
         //for ide design

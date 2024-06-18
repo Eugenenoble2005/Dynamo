@@ -13,7 +13,7 @@ public class ZoroAnimeService : IAnimeService
         try
         {
             return JsonSerializer.Deserialize<List<PopularAnime>>(await
-                new ZoroAnimeScraper().PopularOrRecent(Page: Page, Query: "Popular"));
+                new ZoroAnimeScraper().PopularOrRecentOrSearch(Page: Page, Query: "Popular"));
         }
         catch
         {
@@ -26,7 +26,7 @@ public class ZoroAnimeService : IAnimeService
         try
         {
             return JsonSerializer.Deserialize<List<PopularAnime>>(await
-                new ZoroAnimeScraper().PopularOrRecent(Page: Page, Query: "Recent"));
+                new ZoroAnimeScraper().PopularOrRecentOrSearch(Page: Page, Query: "Recent"));
         }
         catch
         {
@@ -36,16 +36,32 @@ public class ZoroAnimeService : IAnimeService
 
     public async Task<List<PopularAnime>> Search(string Query, int Page = 1)
     {
-        throw new System.NotImplementedException();
+        try
+        {
+            return JsonSerializer.Deserialize<List<PopularAnime>>(await
+                new ZoroAnimeScraper().PopularOrRecentOrSearch(Page: Page, Query: "Search",SearchQuery:Query));
+        }
+        catch
+        {
+            return default;
+        }
     }
 
     public async Task<AnimeInfo> Info(string Query)
     {
-        throw new System.NotImplementedException();
+        try
+        {
+            return JsonSerializer.Deserialize<AnimeInfo>(await
+                new ZoroAnimeScraper().Info( Query: Query));
+        }
+        catch
+        {
+            return default;
+        }
     }
 
     public async Task<List<AnimeStreamingLinks>> StreamingLinks(string Query, int Episode = 1)
     {
-        throw new System.NotImplementedException();
+        return null;
     }
 }

@@ -2,8 +2,10 @@
 using Dynamo_Desktop.Models.Anime;
 using Dynamo_Desktop.Scrapers.Anime;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text.Json;
 using System.Threading.Tasks;
+using CSharpFunctionalExtensions;
 
 namespace Dynamo_Desktop.Services.Anime;
 
@@ -53,15 +55,26 @@ public class GogoAnimeService : IAnimeService
 
     public async Task<AnimeInfo> Info(string Query)
     {
+        /*
+         * API experiences SSL errors. If that occurs. Run method again
+         */
+        int attempts = 1;
         try
         {
-            return JsonSerializer.Deserialize<AnimeInfo>(await new GogoAnimeScraper().Info(Query: Query));
+            var result = JsonSerializer.Deserialize<AnimeInfo>(await new GogoAnimeScraper().Info(Query: Query));
+            if (result == null || result == default)
+            {
+                return result;
+            }
+            else
+            {
+                return result;
+            }
         }
-        catch (Exception e)
+        catch
         {
             return default;
         }
-
     }
 
     public async Task<List<AnimeStreamingLinks>> StreamingLinks(string Query, int Episode = 1)
@@ -74,7 +87,7 @@ public class GogoAnimeService : IAnimeService
             {
                 var result = JsonSerializer.Deserialize<List<AnimeStreamingLinks>>(
                     await new GogoAnimeScraper().StreamingLinks(Query: Query, Episode: Episode));
-                if (result.Count == 0)
+                if (result == null || result.Count == 0)
                 {
                     attempts++;
                 }

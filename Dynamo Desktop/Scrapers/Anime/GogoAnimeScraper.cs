@@ -18,7 +18,7 @@ internal partial class GogoAnimeScraper
     public async Task<string> PopularOrRecent(int Page = 1, string Query = "Popular")
     {
         List<PopularAnime> PopularAnime = new();
-        string url = Query == "Popular" ? $"https://v2.gogoanimehome.com/anime/home?page={Page}&type=popular" : $"https://v2.gogoanimehome.com/anime/home?page={Page}";
+        string url = Query == "Popular" ? $"https://v2.gogoanime.zip/anime/home?page={Page}&type=popular" : $"https://v2.gogoanime.zip/anime/home?page={Page}";
         using (var httpClient = new HttpClient())
         {
             using (var request = new HttpRequestMessage(new HttpMethod("GET"), url))
@@ -48,7 +48,7 @@ internal partial class GogoAnimeScraper
         List<PopularAnime> SearchResults = new();
         using (var httpClient = new HttpClient())
         {
-            using (var request = new HttpRequestMessage(new HttpMethod("GET"), $"https://v2.gogoanimehome.com/anime/search?keyword={Query}&page={Page}"))
+            using (var request = new HttpRequestMessage(new HttpMethod("GET"), $"https://v2.gogoanime.zip/anime/search?keyword={Query}&page={Page}"))
             {
                 var response = await httpClient.SendAsync(request);
                 if (response.IsSuccessStatusCode)
@@ -85,7 +85,7 @@ internal partial class GogoAnimeScraper
             using (var httpCLient2 = new HttpClient())
             {
                 //should work for 99.999 percent of all cases
-                GogoAnimeInfoJsonResponse infoResponse = JsonSerializer.Deserialize<GogoAnimeInfoJsonResponse>(await httpCLient2.GetStringAsync($"https://v2.gogoanimehome.com/anime/details?video={Query}-episode-1")) ;
+                GogoAnimeInfoJsonResponse infoResponse = JsonSerializer.Deserialize<GogoAnimeInfoJsonResponse>(await httpCLient2.GetStringAsync($"https://v2.gogoanime.zip/anime/details?video={Query}-episode-1")) ;
                 Info.EpisodeCount = infoResponse.data.animeData.episodeNumber.Length;
                 Info.Title = anime_title;
                 Info.Description = description;
@@ -100,7 +100,6 @@ internal partial class GogoAnimeScraper
                         EpisodeId = Query
                     });
                 }
-
                 Info.Episodes = episodes;
             }
             
@@ -111,7 +110,7 @@ internal partial class GogoAnimeScraper
     public async Task<string> StreamingLinks(string Query, int Episode)
     {
         List<AnimeStreamingLinks> result = new();
-        string url = $"https://api.gogoanimehome.com/anime/video-ex/{Query}-episode-{Episode}";
+        string url = $"https://api.gogoanime.zip/anime/video-ex/{Query}-episode-{Episode}";
         using (var httpClient = new HttpClient())
         {
             using (var request = new HttpRequestMessage(new HttpMethod("GET"), url))

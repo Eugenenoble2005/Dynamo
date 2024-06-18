@@ -61,15 +61,14 @@
 
         <TabControl x:Name="Tab">
             <!--  GOGOANIME  -->
+            <TabItem Header="AnimePahe">
+                <subview:IndexSubView Provider="AnimePahe" />
+            </TabItem>
 
             <TabItem Header="GogoAnime">
                 <subview:IndexSubView Provider="GogoAnime" />
             </TabItem>
             <!--  AnimePahe  -->
-
-            <TabItem Header="AnimePahe">
-                <subview:IndexSubView Provider="AnimePahe" />
-            </TabItem>
 
             <!--  ZoroAnime  -->
             <TabItem Header="ZoroAnime">
