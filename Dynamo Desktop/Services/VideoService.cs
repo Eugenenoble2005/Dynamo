@@ -37,13 +37,16 @@ public  class VideoService
         {
             StartInfo = new ProcessStartInfo
             {
-                FileName = "mpv",
+                FileName = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? Path.Combine(new string[] {
+                    AppDomain.CurrentDomain.BaseDirectory,
+                    "mpv",
+                    "mpv.exe"
+                }) : "mpv",
                 Arguments = $"{source} --force-window=immediate",
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
                 CreateNoWindow = true, 
                 //play with the bundled mpv binaries on windows. Run mpv anywhere on linux assuming global installation
-                WorkingDirectory = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ?  AppDomain.CurrentDomain.BaseDirectory+"/mpv" : "",
             },
             EnableRaisingEvents = true
         };
@@ -91,7 +94,7 @@ public  class VideoService
             {
                 StartInfo = new ProcessStartInfo
                 {
-                    FileName = "vlc",
+                    FileName = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? Path.Combine(new string[] {vlcDirOnWindows,"vlc.exe"}) : "vlc",
                     Arguments = $"{source}",
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
