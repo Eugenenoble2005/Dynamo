@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text.Json;
 using Dynamo_Desktop.Models.Anime;
 using Dynamo_Desktop.Services.Anime;
 using FluentAvalonia.UI.Controls;
@@ -58,8 +59,12 @@ namespace Dynamo_Desktop.ViewModels.Anime
                 };
                 await dialog.ShowAsync();
             }
+            
             Links = await AnimeService.StreamingLinks(Query: RouteParams.AnimeId, Episode: RouteParams.EpisodeNumber);
             DataLoading = false;
+            // Debug.WriteLine(JsonSerializer.Serialize(RouteParams));
+            // Debug.WriteLine(JsonSerializer.Serialize(Info));
+            // Debug.WriteLine(JsonSerializer.Serialize(Links));
         }
         //for ide design
       

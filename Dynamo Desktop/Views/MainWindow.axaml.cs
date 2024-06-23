@@ -53,12 +53,12 @@ namespace Dynamo_Desktop.Views
                         case "Anime":
                             ContentFrame.Navigate(typeof(Anime.Index));
                             break;
+                        case "Settings":
+                            ContentFrame.Navigate(typeof(Settings));
+                            break;
                     }
                 }
             };
-            // AppTheme.SetTheme("Dark");
-
- 
         }
         public void BackRequested(object sender, NavigationViewBackRequestedEventArgs e)
         {

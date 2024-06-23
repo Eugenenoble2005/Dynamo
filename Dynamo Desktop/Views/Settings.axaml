@@ -1,0 +1,28 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:vm="using:Dynamo_Desktop.ViewModels"
+             xmlns:ui="using:FluentAvalonia.UI.Controls"
+             x:Class="Dynamo_Desktop.Views.Settings"
+             x:DataType="vm:SettingsViewModel">
+    <Design.DataContext>
+        <vm:SettingsViewModel   />
+    </Design.DataContext>
+    <StackPanel>
+        <TextBlock Margin="10" FontSize="30">Settings</TextBlock>
+        <ui:SettingsExpander Header="Media Player"
+                             Description="Select Media Player for content. Must be installed">
+            <ui:SettingsExpander.IconSource>
+                <ui:ImageIconSource Source="/Assets/Images/icons8-play-50.png"></ui:ImageIconSource>
+            </ui:SettingsExpander.IconSource>
+            <ui:SettingsExpander.Footer>
+                <ComboBox SelectedItem="{Binding CurrentMediaPlayer}"
+                          SelectionChanged="SelectingItemsControl_OnSelectionChanged"
+                          ItemsSource="{Binding MediaPlayers}"
+                          MinWidth="150" />
+            </ui:SettingsExpander.Footer>
+            </ui:SettingsExpander>
+    </StackPanel>
+</UserControl>

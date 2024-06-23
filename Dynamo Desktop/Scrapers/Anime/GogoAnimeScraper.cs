@@ -13,7 +13,7 @@ using HtmlAgilityPack;
 namespace Dynamo_Desktop.Scrapers.Anime;
 internal partial class GogoAnimeScraper
 {
-    private string Host => SettingsService.Settings().Providers.gogoanime.host;
+    private string Host => SettingsService.GetSettings().Providers.gogoanime.host;
 
     public async Task<string> PopularOrRecent(int Page = 1, string Query = "Popular")
     {

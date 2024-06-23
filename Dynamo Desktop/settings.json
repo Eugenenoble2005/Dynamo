@@ -10,5 +10,5 @@
 			"host": "https://zoroxtv.to"
 		}
 	},
-	"media_player": "vlc"
+	"media_player": "mpv"
 }

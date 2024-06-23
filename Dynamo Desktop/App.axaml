@@ -24,7 +24,7 @@
     <Application.Styles>
 
         <!--<FluentTheme Mode="Dark" />-->
-        <sty:FluentAvaloniaTheme PreferSystemTheme="false" PreferUserAccentColor="True" />
+        <sty:FluentAvaloniaTheme PreferSystemTheme="True" PreferUserAccentColor="True"  />
         <StyleInclude Source="avares://AsyncImageLoader.Avalonia/AdvancedImage.axaml" />
 
 

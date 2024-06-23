@@ -14,7 +14,7 @@ namespace Dynamo_Desktop.Scrapers.Anime;
 
 public class ZoroAnimeScraper
 {
-    private string Host => SettingsService.Settings().Providers.zoroanime.host;
+    private string Host => SettingsService.GetSettings().Providers.zoroanime.host;
 
     public async Task<string> PopularOrRecentOrSearch(int Page = 1, string Query = "Recent",string SearchQuery = "")
     {

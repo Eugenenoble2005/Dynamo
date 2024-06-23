@@ -54,7 +54,6 @@ public partial class AnimePaheScraper
         public string status { get; set; }
         public string season { get; set; }
         public int year { get; set; }
-        public double score { get; set; }
         public string poster { get; set; }
         public string session { get; set; }
     }

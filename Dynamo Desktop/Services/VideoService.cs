@@ -16,7 +16,7 @@ public  class VideoService
     }
     public void Play(string Source = null)
     {
-        string media_player = SettingsService.Settings().media_player;
+        string media_player = SettingsService.GetSettings().media_player;
         switch (media_player)
         {
             case "vlc":

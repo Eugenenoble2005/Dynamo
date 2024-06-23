@@ -41,6 +41,9 @@ public partial class DetailsSubView : UserControl
          string link = (sender as Button).Tag.ToString();
          VideoService videoService = new();
          videoService.Play(link);
-        
+         videoService.ProcessExited += (o, args) =>
+         {
+             Debug.WriteLine("Video was exited");
+         };
     }
 }

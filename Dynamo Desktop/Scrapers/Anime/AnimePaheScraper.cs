@@ -16,7 +16,7 @@ namespace Dynamo_Desktop.Scrapers.Anime;
 
 public partial class AnimePaheScraper
 {
-    private string Host = SettingsService.Settings().Providers.animepahe.host;
+    private string Host = SettingsService.GetSettings().Providers.animepahe.host;
 
     public async Task<string> RecentAnime(int Page = 1)
     {
@@ -136,7 +136,10 @@ public partial class AnimePaheScraper
                                 JsonSerializer.Deserialize<AnimePaheEpisodesJsonResponse>(
                                     await response2.Content.ReadAsStringAsync());
                             int totalEpisodes = response2body.total;
-                            for (int i = 1; i <= totalEpisodes; i++)
+                            //animepahe might sometimes not index episodes from 0 and start from some random bullshit number
+                            int first_episode = response2body.data[0].episode;
+                            int last_episode = first_episode + (totalEpisodes - 1);
+                            for (int i = first_episode; i <= last_episode; i++)
                             {
                                 animeDetails.Episodes.Add(new()
                                 {
@@ -205,13 +208,13 @@ public partial class AnimePaheScraper
         handler.UseCookies = false;
         handler.AutomaticDecompression = ~DecompressionMethods.None;
         bool foundEpisode = false;
-
-        while (!foundEpisode)
-        {
+        int page = 1;
             using (var httpClient = new HttpClient(handler))
             {
+                 while (!foundEpisode)
+             {
                 using (var request = new HttpRequestMessage(new HttpMethod("GET"),
-                           $"{Host}/api?m=release&id={AnimeId}&sort=episode_asc&page=1"))
+                           $"{Host}/api?m=release&id={AnimeId}&sort=episode_asc&page={page}"))
                 {
                     request.Headers.TryAddWithoutValidation("User-Agent",
                         "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0");
@@ -219,7 +222,7 @@ public partial class AnimePaheScraper
                     request.Headers.TryAddWithoutValidation("Accept-Language", "en-US,en;q=0.5");
                     request.Headers.TryAddWithoutValidation("Accept-Encoding", "gzip, deflate, br, zstd");
                     request.Headers.TryAddWithoutValidation("Referer",
-                        "https://animepahe.ru/anime/25e68f23-0686-9946-81be-755adce081b3");
+                        $"https://animepahe.ru/anime/{AnimeId}");
                     request.Headers.TryAddWithoutValidation("X-Requested-With", "XMLHttpRequest");
                     request.Headers.TryAddWithoutValidation("Connection", "keep-alive");
                     request.Headers.TryAddWithoutValidation("Sec-Fetch-Dest", "empty");
@@ -232,9 +235,12 @@ public partial class AnimePaheScraper
                     var response = await httpClient.SendAsync(request);
                     if (response.IsSuccessStatusCode)
                     {
+                        Debug.WriteLine(await response.Content.ReadAsStringAsync());
+                        //point of inerese
                         var responseData =
                             JsonSerializer.Deserialize<AnimePaheEpisodesJsonResponse>(
                                 await response.Content.ReadAsStringAsync());
+                        int key  = 0;
                         foreach (var data in responseData.data)
                         {
                             if (data.episode == Episode)
@@ -360,6 +366,13 @@ public partial class AnimePaheScraper
                                     }
                                     //   Debug.WriteLine(JsonSerializer.Serialize(Streaming_links));
                                     return JsonSerializer.Serialize(Streaming_links);
+                                }
+                            }
+                            else{
+                                key++;
+                                if(key == responseData.data.Length -1){
+                                    //if episode is not found at the end of this page, repeaqt while loop with next page
+                                    page++;
                                 }
                             }
                         }

@@ -73,12 +73,12 @@
                         Margin="20"
                         Orientation="Vertical">
                         <TextBlock FontSize="40" Text="{Binding RouteParams.EpisodeNumber, StringFormat='Stream Episode {0}'}" />
-
                         <ItemsRepeater ItemsSource="{Binding Links}">
                             <ItemsRepeater.Layout>
-                                <UniformGridLayout />
+                                <UniformGridLayout/>
                             </ItemsRepeater.Layout>
                             <ItemsRepeater.ItemTemplate>
+                                
                                 <DataTemplate>
                                     <Border
                                         Background="{DynamicResource SystemAccentColor}"
@@ -100,8 +100,9 @@
                         </ItemsRepeater>
                         <TextBlock FontSize="40" Text="{Binding Info.Episodes.Count, StringFormat='All Episodes ({0})'}" />
                         <ItemsRepeater ItemsSource="{Binding Info.Episodes}">
+                        
                             <ItemsRepeater.Layout>
-                                <WrapLayout />
+                                <StackLayout />
                             </ItemsRepeater.Layout>
                             <ItemsRepeater.ItemTemplate>
                                 <DataTemplate>

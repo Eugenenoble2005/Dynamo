@@ -64,10 +64,6 @@
             <TabItem Header="AnimePahe">
                 <subview:IndexSubView Provider="AnimePahe" />
             </TabItem>
-
-            <TabItem Header="GogoAnime">
-                <subview:IndexSubView Provider="GogoAnime" />
-            </TabItem>
             <!--  AnimePahe  -->
 
             <!--  ZoroAnime  -->

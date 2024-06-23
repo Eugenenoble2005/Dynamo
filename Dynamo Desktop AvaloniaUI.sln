@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dynamo Desktop", "Dynamo De
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvaloniaGif", "Avalonia.GIF\AvaloniaGif\AvaloniaGif.csproj", "{D1F13819-B54B-41FF-ABC8-7796B4A7F5DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dynamo Desktop.Tests", "Dynamo Desktop.Tests\Dynamo Desktop.Tests.csproj", "{4E995E1D-F45D-4FFA-A58A-33CDFE42318C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D1F13819-B54B-41FF-ABC8-7796B4A7F5DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1F13819-B54B-41FF-ABC8-7796B4A7F5DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1F13819-B54B-41FF-ABC8-7796B4A7F5DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E995E1D-F45D-4FFA-A58A-33CDFE42318C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E995E1D-F45D-4FFA-A58A-33CDFE42318C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E995E1D-F45D-4FFA-A58A-33CDFE42318C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E995E1D-F45D-4FFA-A58A-33CDFE42318C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

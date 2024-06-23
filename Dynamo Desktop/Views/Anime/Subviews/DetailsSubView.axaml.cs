@@ -51,11 +51,10 @@ namespace Dynamo_Desktop.Views.Anime.Subviews
             AnimeIndexToDetailsRouteParams routeParams = new()
             {
                 Provider = dataContext.RouteParams.Provider,
-                AnimeId = border.Tag.ToString(),
+                AnimeId = dataContext.RouteParams.AnimeId,
                 EpisodeNumber = int.Parse(innerText.Text),
                 
             };
-            Debug.WriteLine(JsonSerializer.Serialize(routeParams));
             dataContext.RouteParams = routeParams;
         }
     }   
