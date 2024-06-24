@@ -132,21 +132,7 @@ public partial class AnimePaheScraper
                         var response2 = await httpClient.SendAsync(request2);
                         if (response2.IsSuccessStatusCode)
                         {
-                            var response2body =
-                                JsonSerializer.Deserialize<AnimePaheEpisodesJsonResponse>(
-                                    await response2.Content.ReadAsStringAsync());
-                            int totalEpisodes = response2body.total;
-                            //animepahe might sometimes not index episodes from 0 and start from some random bullshit number
-                            int first_episode = response2body.data[0].episode;
-                            int last_episode = first_episode + (totalEpisodes - 1);
-                            for (int i = first_episode; i <= last_episode; i++)
-                            {
-                                animeDetails.Episodes.Add(new()
-                                {
-                                    EpisodeNumber = i,
-                                    EpisodeId = Query
-                                });
-                            }
+                           
                         }
                     }
                 }

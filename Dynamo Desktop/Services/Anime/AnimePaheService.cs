@@ -15,7 +15,14 @@ namespace Dynamo_Desktop.Services.Anime
     {
         public Task<List<PopularAnime>> PopularAnime(int Page = 1)
         {
-            return RecentAnime(Page: Page);
+            try
+            {
+                return RecentAnime(Page: Page);
+            }
+            catch
+            {
+                return default;
+            }
         }
 
         public async Task<List<PopularAnime>> RecentAnime(int Page = 1)

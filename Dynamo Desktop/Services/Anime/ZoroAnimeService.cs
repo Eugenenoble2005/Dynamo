@@ -49,15 +49,9 @@ public class ZoroAnimeService : IAnimeService
 
     public async Task<AnimeInfo> Info(string Query)
     {
-        try
-        {
+        
             return JsonSerializer.Deserialize<AnimeInfo>(await
                 new ZoroAnimeScraper().Info( Query: Query));
-        }
-        catch
-        {
-            return default;
-        }
     }
 
     public async Task<List<AnimeStreamingLinks>> StreamingLinks(string Query, int Episode = 1)

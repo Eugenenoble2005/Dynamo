@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 using Dynamo_Desktop.Models.Anime;
 using Dynamo_Desktop.Services;
 using HtmlAgilityPack;
+using PuppeteerExtraSharp;
+using PuppeteerExtraSharp.Plugins.ExtraStealth;
+using PuppeteerSharp;
 
 namespace Dynamo_Desktop.Scrapers.Anime;
 
@@ -111,6 +114,7 @@ public class ZoroAnimeScraper
                     var desriptionDiv = htmldoc.DocumentNode.SelectSingleNode("//div[contains(@class,'film-description')]");
                     info.Description = desriptionDiv.SelectSingleNode(".//div[contains(@class,'content')]").InnerText;
                     info.Image = htmldoc.DocumentNode.SelectSingleNode("//img[@class='film-poster-img']").GetAttributeValue("src", "");
+                    
                     return JsonSerializer.Serialize(info);
                 }
             }
