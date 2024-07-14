@@ -18,7 +18,7 @@ namespace Dynamo_Desktop
         // yet and stuff might break.
         [STAThread]
         public  static void Main(string[] args)
-        {
+        { 
             // var test = new ZoroAnimeScraper();
             // test.PopularOrRecent(1,Query:"Recent");
             BuildAvaloniaApp()

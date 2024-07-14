@@ -13,6 +13,7 @@ using FluentAvalonia.UI.Navigation;
 using FluentAvalonia.UI.Windowing;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,7 +28,10 @@ namespace Dynamo_Desktop.Views
         public bool IsWindows = true;
         public MainWindow()
         {
-           
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                Background = Brushes.Transparent;
+            } 
 			InitializeComponent();
             ContentFrame.Navigate(typeof(Anime.Index));
         //   SplashScreen = new ApplicationSplashScreen();

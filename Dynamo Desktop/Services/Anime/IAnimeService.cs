@@ -16,3 +16,4 @@ public interface IAnimeService
     public Task<List<AnimeStreamingLinks>> StreamingLinks(string Query, int Episode = 1);
 
 }
+

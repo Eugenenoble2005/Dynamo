@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using Avalonia.Media;
+using Color = Avalonia.Media.Color;
 
 namespace Dynamo_Desktop.ViewModels;
 
@@ -16,8 +17,7 @@ public class MainWindowViewModel : ViewModelBase
 {
    
     public string Greeting => "Welcome to Avalonia!";
-    public bool IsLinux => RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
-
+    
     public MainWindowViewModel()
     {
       

@@ -132,7 +132,21 @@ public partial class AnimePaheScraper
                         var response2 = await httpClient.SendAsync(request2);
                         if (response2.IsSuccessStatusCode)
                         {
-                           
+                            var response2body =
+                                JsonSerializer.Deserialize<AnimePaheEpisodesJsonResponse>(
+                                    await response2.Content.ReadAsStringAsync());
+                            int totalEpisodes = response2body.total;
+                            //animepahe might sometimes not index episodes from 0 and start from some random bullshit number
+                            // int first_episode = response2body.data[0].episode;
+                            // int last_episode = first_episode + (totalEpisodes - 1);
+                            for (int i = 1; i <= totalEpisodes; i++)
+                            {
+                                animeDetails.Episodes.Add(new()
+                                {
+                                    EpisodeNumber = i,
+                                    EpisodeId = Query
+                                });
+                            }
                         }
                     }
                 }
@@ -197,6 +211,10 @@ public partial class AnimePaheScraper
         int page = 1;
             using (var httpClient = new HttpClient(handler))
             {
+                /*
+                 * Animepahe sometimes index episodes in a very stupid way or with reference to past seasons e.g episode 1,2,3,4,5 or ,10,11,12,13 or even shit like 0,45,46,47. Since this application presents episodes from 1- total number of episodes , i use this index variable to keep count of how many episodes we've searched. When the current episode in the search is equal to the index, we have found the correct episode regardless of whatever animepahe named it.
+                 */
+                int index = 0;
                  while (!foundEpisode)
              {
                 using (var request = new HttpRequestMessage(new HttpMethod("GET"),
@@ -221,7 +239,7 @@ public partial class AnimePaheScraper
                     var response = await httpClient.SendAsync(request);
                     if (response.IsSuccessStatusCode)
                     {
-                        Debug.WriteLine(await response.Content.ReadAsStringAsync());
+                  
                         //point of inerese
                         var responseData =
                             JsonSerializer.Deserialize<AnimePaheEpisodesJsonResponse>(
@@ -229,7 +247,8 @@ public partial class AnimePaheScraper
                         int key  = 0;
                         foreach (var data in responseData.data)
                         {
-                            if (data.episode == Episode)
+                            index++;
+                            if (index == Episode)
                             {
                                 foundEpisode = true;
                                 string EpisodeId = data.session;
@@ -264,6 +283,7 @@ public partial class AnimePaheScraper
                                     HtmlNode resolutionMenu =
                                         htmlDoc.DocumentNode.SelectSingleNode("//div[@id='resolutionMenu']");
                                     List<AnimeStreamingLinks> Streaming_links = new List<AnimeStreamingLinks>();
+                                    //need to run this asynchronously somehow
                                     foreach (var button in resolutionMenu.SelectNodes(".//button"))
                                     {
                                         AnimeStreamingLinks StreamingLink = new();
@@ -304,53 +324,58 @@ public partial class AnimePaheScraper
 
                                             List<string> data_list = target_script.InnerText.Split("'player||")[1]
                                                 .Split("|").ToList();
-                                            string path = data_list[92] == "stream" ? "stream" : "hls";
+                                            string path = data_list[94] == "stream" ? "stream" : "hls";
                                             string title = "https:" +
                                                            kwik_body.DocumentNode.SelectNodes(
                                                                    "//link[@rel='preconnect']")[1]
                                                                .GetAttributeValue("href", null);
                                             string m3u8_link = "";
-                                            if (data_list[88] == "m3u8")
+                                            /**
+                                             * SAMPLE ANIMEPAHE M4U8 FOR REFERENCE:
+                                             * https://eu-99.files.nextcdn.org/stream/99/01/2eb8a42d745a979c7222a44fc66a21c7a4fee29f338fd7ee9514ba19fecaf6a9/uwu.m3u8
+                                             */
+                                            if (data_list[90] == "m3u8")
                                             {
                                                 m3u8_link = title + $"/{path}" +
                                                             $"/{title.Split("-")[1].Split(".")[0]}" +
-                                                            $"/{data_list[91]}" + $"/{data_list[90]}" +
-                                                            $"/{data_list[89]}" + $".{data_list[88]}";
+                                                            $"/{data_list[93]}" + $"/{data_list[92]}" +
+                                                            $"/{data_list[91]}" + $".{data_list[90]}";
                                             }
-                                            else
-                                            {
-                                                /*
-                                                 * in this case, the complete path is not stored in the script. I have no idea where the dweebs at animepahe put it and i have no clue how to get it. But the missing number is PROBABLY gonna be a number from 00 to 100.(will usually be 00-20 but to be safe, most of there wont be reached). We will try every value until we find a source that returns a 200.
-                                                 */
-                                                var _http = new HttpClient();
-                                                for (int i = 0; i <= 100; i++)
-                                                {
-                                                    string temp_link = title + $"/{path}" +
-                                                                       $"/{title.Split("-")[1].Split(".")[0]}" +
-                                                                       $"/{i.ToString("D2")}" + $"/{data_list[91]}" +
-                                                                       $"/{data_list[90]}" + $".{data_list[89]}";
-                                                    var temp_response = await _http.GetAsync(temp_link);
-                                                    if (temp_response.IsSuccessStatusCode)
-                                                    {
-                                                        m3u8_link = temp_link;
-                                                        break;
-                                                    }
-
-                                                }
-                                            }
-                                            // int data_list_index = 0;
-                                            // foreach (var se in data_list)
+                                           
+                                            // else
                                             // {
-                                            //     Debug.WriteLine($"{data_list_index}:{se}");
-                                            //     data_list_index++;
+                                            //     /*
+                                            //      * in this case, the complete path is not stored in the script. I have no idea where the dweebs at animepahe put it and i have no clue how to get it. But the missing number is PROBABLY gonna be a number from 00 to 100.(will usually be 00-20 but to be safe, most of these wont be reached). We will try every value until we find a source that returns a 200.
+                                            //      */
+                                            //     var _http = new HttpClient();
+                                            //     for (int i = 0; i <= 100; i++)
+                                            //     {
+                                            //         string temp_link = title + $"/{path}" +
+                                            //                            $"/{title.Split("-")[1].Split(".")[0]}" +
+                                            //                            $"/{i.ToString("D2")}" + $"/{data_list[91]}" +
+                                            //                            $"/{data_list[90]}" + $".{data_list[89]}";
+                                            //         Debug.WriteLine($"attempt {i.ToString("D2")}");
+                                            //         var temp_response = await _http.GetAsync(temp_link);
+                                            //         Debug.Write(temp_link);
+                                            //         if (temp_response.IsSuccessStatusCode)
+                                            //         {
+                                            //             Debug.WriteLine("found a valid link");
+                                            //             m3u8_link = temp_link;
+                                            //             break;
+                                            //         }
+                                            //
+                                            //     }
                                             // }
-
+                                            int data_list_index = 0;
+                                            foreach (var se in data_list)
+                                            {
+                                                Debug.WriteLine($"{data_list_index}:{se}");
+                                                data_list_index++;
+                                            }
                                             StreamingLink.Source = m3u8_link;
-                                         
                                             Streaming_links.Add(StreamingLink);
                                         }
                                     }
-                                    //   Debug.WriteLine(JsonSerializer.Serialize(Streaming_links));
                                     return JsonSerializer.Serialize(Streaming_links);
                                 }
                             }

@@ -67,8 +67,8 @@
             <!--  AnimePahe  -->
 
             <!--  ZoroAnime  -->
-            <TabItem Header="ZoroAnime">
-                <subview:IndexSubView Provider="ZoroAnime" />
+            <TabItem Header="GogoAnime">
+                <subview:IndexSubView Provider="GogoAnime"/>
             </TabItem>
 
         </TabControl>
