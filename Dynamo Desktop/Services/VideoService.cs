@@ -16,6 +16,7 @@ public  class VideoService
     }
     public void Play(string Source = null)
     {
+        Debug.WriteLine(Source);
         string media_player = SettingsService.GetSettings().media_player;
         switch (media_player)
         {

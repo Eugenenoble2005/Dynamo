@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dynamo_Desktop.Scrapers.Anime;
 
-internal partial class GogoAnimeScraper
+public partial class GogoAnimeScraper
 {
     private class GogoAnimePopularJsonResponse
     {

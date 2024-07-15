@@ -11,7 +11,7 @@ using Dynamo_Desktop.Models.Anime;
 using HtmlAgilityPack;
 
 namespace Dynamo_Desktop.Scrapers.Anime;
-internal partial class GogoAnimeScraper
+public partial class GogoAnimeScraper
 {
     private string Host => SettingsService.GetSettings().Providers.gogoanime.host;
 
@@ -29,13 +29,16 @@ internal partial class GogoAnimeScraper
                     var responseBody = JsonSerializer.Deserialize<GogoAnimePopularJsonResponse>(await response.Content.ReadAsStringAsync());
                     foreach (var item in responseBody.data.animeData)
                     {
+                        int EpisodeInt = 0;
+                        bool tryParseEpisode = int.TryParse(item.url.Split("-").Last(), out EpisodeInt);
                         PopularAnime.Add(new()
                         {
                             AnimeId = string.Join("-",item.url.Split("/").Last().Split("-")[..^2]),
                             Title = item.name,
                             Image = item.img,
-                            Episode = int.Parse(item.url.Split("-").Last())
+                            Episode = EpisodeInt
                         });
+                       
                     }
                 }
             }
@@ -74,9 +77,12 @@ internal partial class GogoAnimeScraper
         string url = $"{Host}/category/{Query}";
         using (var httpClient = new HttpClient())
         {
-            var response = await httpClient.GetStringAsync(url);
+            var response = await httpClient.GetAsync(url);
+            //needed for some tests to pass
+            
+           string responseString = await response.Content.ReadAsStringAsync();
             HtmlDocument htmlDoc = new HtmlDocument();
-            htmlDoc.LoadHtml(response);
+            htmlDoc.LoadHtml(responseString);
             HtmlNode anime_info_body = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='anime_info_body']");
             string anime_poster = anime_info_body.SelectSingleNode(".//img").GetAttributeValue("src", "");
             string anime_title = anime_info_body.SelectSingleNode(".//h1").InnerText;

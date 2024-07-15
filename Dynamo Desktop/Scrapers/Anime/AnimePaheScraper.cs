@@ -235,7 +235,7 @@ public partial class AnimePaheScraper
                     request.Headers.TryAddWithoutValidation("TE", "trailers");
                     request.Headers.TryAddWithoutValidation("Cookie",
                         "__ddgid_=dvB6IyowCIdclQM3; __ddg2_=Jk4UTRNXo2Ew2InP; __ddg1_=mrU8HTW5YbTLmgllwMVd;");
-
+                    
                     var response = await httpClient.SendAsync(request);
                     if (response.IsSuccessStatusCode)
                     {
