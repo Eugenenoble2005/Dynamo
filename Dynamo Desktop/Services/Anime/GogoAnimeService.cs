@@ -58,8 +58,8 @@ public class GogoAnimeService : IAnimeService
         /*
          * API experiences SSL errors. If that occurs. Run method again
          */
-       
-            var result = JsonSerializer.Deserialize<AnimeInfo>(await new GogoAnimeScraper().Info(Query: Query));
+       try{
+              var result = JsonSerializer.Deserialize<AnimeInfo>(await new GogoAnimeScraper().Info(Query: Query));
             if (result == null || result == default)
             {
                 return result;
@@ -68,7 +68,12 @@ public class GogoAnimeService : IAnimeService
             {
                 return result;
             }
-       
+
+       }
+       catch{
+         return default;
+       }
+               
     }
 
     public async Task<List<AnimeStreamingLinks>> StreamingLinks(string Query, int Episode = 1)
